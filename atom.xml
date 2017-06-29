@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>我的title</title>
-  <subtitle>我的subtitle</subtitle>
+  <title>JK客栈</title>
+  <subtitle>JK客栈</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.jkinn.com/"/>
@@ -9,8 +9,8 @@
   <id>http://www.jkinn.com/</id>
   
   <author>
-    <name>myauthor</name>
-    <email>myemail</email>
+    <name>田埂↑の夢</name>
+    <email>sdwanghuailiang@163.com</email>
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
