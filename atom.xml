@@ -16,7 +16,7 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hexo + CodingGithub码云(oschina)搭建个人博客（五） —— Markdown常用语法及工具</title>
+    <title>Hexo + Coding、Github、码云(oschina)搭建个人博客（五） —— Markdown常用语法及工具</title>
     <link href="http://www.jkinn.com/2017/07/05/hexo5/"/>
     <id>http://www.jkinn.com/2017/07/05/hexo5/</id>
     <published>2017-07-05T09:22:32.000Z</published>
@@ -34,7 +34,7 @@
   </entry>
   
   <entry>
-    <title>Hexo + CodingGithub码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床</title>
+    <title>Hexo + Coding、Github、码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床</title>
     <link href="http://www.jkinn.com/2017/07/05/hexo4/"/>
     <id>http://www.jkinn.com/2017/07/05/hexo4/</id>
     <published>2017-07-05T09:21:08.000Z</published>
@@ -52,7 +52,7 @@
   </entry>
   
   <entry>
-    <title>Hexo + CodingGithub码云(oschina)搭建个人博客（三） —— 绑定个人域名</title>
+    <title>Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名</title>
     <link href="http://www.jkinn.com/2017/07/05/hexo3/"/>
     <id>http://www.jkinn.com/2017/07/05/hexo3/</id>
     <published>2017-07-05T09:18:41.000Z</published>
@@ -70,7 +70,7 @@
   </entry>
   
   <entry>
-    <title>Hexo + CodingGithub码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）</title>
+    <title>Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）</title>
     <link href="http://www.jkinn.com/2017/07/05/hexo2/"/>
     <id>http://www.jkinn.com/2017/07/05/hexo2/</id>
     <published>2017-07-05T09:17:27.000Z</published>
@@ -88,26 +88,150 @@
   </entry>
   
   <entry>
-    <title>Hexo + Coding\Github\码云(oschina)搭建个人博客（一） —— 环境搭建</title>
+    <title>Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 环境搭建</title>
     <link href="http://www.jkinn.com/2017/07/05/hexo1/"/>
     <id>http://www.jkinn.com/2017/07/05/hexo1/</id>
     <published>2017-07-05T08:05:05.000Z</published>
     <updated>2017-07-05T08:05:11.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>至今工作也有五六年了，期间断断续续写过几篇博文，大都发布在了新浪博客、CSDN之类的博客平台，小编一直期盼能有一个属于自己的博客系统，可是小编穷啊，买不起服务器空间，所以这个愿望一直没能实现，直到前几日了解了Hexo这么个博客搭建工具。Hexo搭建的博客发布在GitHub、Coding或者码云等代码托管平台上，不需要任何成本，这不就是小编这种八辈贫农需要的么。经过几番折腾，小编的专属博客终于搭建起来了，由于搭建过程不是那么的顺畅，为了和小编一样穷的屌丝们在搭建自己的博客系统时少踩一些坑，现小编整理了自己搭建博客的过程，绝对的手把手一步步。</p>
-<h1 id="软件列表"><a href="#软件列表" class="headerlink" title="软件列表"></a>软件列表</h1><p>整个搭建过程需要安装的软件并不多，全部所需软件如下：<br><figure class="image-bubble">
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>能用来搭建个人博客的工具很多，本文只对Hexo做介绍。<br>Hexo可用来搭建个人博客，并可依据国内外网络环境同时部署在Github和Coding(码云)上，国外用户访问Github，国内用户访问Coding，即加快国内访问速度，又可实现博客访问分流。用Hexo搭建个人博客，不仅所需的所有软件及部署平台均免费，而且搭建过程也是非常简单的，您只需要按照小编给您写好的步骤不停的下一步即可。</p>
+<a id="more"></a>
+<h1 id="软件列表"><a href="#软件列表" class="headerlink" title="软件列表"></a>软件列表</h1><p>整个搭建过程需要安装的软件并不多，全部所需软件如下（版本无所谓）：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="http://oslz3deon.bkt.clouddn.com/image/myblog/jpg/0.%E8%BD%AF%E4%BB%B6%E5%88%97%E8%A1%A8.png" alt="软件列表" title="">
                 </div>
                 <div class="image-caption">软件列表</div>
-            </figure></p>
-<p>这几个软件的下载地址百度下都能找到，我就不写了，如果您已经安装过这几个软件，则可跳过本文，直接进入下一步：</p>
-<h1 id="Git-安装"><a href="#Git-安装" class="headerlink" title="Git 安装"></a>Git 安装</h1><h1 id="TortoiseGit-安装及配置"><a href="#TortoiseGit-安装及配置" class="headerlink" title="TortoiseGit 安装及配置"></a>TortoiseGit 安装及配置</h1><h1 id="nodeJS-安装"><a href="#nodeJS-安装" class="headerlink" title="nodeJS 安装"></a>nodeJS 安装</h1><h1 id="Hexo-安装及配置"><a href="#Hexo-安装及配置" class="headerlink" title="Hexo 安装及配置"></a>Hexo 安装及配置</h1><h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1>]]></content>
+            </figure><br>各软件下载地址如下：</p>
+<table>
+<thead>
+<tr>
+<th>软件</th>
+<th style="text-align:left">下载地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Git-2.13.2-64-bit.exe</td>
+<td style="text-align:left"><a href="https://git-scm.com/downloads" target="_blank" rel="external">https://git-scm.com/downloads</a></td>
+</tr>
+<tr>
+<td>node-v6.11.0-x64.msi</td>
+<td style="text-align:left"><a href="https://nodejs.org/en/download/" target="_blank" rel="external">https://nodejs.org/en/download/</a></td>
+</tr>
+<tr>
+<td>TortoiseGit-2.4.0.2-64bit.msi</td>
+<td style="text-align:left"><a href="https://tortoisegit.org/download/" target="_blank" rel="external">https://tortoisegit.org/download/</a></td>
+</tr>
+<tr>
+<td>TortoiseGit-LanguagePack-2.4.0.0-64bit-zh_CN.msi</td>
+<td style="text-align:left"><a href="https://tortoisegit.org/download/" target="_blank" rel="external">https://tortoisegit.org/download/</a></td>
+</tr>
+</tbody>
+</table>
+<p>如果您已经安装过这几个软件，则可跳过本文，直接进入下一步：</p>
+<h1 id="Git-安装"><a href="#Git-安装" class="headerlink" title="Git 安装"></a>Git 安装</h1><p>首先我们需要安装Git，Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。在搭建博客的过程中，我们主要使用Git的命令行进行Hexo的安装及配置。</p>
+<p>双击Git-2.13.2-64-bit.exe，开始安装Git:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/599721/2b6e2efb0217383e.png" alt="git安装 图1" title="">
+                </div>
+                <div class="image-caption">git安装 图1</div>
+            </figure>
+<p>点击Next,进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/599721/827aee525a73d1ca.png" alt="git安装 图2" title="">
+                </div>
+                <div class="image-caption">git安装 图2</div>
+            </figure>
+<p>选择安装目录，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/599721/aad05f2d2eff9f2e.png" alt="git安装 图3" title="">
+                </div>
+                <div class="image-caption">git安装 图3</div>
+            </figure>
+<p>全部勾选，特别是需要勾选Git Bash Here和Git GUI Here这两个选项，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/599721/dabca812c5ff6e05.png" alt="git安装 图4" title="">
+                </div>
+                <div class="image-caption">git安装 图4</div>
+            </figure>
+<p>默认，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/599721/2481e06f1eb8768e.png" alt="git安装 图5" title="">
+                </div>
+                <div class="image-caption">git安装 图5</div>
+            </figure>
+<p>选择第二项 Use Git from the Windows Command Prompt ,点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/599721/b0f83af6283df166.png" alt="git安装 图6" title="">
+                </div>
+                <div class="image-caption">git安装 图6</div>
+            </figure>
+<p>默认，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/599721/b86cc7a5e305cc55.png" alt="git安装 图7" title="">
+                </div>
+                <div class="image-caption">git安装 图7</div>
+            </figure>
+<p>选择第一项Checkout Windows-style,comment Unix-style line endings，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/599721/0abf31f23def5b05.png" alt="git安装 图8" title="">
+                </div>
+                <div class="image-caption">git安装 图8</div>
+            </figure>
+<p>选择第一项Use MinTTY， 点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/599721/90e5e2f8553a46a8.png" alt="git安装 图9" title="">
+                </div>
+                <div class="image-caption">git安装 图9</div>
+            </figure>
+<p>默认，点击Next，开始安装：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/599721/3ac8bbdac8800677.png" alt="git安装 图10" title="">
+                </div>
+                <div class="image-caption">git安装 图10</div>
+            </figure>
+<p>稍等片刻，弹出如下界面，表示安装完毕：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/599721/8a19de991997f588.png" alt="git安装 图11" title="">
+                </div>
+                <div class="image-caption">git安装 图11</div>
+            </figure>
+<p>在电脑任意文件夹，右键，能在右键操作列表中看到如下红圈标识两项操作，标识Git安装成功：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/599721/6efd480c83ca0149.jpg" alt="git安装 图12" title="">
+                </div>
+                <div class="image-caption">git安装 图12</div>
+            </figure>
+<h1 id="TortoiseGit-安装及配置"><a href="#TortoiseGit-安装及配置" class="headerlink" title="TortoiseGit 安装及配置"></a>TortoiseGit 安装及配置</h1><h1 id="nodeJS-安装"><a href="#nodeJS-安装" class="headerlink" title="nodeJS 安装"></a>nodeJS 安装</h1><h1 id="Hexo-安装及配置"><a href="#Hexo-安装及配置" class="headerlink" title="Hexo 安装及配置"></a>Hexo 安装及配置</h1><h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;至今工作也有五六年了，期间断断续续写过几篇博文，大都发布在了新浪博客、CSDN之类的博客平台，小编一直期盼能有一个属于自己的博客系统，可是小
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;能用来搭建个人博客的工具很多，本文只对Hexo做介绍。&lt;br&gt;Hexo可用来搭建个人博客，并可依据国内外网络环境同时部署在Github和Coding(码云)上，国外用户访问Github，国内用户访问Coding，即加快国内访问速度，又可实现博客访问分流。用Hexo搭建个人博客，不仅所需的所有软件及部署平台均免费，而且搭建过程也是非常简单的，您只需要按照小编给您写好的步骤不停的下一步即可。&lt;/p&gt;
     
     </summary>
     
