@@ -16,17 +16,17 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hexo + Coding\Github\码云(oschina)搭建个人博客（一）——环境搭建</title>
+    <title>Hexo + Coding\Github\码云(oschina)搭建个人博客（一） —— 环境搭建</title>
     <link href="http://www.jkinn.com/2017/07/05/url%E5%90%8D%E5%AD%97/"/>
     <id>http://www.jkinn.com/2017/07/05/url名字/</id>
     <published>2017-07-05T08:05:05.000Z</published>
     <updated>2017-07-05T08:05:11.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="1-软件列表"><a href="#1-软件列表" class="headerlink" title="1. 软件列表"></a>1. 软件列表</h1><h1 id="2-Git-安装"><a href="#2-Git-安装" class="headerlink" title="2. Git 安装"></a>2. Git 安装</h1><h1 id="3-TortoiseGit-安装及配置"><a href="#3-TortoiseGit-安装及配置" class="headerlink" title="3. TortoiseGit 安装及配置"></a>3. TortoiseGit 安装及配置</h1><h1 id="4-nodeJS-安装"><a href="#4-nodeJS-安装" class="headerlink" title="4. nodeJS 安装"></a>4. nodeJS 安装</h1><h1 id="5-Hexo-安装及配置"><a href="#5-Hexo-安装及配置" class="headerlink" title="5. Hexo 安装及配置"></a>5. Hexo 安装及配置</h1><h1 id="6-测试"><a href="#6-测试" class="headerlink" title="6. 测试"></a>6. 测试</h1>]]></content>
+    <content type="html"><![CDATA[<h1 id="软件列表"><a href="#软件列表" class="headerlink" title="软件列表"></a>软件列表</h1><h1 id="Git-安装"><a href="#Git-安装" class="headerlink" title="Git 安装"></a>Git 安装</h1><h1 id="TortoiseGit-安装及配置"><a href="#TortoiseGit-安装及配置" class="headerlink" title="TortoiseGit 安装及配置"></a>TortoiseGit 安装及配置</h1><h1 id="nodeJS-安装"><a href="#nodeJS-安装" class="headerlink" title="nodeJS 安装"></a>nodeJS 安装</h1><h1 id="Hexo-安装及配置"><a href="#Hexo-安装及配置" class="headerlink" title="Hexo 安装及配置"></a>Hexo 安装及配置</h1><h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;1-软件列表&quot;&gt;&lt;a href=&quot;#1-软件列表&quot; class=&quot;headerlink&quot; title=&quot;1. 软件列表&quot;&gt;&lt;/a&gt;1. 软件列表&lt;/h1&gt;&lt;h1 id=&quot;2-Git-安装&quot;&gt;&lt;a href=&quot;#2-Git-安装&quot; class=&quot;headerlink
+      &lt;h1 id=&quot;软件列表&quot;&gt;&lt;a href=&quot;#软件列表&quot; class=&quot;headerlink&quot; title=&quot;软件列表&quot;&gt;&lt;/a&gt;软件列表&lt;/h1&gt;&lt;h1 id=&quot;Git-安装&quot;&gt;&lt;a href=&quot;#Git-安装&quot; class=&quot;headerlink&quot; title=&quot;Git 安
     
     </summary>
     
