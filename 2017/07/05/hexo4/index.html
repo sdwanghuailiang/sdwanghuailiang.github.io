@@ -13,24 +13,24 @@
     
     
     
-    <title>Hexo + Coding\Github\码云(oschina)搭建个人博客（一） —— 环境搭建 | JK客栈 | 再不折腾就老了</title>
+    <title>Hexo + CodingGithub码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床 | JK客栈 | 再不折腾就老了</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
     <meta name="keywords" content="hexo">
-    <meta name="description" content="软件列表Git 安装TortoiseGit 安装及配置nodeJS 安装Hexo 安装及配置测试">
+    <meta name="description" content="本站是JK客栈（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。">
 <meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo + Coding\Github\码云(oschina)搭建个人博客（一） —— 环境搭建">
-<meta property="og:url" content="http://www.jkinn.com/2017/07/05/url名字/index.html">
+<meta property="og:title" content="Hexo + CodingGithub码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床">
+<meta property="og:url" content="http://www.jkinn.com/2017/07/05/hexo4/index.html">
 <meta property="og:site_name" content="JK客栈">
-<meta property="og:description" content="软件列表Git 安装TortoiseGit 安装及配置nodeJS 安装Hexo 安装及配置测试">
-<meta property="og:updated_time" content="2017-07-05T08:05:11.000Z">
+<meta property="og:description" content="本站是JK客栈（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。">
+<meta property="og:updated_time" content="2017-07-05T09:21:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo + Coding\Github\码云(oschina)搭建个人博客（一） —— 环境搭建">
-<meta name="twitter:description" content="软件列表Git 安装TortoiseGit 安装及配置nodeJS 安装Hexo 安装及配置测试">
+<meta name="twitter:title" content="Hexo + CodingGithub码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床">
+<meta name="twitter:description" content="本站是JK客栈（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。">
     
         <link rel="alternate" type="application/atom+xml" title="JK客栈" href="/atom.xml">
     
@@ -121,7 +121,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Hexo + Coding\Github\码云(oschina)搭建个人博客（一） —— 环境搭建</div>
+        <div class="flex-col header-title ellipsis">Hexo + CodingGithub码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -143,15 +143,15 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">Hexo + Coding\Github\码云(oschina)搭建个人博客（一） —— 环境搭建</h1>
+        <h1 class="title">Hexo + CodingGithub码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床</h1>
         <h5 class="subtitle">
             
-                <time datetime="2017-07-05T08:05:05.000Z" itemprop="datePublished" class="page-time">
+                <time datetime="2017-07-05T09:21:08.000Z" itemprop="datePublished" class="page-time">
   2017-07-05
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/hexo使用/">hexo使用</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/博客搭建/">博客搭建</a></li></ul>
 
             
         </h5>
@@ -165,23 +165,16 @@
 
 <div class="container body-wrap">
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#软件列表"><span class="post-toc-number">1.</span> <span class="post-toc-text">软件列表</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Git-安装"><span class="post-toc-number">2.</span> <span class="post-toc-text">Git 安装</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#TortoiseGit-安装及配置"><span class="post-toc-number">3.</span> <span class="post-toc-text">TortoiseGit 安装及配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#nodeJS-安装"><span class="post-toc-number">4.</span> <span class="post-toc-text">nodeJS 安装</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Hexo-安装及配置"><span class="post-toc-number">5.</span> <span class="post-toc-text">Hexo 安装及配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#测试"><span class="post-toc-number">6.</span> <span class="post-toc-text">测试</span></a></li></ol>
-        </nav>
-    </aside>
-    
-<article id="post-url名字"
+<article id="post-hexo4"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">Hexo + Coding\Github\码云(oschina)搭建个人博客（一） —— 环境搭建</h1>
+        <h1 class="post-card-title">Hexo + CodingGithub码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床</h1>
         <div class="post-meta">
-            <time class="post-time" title="2017-07-05 16:05:05" datetime="2017-07-05T08:05:05.000Z"  itemprop="datePublished">2017-07-05</time>
+            <time class="post-time" title="2017-07-05 17:21:08" datetime="2017-07-05T09:21:08.000Z"  itemprop="datePublished">2017-07-05</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/hexo使用/">hexo使用</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/博客搭建/">博客搭建</a></li></ul>
 
 
 
@@ -193,19 +186,19 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="软件列表"><a href="#软件列表" class="headerlink" title="软件列表"></a>软件列表</h1><h1 id="Git-安装"><a href="#Git-安装" class="headerlink" title="Git 安装"></a>Git 安装</h1><h1 id="TortoiseGit-安装及配置"><a href="#TortoiseGit-安装及配置" class="headerlink" title="TortoiseGit 安装及配置"></a>TortoiseGit 安装及配置</h1><h1 id="nodeJS-安装"><a href="#nodeJS-安装" class="headerlink" title="nodeJS 安装"></a>nodeJS 安装</h1><h1 id="Hexo-安装及配置"><a href="#Hexo-安装及配置" class="headerlink" title="Hexo 安装及配置"></a>Hexo 安装及配置</h1><h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1>
+            
         </div>
 
         <blockquote class="post-copyright">
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-07-05T08:05:11.000Z" itemprop="dateUpdated">2017-07-05 16:05:11</time>
+    最后更新时间：<time datetime="2017-07-05T09:21:04.000Z" itemprop="dateUpdated">2017-07-05 17:21:04</time>
 </span><br>
 
 
         
-        【转载请注明出处】<a href="/2017/07/05/url名字/" target="_blank" rel="external">http://www.jkinn.com/2017/07/05/url名字/</a>
+        【转载请注明出处】<a href="/2017/07/05/hexo4/" target="_blank" rel="external">http://www.jkinn.com/2017/07/05/hexo4/</a>
         
     </div>
     <footer>
@@ -235,7 +228,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.jkinn.com/2017/07/05/url名字/&title=《Hexo + Coding\Github\码云(oschina)搭建个人博客（一） —— 环境搭建》 — JK客栈&pic=http://www.jkinn.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.jkinn.com/2017/07/05/hexo4/&title=《Hexo + CodingGithub码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床》 — JK客栈&pic=http://www.jkinn.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -245,22 +238,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.jkinn.com/2017/07/05/url名字/&title=《Hexo + Coding\Github\码云(oschina)搭建个人博客（一） —— 环境搭建》 — JK客栈&source=本站是JK客栈（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.jkinn.com/2017/07/05/hexo4/&title=《Hexo + CodingGithub码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床》 — JK客栈&source=本站是JK客栈（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.jkinn.com/2017/07/05/url名字/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.jkinn.com/2017/07/05/hexo4/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Hexo + Coding\Github\码云(oschina)搭建个人博客（一） —— 环境搭建》 — JK客栈&url=http://www.jkinn.com/2017/07/05/url名字/&via=http://www.jkinn.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Hexo + CodingGithub码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床》 — JK客栈&url=http://www.jkinn.com/2017/07/05/hexo4/&via=http://www.jkinn.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.jkinn.com/2017/07/05/url名字/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.jkinn.com/2017/07/05/hexo4/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -280,6 +273,26 @@
     </div>
 
     
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/07/05/hexo5/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Hexo + CodingGithub码云(oschina)搭建个人博客（五） —— Markdown常用语法及工具</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/07/05/hexo3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hexo + CodingGithub码云(oschina)搭建个人博客（三） —— 绑定个人域名</h4>
+      </a>
+    </div>
+  
+</nav>
+
 
 
     
@@ -375,7 +388,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.jkinn.com/2017/07/05/url名字/&title=《Hexo + Coding\Github\码云(oschina)搭建个人博客（一） —— 环境搭建》 — JK客栈&pic=http://www.jkinn.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.jkinn.com/2017/07/05/hexo4/&title=《Hexo + CodingGithub码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床》 — JK客栈&pic=http://www.jkinn.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -385,22 +398,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.jkinn.com/2017/07/05/url名字/&title=《Hexo + Coding\Github\码云(oschina)搭建个人博客（一） —— 环境搭建》 — JK客栈&source=本站是JK客栈（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.jkinn.com/2017/07/05/hexo4/&title=《Hexo + CodingGithub码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床》 — JK客栈&source=本站是JK客栈（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.jkinn.com/2017/07/05/url名字/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.jkinn.com/2017/07/05/hexo4/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Hexo + Coding\Github\码云(oschina)搭建个人博客（一） —— 环境搭建》 — JK客栈&url=http://www.jkinn.com/2017/07/05/url名字/&via=http://www.jkinn.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Hexo + CodingGithub码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床》 — JK客栈&url=http://www.jkinn.com/2017/07/05/hexo4/&via=http://www.jkinn.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.jkinn.com/2017/07/05/url名字/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.jkinn.com/2017/07/05/hexo4/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -411,7 +424,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwklEQVR42u3aS27DMAwFwNz/0u62QBH5UbSIpBitgsCfsReEyOfXK17Xcv0+Zn3W3/9fJxYuLm6bm1PWxP4xawMuLu48913FWBep9VlJgateDRcX9zO5SQFK6Li4uP+Pmzc2+T+4uLifxs1LUv54+XWO9Gq4uLgNbj6lPPf7yHwXFxd3i3sVV3VEsg5OynfHxcUd4eYFJQ9Xkhg1377g4uLOc/NANP/AojMEuXkRuLi4I9zOpqQar+alrTwcwcXFfZRbHXEmQ5POEPbmSFxc3BHus1uZvVaq3ETh4uIOcvNPJfK49NnYBhcXd4a715zsDUCrzc/bgSkuLu5hblLOkhClH7KWGzBcXNzD3HxD0wlW96a55eYHFxf3Ie5e9vJsO5THM7i4uDPcKqg68lg/RvmOuLi4g9xORNpnJU0RLi7uPLfT2CSjjc7HHNFeDBcX9yHuVVxJodm7TrRtwsXFHeFWG5h8aJKUp5tsp/MxBy4ubpu71+r039DmZggXF3eQWx107hW1B7YyuLi4X8LdK09JE4WLi/st3L0IpFPCbpIfXFzcY9zqcDOJW47EtLi4uCPcainpXKg6r23Nd3FxcXe4PwwymnmAPGvJAAAAAElFTkSuQmCC" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwUlEQVR42u3aS3LDIBAFQN3/0soBHOM3DGAl1axctoyazRTzua543S9r/Ez+/bVj4eLitrn3cL1uPf51/JbxDmMDLi7ueW71BePnk38lB8bFxf0r3DwAjUMSLi7u/+DmiVDyJC4u7vO5SfLTKXwkvy7O1XBxcRvcvEq57/OW+i4uLu4U955ac0XSavD65b24uLhHuNWgk1yA8jZqvhsuLu5JbpLG5EnI2hGNDyEMFxd3M7fTQJ0LT9WmCy4u7hO4+XhWPmwRtUnGhRhcXNyvctfWKqu10EJ7FRcXdxu32nDNd1iVFOHi4p7krmqKVC9AC1IgXFzcbdy54FINT3mTtZD84OLibubmRY0qrj9zdSVnxcXF3cbNexbJUeeOVJgTwcXF3catvixJdaojXHmrBhcX9wx3LrHJRyv6e75NfnBxcbdxq9eR6rhGpzj7dk9cXNzN3H4fpk8vXLBwcXGPcOcKmlV0pymLi4v7LW4SvFY1UZKQF02L4OLiHuHmJdEqpX8wXFzcJ3PzcNYpoS4LZLi4uAfvDHOF0bnDl1utuLi4S7lzYxPJvzoDHG+brLi4uJu5q8oZSRjaUWrBxcVdyv0BC/GfZsdDTv4AAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
