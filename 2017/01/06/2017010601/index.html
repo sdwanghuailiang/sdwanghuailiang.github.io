@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名 | JK客栈 | 王怀亮的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="hexo,Coding,Github,码云(oschina),域名绑定">
+    <meta name="description" content="本文介绍如何将我们使用 Hexo + Coding、Github、码云(oschina) 搭建的博客绑定到我们自己的域名上">
+<meta name="keywords" content="hexo,Coding,Github,码云(oschina),域名绑定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名">
+<meta property="og:url" content="http://www.jkinn.com/2017/01/06/2017010601/index.html">
+<meta property="og:site_name" content="JK客栈">
+<meta property="og:description" content="本文介绍如何将我们使用 Hexo + Coding、Github、码云(oschina) 搭建的博客绑定到我们自己的域名上">
+<meta property="og:image" content="http://i4.piimg.com/1949/9b37a6f30b5703f8.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/f05f35709ddb77ec.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/8990aab1a0edc77a.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/5a34c87afeaa1e94.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/78d2aaeee1b1cfec.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/0daa464b42eca4ac.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/f1c52943504aec43.png">
+<meta property="og:image" content="http://i2.kiimg.com/1949/d55dc9ac84996028.png">
+<meta property="og:updated_time" content="2017-01-06T09:18:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名">
+<meta name="twitter:description" content="本文介绍如何将我们使用 Hexo + Coding、Github、码云(oschina) 搭建的博客绑定到我们自己的域名上">
+<meta name="twitter:image" content="http://i4.piimg.com/1949/9b37a6f30b5703f8.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="JK客栈" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">田埂↑の夢</h5>
+          <a href="mailto:sdwanghuailiang@163.com" title="sdwanghuailiang@163.com" class="mail">sdwanghuailiang@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sdwanghuailiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/sdwanghuailiang" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.dongchunlin.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                小董董
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-01-06T09:18:41.000Z" itemprop="datePublished" class="page-time">
+  2017-01-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/博客搭建/">博客搭建</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-2017010601"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-01-06 17:18:41" datetime="2017-01-06T09:18:41.000Z"  itemprop="datePublished">2017-01-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/博客搭建/">博客搭建</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>经过前面两个小节的搭建，我们的博客已经实现了外网访问，其实只要不介意地址，博客就可以用了。今天我们来说一下如何使用自己申请的域名访问博客，当然，前提是你已经购买了域名。<br>在第二小节中，我们把博客发布在了Github、Coding、码云这三个平台上，在绑定域名时，可以选择其中一个平台进行绑定，也可以一个域名根据线路不同绑定多个平台，比如海外用户访问Github，国内用户访问Coding或者码云。</p>
+<p>首先，我们登录Coding，依次选择 代码——&gt; Pages服务，在 自定义域名处填写自己的域名，这里可以写多个：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/9b37a6f30b5703f8.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>然后登录我们的域名系统，这里我是购买的万网的域名，找到域名解析——&gt;立即设置：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/f05f35709ddb77ec.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>然后选择 进入高级设置：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/8990aab1a0edc77a.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>这里先科普一下，什么是记录类型和主机记录，常用的记录类型是 CNAME记录和A记录，简单说就是CNAME记录是绑定域名，A记录是绑定IP地址：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/5a34c87afeaa1e94.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>主机记录就是你的域名在浏览器地址栏怎么写，www就是域名带www，@就是域名不带www:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/78d2aaeee1b1cfec.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>添加解析记录就很简单了，这里你可以用之前我们访问的地址（xxxx.github.io、xxx.coding.me、xxxx.oschina.io），也可以用IP地址，可以找一个平台绑定，也可以根据解析线路不同绑定多个平台，具体解析如下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/0daa464b42eca4ac.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>有的兄弟可能会问，我哪知道他的IP多少，ping命令会吧，ping一下地址不就出来了：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/f1c52943504aec43.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>到这里还没完呢，这时候我们可以通过域名访问，但是访问会提示403,这时候需要在博客根目录的source子目录下建一个名为【CNAME】的文本文件，然后把文件的后缀名干掉，这个文件里写什么呢，就是你的域名，如下图所示：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/d55dc9ac84996028.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>最后依次执行 hexo g、hexo d 待执行完毕，我们就可以用自己的域名访问博客了。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-01-06T09:18:44.000Z" itemprop="dateUpdated">2017-01-06 17:18:44</time>
+</span><br>
+
+
+        
+        【转载请注明出处】<a href="/2017/01/06/2017010601/" target="_blank" rel="external">http://www.jkinn.com/2017/01/06/2017010601/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.jkinn.com">
+            <img src="/img/avatar.jpg" alt="田埂↑の夢">
+            田埂↑の夢
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Coding/">Coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/">Github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/域名绑定/">域名绑定</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/码云-oschina/">码云(oschina)</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.jkinn.com/2017/01/06/2017010601/&title=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名》 — JK客栈&pic=http://www.jkinn.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.jkinn.com/2017/01/06/2017010601/&title=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名》 — JK客栈&source=本站是 JK客栈 田埂上的梦（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.jkinn.com/2017/01/06/2017010601/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名》 — JK客栈&url=http://www.jkinn.com/2017/01/06/2017010601/&via=http://www.jkinn.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.jkinn.com/2017/01/06/2017010601/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/01/07/2017010701/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 上一篇</div>
+        <h5 class="title">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床</h5>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/01/05/2017010501/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h5 class="title">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）</h5>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2137675"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢您的支持
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <!--<p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>-->
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>田埂↑の夢 &copy; 2015 - 2017</span>
+            <span>
+                
+                <!--Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>-->
+				田埂上的梦（王怀亮的博客）
+            </span>
+        </p>
+    </div>
+	
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.jkinn.com/2017/01/06/2017010601/&title=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名》 — JK客栈&pic=http://www.jkinn.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.jkinn.com/2017/01/06/2017010601/&title=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名》 — JK客栈&source=本站是 JK客栈 田埂上的梦（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.jkinn.com/2017/01/06/2017010601/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名》 — JK客栈&url=http://www.jkinn.com/2017/01/06/2017010601/&via=http://www.jkinn.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.jkinn.com/2017/01/06/2017010601/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACK0lEQVR42u3aO47DMAwFwNz/0tlmu8DOI6kUlsaVEQuyJwUhfl6v+Hp/XFdPr9Z/Pr26/9x/2YWBgfFYxvv2StYkyM/7HJy8BQMD4wTGVQTrrZmE0ep7MTAwMKpbrwrBGBgYGKsYPd59UMbAwMCYJLH3G0WpZivgLs7FMTAwHsiYJJa/vv9JfwMDA+NRjEm5f368m3/P/84YGBhbM/LXVI+MCb6QoCY7YGBgbMrIU9NemjovrkUpKwYGxgGMSe7bO/blwxnRAAcGBsbWjF45fu0gxeRwGdUFMTAwHs5INsrbA72UNU+YL59iYGAcw7g6it3/Pl+ZIL+swcDAOICRNwDy9LI3qFEt7X1pDGBgYGzBmAyE5U+Tz73/rGQfDAyMXRl5IKu2NnsJahJML6dFMDAwtmbkhfvqwbFa4m8OimFgYGzNyEtv+Xb5QbDafywMW2BgYGzHyANlNWjmB8GcXQ61GBgYWzDyOlz16WR0rBn0MTAwNmX0hi3yP6K6TzMQY2BgHMCoJpCTQtva1iYGBsY5jN5IVp7WVsN0dQ0GBsY5jN6xLw+R+d9UJmFgYGzKeBevajuhV1ZLdsDAwDiHMekM9sa/5g3RwmERAwNjI8baMYtqUros4GJgYBzAyANfNRTm4TgP/VF/AwMD43hGdcArD7W9ETQMDAyMeU48Hwv7Er4xMDAOYFQTy0mymg+ZFQY4MDAwtmZUQ14eLqtty3yMrNnIxMDAeB7jD3oS+giP7wC9AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1262549369&web_id=1262549369')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

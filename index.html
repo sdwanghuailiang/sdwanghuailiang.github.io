@@ -8,28 +8,45 @@
     
 
 
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
 
     <meta charset="utf-8">
     
     
     
-    <title>JK客栈 | 再不折腾就老了</title>
+    <title>JK客栈 | 王怀亮的博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="田埂,田埂↑の夢,王怀亮,博客,java,微服务,分布式,架构">
-    <meta name="description" content="本站是JK客栈（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。">
-<meta name="keywords" content="田埂,田埂↑の夢,王怀亮,博客,java,微服务,分布式,架构">
+    <meta name="keywords" content="JK客栈,王怀亮的博客,田埂上的梦,田埂↑の夢,王怀亮,博客,java,微服务,分布式,架构">
+    <meta name="description" content="本站是 JK客栈 田埂上的梦（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。">
+<meta name="keywords" content="JK客栈,王怀亮的博客,田埂上的梦,田埂↑の夢,王怀亮,博客,java,微服务,分布式,架构">
 <meta property="og:type" content="website">
 <meta property="og:title" content="JK客栈">
 <meta property="og:url" content="http://www.jkinn.com/index.html">
 <meta property="og:site_name" content="JK客栈">
-<meta property="og:description" content="本站是JK客栈（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。">
+<meta property="og:description" content="本站是 JK客栈 田埂上的梦（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JK客栈">
-<meta name="twitter:description" content="本站是JK客栈（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。">
+<meta name="twitter:description" content="本站是 JK客栈 田埂上的梦（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。">
     
         <link rel="alternate" type="application/atom+xml" title="JK客栈" href="/atom.xml">
     
@@ -145,7 +162,7 @@
         <h1 class="title">JK客栈</h1>
         <h5 class="subtitle">
             
-                tinghao
+                在哪里跌倒，就要在哪里睡一觉
             
         </h5>
     </div>
@@ -160,14 +177,14 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
-            <article id="post-hexo5"
+            <article id="post-2017041001"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017-07-05 17:22:32" datetime="2017-07-05T09:22:32.000Z"  itemprop="datePublished">2017-07-05</time>
+        <time class="post-time" title="2017-04-10 15:48:14" datetime="2017-04-10T07:48:14.000Z"  itemprop="datePublished">2017-04-10</time>
 
         
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/博客搭建/">博客搭建</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/阿里云/">阿里云</a></li></ul>
 
 
 
@@ -178,7 +195,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/07/05/hexo5/">Hexo + Coding、Github、码云(oschina)搭建个人博客（五） —— Markdown常用语法及工具</a>
+      <a class="post-title-link" href="/2017/04/10/2017041001/">阿里云 Linux CentOS 7.3 安装配置 JDK-1.8、MySQL-5.7、Redis-3.2.9、Zookeeper-3.4.9</a>
     </h3>
   
 
@@ -188,17 +205,17 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
+        最初公司购买的阿里云服务器是Linux CentOS 6.8版本的，在安装MySQL 5.7的过程中遇到了一些问题，系统总是提示各种依赖包不存在。折腾了一天，打败了好多小怪兽后最后总算安装好了，遗憾的是，当时的安装过程没有做记录。这几天公司又采购了一台阿里云，还是由我来搭建生产环境，为了以后公司有新的服务器加入时，弟兄们能无脑搭建环境，这次的安装过程我做了详细记录，其他的服务器版本不敢说，阿...
     
 
-        <a href="/2017/07/05/hexo5/" class="post-more waves-effect waves-button">
+        <a href="/2017/04/10/2017041001/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS/">CentOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Zookeeper/">Zookeeper</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里云/">阿里云</a></li></ul>
 
     </div>
     
@@ -207,11 +224,11 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-hexo4"
+            <article id="post-2017010901"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017-07-05 17:21:08" datetime="2017-07-05T09:21:08.000Z"  itemprop="datePublished">2017-07-05</time>
+        <time class="post-time" title="2017-01-09 10:39:52" datetime="2017-01-09T02:39:52.000Z"  itemprop="datePublished">2017-01-09</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/博客搭建/">博客搭建</a></li></ul>
@@ -225,7 +242,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/07/05/hexo4/">Hexo + Coding、Github、码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床</a>
+      <a class="post-title-link" href="/2017/01/09/2017010901/">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（六） —— Markdown常用语法及工具</a>
     </h3>
   
 
@@ -238,14 +255,14 @@
         
     
 
-        <a href="/2017/07/05/hexo4/" class="post-more waves-effect waves-button">
+        <a href="/2017/01/09/2017010901/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
 
     </div>
     
@@ -254,11 +271,11 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-hexo3"
+            <article id="post-2017010801"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017-07-05 17:18:41" datetime="2017-07-05T09:18:41.000Z"  itemprop="datePublished">2017-07-05</time>
+        <time class="post-time" title="2017-01-08 17:22:32" datetime="2017-01-08T09:22:32.000Z"  itemprop="datePublished">2017-01-08</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/博客搭建/">博客搭建</a></li></ul>
@@ -272,7 +289,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/07/05/hexo3/">Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名</a>
+      <a class="post-title-link" href="/2017/01/08/2017010801/">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（五） —— 博客链接提交百度、谷歌等搜索引擎收录</a>
     </h3>
   
 
@@ -285,14 +302,14 @@
         
     
 
-        <a href="/2017/07/05/hexo3/" class="post-more waves-effect waves-button">
+        <a href="/2017/01/08/2017010801/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/百度/">百度</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/谷歌/">谷歌</a></li></ul>
 
     </div>
     
@@ -301,11 +318,11 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-hexo2"
+            <article id="post-2017010701"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017-07-05 17:17:27" datetime="2017-07-05T09:17:27.000Z"  itemprop="datePublished">2017-07-05</time>
+        <time class="post-time" title="2017-01-07 17:21:08" datetime="2017-01-07T09:21:08.000Z"  itemprop="datePublished">2017-01-07</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/博客搭建/">博客搭建</a></li></ul>
@@ -319,7 +336,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/07/05/hexo2/">Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）</a>
+      <a class="post-title-link" href="/2017/01/07/2017010701/">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床</a>
     </h3>
   
 
@@ -329,17 +346,17 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
+        前面三个小节，我们实现了博客搭建及绑定个人域名，到目前我们的博客其实已经搭建完成了，本节属于博客优化。我们之前把博客部署在了Github、Coding、码云上，Giehub和码云好说，空间比较大，但是Coding给我们的存储空间只有256M，试想如果我们博客中的图片很多，一篇博客有那么十来张图片，那么一篇博客的大小最低也得超出1M甚至几兆了，而博客的文字只占很小的一部分空间，大部分空间都让图...
     
 
-        <a href="/2017/07/05/hexo2/" class="post-more waves-effect waves-button">
+        <a href="/2017/01/07/2017010701/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/七牛云/">七牛云</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图床/">图床</a></li></ul>
 
     </div>
     
@@ -348,11 +365,11 @@
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-hexo1"
+            <article id="post-2017010601"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
-        <time class="post-time" title="2017-07-05 16:05:05" datetime="2017-07-05T08:05:05.000Z"  itemprop="datePublished">2017-07-05</time>
+        <time class="post-time" title="2017-01-06 17:18:41" datetime="2017-01-06T09:18:41.000Z"  itemprop="datePublished">2017-01-06</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/博客搭建/">博客搭建</a></li></ul>
@@ -366,7 +383,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2017/07/05/hexo1/">Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 环境搭建</a>
+      <a class="post-title-link" href="/2017/01/06/2017010601/">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名</a>
     </h3>
   
 
@@ -376,17 +393,111 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        前言能用来搭建个人博客的工具很多，本文只对Hexo做介绍。Hexo可用来搭建个人博客，并可依据国内外网络环境同时部署在Github和Coding(码云)上，国外用户访问Github，国内用户访问Coding，即加快国内访问速度，又可实现博客访问分流。用Hexo搭建个人博客，不仅所需的所有软件及部署平台均免费，而且搭建过程也是非常简单的，您只需要按照小编给您写好的步骤不停的下一步即可。
+        经过前面两个小节的搭建，我们的博客已经实现了外网访问，其实只要不介意地址，博客就可以用了。今天我们来说一下如何使用自己申请的域名访问博客，当然，前提是你已经购买了域名。在第二小节中，我们把博客发布在了Github、Coding、码云这三个平台上，在绑定域名时，可以选择其中一个平台进行绑定，也可以一个域名根据线路不同绑定多个平台，比如海外用户访问Github，国内用户访问Coding或者码云。...
     
 
-        <a href="/2017/07/05/hexo1/" class="post-more waves-effect waves-button">
+        <a href="/2017/01/06/2017010601/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Coding/">Coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/">Github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/域名绑定/">域名绑定</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/码云-oschina/">码云(oschina)</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-2017010501"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-01-05 17:01:27" datetime="2017-01-05T09:01:27.000Z"  itemprop="datePublished">2017-01-05</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/博客搭建/">博客搭建</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/01/05/2017010501/">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        前言在上一节中，我们在本地用Hexo搭建起了个人博客，并实现了发布及本地访问，本节我们学习将本地搭建好的博客发布到Github、Coding、码云上，实现外网访问。同时发布到多个托管平台一是为了下一节绑定域名时能够做到国内外访问分流，以提高各自的访问速度，二是为了在某一托管平台不能访问时，我们的博客能切换至其他平台继续对外发布。
+    
+
+        <a href="/2017/01/05/2017010501/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Coding/">Coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/">Github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/码云-oschina/">码云(oschina)</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-2017010401"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2017-01-04 16:05:05" datetime="2017-01-04T08:05:05.000Z"  itemprop="datePublished">2017-01-04</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/博客搭建/">博客搭建</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2017/01/04/2017010401/">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 基础环境搭建</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        前言&nbsp;&nbsp;&nbsp;&nbsp;能用来搭建个人博客的工具很多，本文只对Hexo做介绍。&nbsp;&nbsp;&nbsp;&nbsp;Hexo可用来搭建个人博客，并可依据国内外网络环境同时部署在Github和Coding(码云)上，国外用户访问Github，国内用户访问Coding，即加快国内访问速度，又可实现博客访问分流。用Hexo搭建个人博客，不仅所需的所有软件及部署平台均免费，而且搭建过程也是非常简单的，您只需要按照小编给您写好的步骤不停的下一步即可。
+    
+
+        <a href="/2017/01/04/2017010401/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Coding/">Coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/">Github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/码云-oschina/">码云(oschina)</a></li></ul>
 
     </div>
     
@@ -397,6 +508,21 @@
     </ul>
 
     
+	
+	<script>
+		(function(){
+			var bp = document.createElement('script');
+			var curProtocol = window.location.protocol.split(':')[0];
+			if (curProtocol === 'https') {
+				bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+			}
+			else {
+				bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+			}
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(bp, s);
+		})();
+	</script>
 
 </div>
         <footer class="footer">
@@ -423,10 +549,33 @@
         <p><span>田埂↑の夢 &copy; 2015 - 2017</span>
             <span>
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+                <!--Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>-->
+				田埂上的梦（王怀亮的博客）
             </span>
         </p>
     </div>
+	
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+
 </footer>
 
     </main>
@@ -448,7 +597,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.jkinn.com/&title=JK客栈&source=本站是JK客栈（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.jkinn.com/&title=JK客栈&source=本站是 JK客栈 田埂上的梦（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

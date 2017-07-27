@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 基础环境搭建 | JK客栈 | 王怀亮的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="hexo,Git,Coding,Github,码云(oschina)">
+    <meta name="description" content="本文介绍如何如何安装 Git、 nodeJS、TortoiseGit、Hexo，并使用 Hexo 搭建个人博客">
+<meta name="keywords" content="hexo,Git,Coding,Github,码云(oschina)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 基础环境搭建">
+<meta property="og:url" content="http://www.jkinn.com/2017/01/04/2017010401/index.html">
+<meta property="og:site_name" content="JK客栈">
+<meta property="og:description" content="本文介绍如何如何安装 Git、 nodeJS、TortoiseGit、Hexo，并使用 Hexo 搭建个人博客">
+<meta property="og:image" content="http://i1.buimg.com/1949/945c19924044317ds.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/83be676010557ac0.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/9229aba951974761.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/d05508802aa1c71e.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/3bf094fc2db92e1e.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/6c88e19b8d8374b6.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/5127bbfd570d8631.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/bf68af24f1374e2e.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/c5d6463d7e13e436.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/14d4287f07ed9ece.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/70494ff6340c4e38.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/957939485dc76f9e.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/6e975152b13b049a.jpg">
+<meta property="og:image" content="http://i1.buimg.com/1949/da8ddc44ecaf54e7.jpg">
+<meta property="og:image" content="http://i1.buimg.com/1949/66dfe5b9d56f411e.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/2f4c0cf6cd99198e.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/6f56fb85a6fe480d.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/13381aa66d476075.png">
+<meta property="og:image" content="http://i2.kiimg.com/1949/615f644a8a4d2e3b.jpg">
+<meta property="og:image" content="http://i2.kiimg.com/1949/ec284f4646af58d9.jpg">
+<meta property="og:image" content="http://i2.kiimg.com/1949/42334a157c1ede31.jpg">
+<meta property="og:image" content="http://i2.kiimg.com/1949/497e1ab9fbbcd9d3.jpg">
+<meta property="og:image" content="http://i2.kiimg.com/1949/e499bb67dd277603.jpg">
+<meta property="og:image" content="http://i2.kiimg.com/1949/54719b4e4978125a.jpg">
+<meta property="og:image" content="http://i2.kiimg.com/1949/9926fb53ac8a7325.jpg">
+<meta property="og:image" content="http://i2.kiimg.com/1949/774e43a07ce0e22b.png">
+<meta property="og:image" content="http://i2.kiimg.com/1949/3677007b6cd860d0.png">
+<meta property="og:image" content="http://i2.kiimg.com/1949/62e20a67076d6489.png">
+<meta property="og:image" content="http://i2.kiimg.com/1949/6cc6abee30db33cc.png">
+<meta property="og:image" content="http://i2.kiimg.com/1949/25b21f563d7b6661.png">
+<meta property="og:image" content="http://i2.kiimg.com/1949/687b5c60dc359bff.png">
+<meta property="og:image" content="http://i2.kiimg.com/1949/9bc6ee2bcde44862.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/49adc90e09817306.png">
+<meta property="og:image" content="http://i1.buimg.com/1949/d8ff3cff8f8e5280.jpg">
+<meta property="og:updated_time" content="2017-01-04T08:05:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 基础环境搭建">
+<meta name="twitter:description" content="本文介绍如何如何安装 Git、 nodeJS、TortoiseGit、Hexo，并使用 Hexo 搭建个人博客">
+<meta name="twitter:image" content="http://i1.buimg.com/1949/945c19924044317ds.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="JK客栈" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">田埂↑の夢</h5>
+          <a href="mailto:sdwanghuailiang@163.com" title="sdwanghuailiang@163.com" class="mail">sdwanghuailiang@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sdwanghuailiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/sdwanghuailiang" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.dongchunlin.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                小董董
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 基础环境搭建</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 基础环境搭建</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-01-04T08:05:05.000Z" itemprop="datePublished" class="page-time">
+  2017-01-04
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/博客搭建/">博客搭建</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#软件列表"><span class="post-toc-number">2.</span> <span class="post-toc-text">软件列表</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Git-安装"><span class="post-toc-number">3.</span> <span class="post-toc-text">Git 安装</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#TortoiseGit-安装及配置"><span class="post-toc-number">4.</span> <span class="post-toc-text">TortoiseGit 安装及配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#nodeJS-安装"><span class="post-toc-number">5.</span> <span class="post-toc-text">nodeJS 安装</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Hexo-安装及配置"><span class="post-toc-number">6.</span> <span class="post-toc-text">Hexo 安装及配置</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#测试"><span class="post-toc-number">7.</span> <span class="post-toc-text">测试</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-2017010401"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 基础环境搭建</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-01-04 16:05:05" datetime="2017-01-04T08:05:05.000Z"  itemprop="datePublished">2017-01-04</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/博客搭建/">博客搭建</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;能用来搭建个人博客的工具很多，本文只对Hexo做介绍。<br>&nbsp;&nbsp;&nbsp;&nbsp;Hexo可用来搭建个人博客，并可依据国内外网络环境同时部署在Github和Coding(码云)上，国外用户访问Github，国内用户访问Coding，即加快国内访问速度，又可实现博客访问分流。用Hexo搭建个人博客，不仅所需的所有软件及部署平台均免费，而且搭建过程也是非常简单的，您只需要按照小编给您写好的步骤不停的下一步即可。</p>
+<a id="more"></a>
+<h1 id="软件列表"><a href="#软件列表" class="headerlink" title="软件列表"></a>软件列表</h1><p>整个搭建过程需要安装的软件并不多，全部所需软件如下（版本无所谓）：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/945c19924044317ds.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure><br>各软件下载地址如下：</p>
+<table>
+<thead>
+<tr>
+<th>软件</th>
+<th style="text-align:left">下载地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Git-2.13.2-64-bit.exe</td>
+<td style="text-align:left"><a href="https://git-scm.com/downloads" target="_blank" rel="external">https://git-scm.com/downloads</a></td>
+</tr>
+<tr>
+<td>node-v6.11.0-x64.msi</td>
+<td style="text-align:left"><a href="https://nodejs.org/en/download/" target="_blank" rel="external">https://nodejs.org/en/download/</a></td>
+</tr>
+<tr>
+<td>TortoiseGit-2.4.0.2-64bit.msi</td>
+<td style="text-align:left"><a href="https://tortoisegit.org/download/" target="_blank" rel="external">https://tortoisegit.org/download/</a></td>
+</tr>
+<tr>
+<td>TortoiseGit-LanguagePack-2.4.0.0-64bit-zh_CN.msi</td>
+<td style="text-align:left"><a href="https://tortoisegit.org/download/" target="_blank" rel="external">https://tortoisegit.org/download/</a></td>
+</tr>
+</tbody>
+</table>
+<p>如果您已经安装过这几个软件，则可跳过本文，直接进入下一步：</p>
+<h1 id="Git-安装"><a href="#Git-安装" class="headerlink" title="Git 安装"></a>Git 安装</h1><p>首先我们需要安装Git，Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。在搭建博客的过程中，我们主要使用Git的命令行进行Hexo的安装及配置。</p>
+<p>双击Git-2.13.2-64-bit.exe，开始安装Git:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/83be676010557ac0.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击Next,进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/9229aba951974761.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>选择安装目录，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/d05508802aa1c71e.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>全部勾选，特别是需要勾选Git Bash Here和Git GUI Here这两个选项，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/3bf094fc2db92e1e.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>默认，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/6c88e19b8d8374b6.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>选择第二项 Use Git from the Windows Command Prompt ,点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/5127bbfd570d8631.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>默认，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/bf68af24f1374e2e.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>选择第一项Checkout Windows-style,comment Unix-style line endings，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/c5d6463d7e13e436.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>选择第一项Use MinTTY， 点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/14d4287f07ed9ece.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>默认，点击Next，开始安装：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/70494ff6340c4e38.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>稍等片刻，弹出如下界面，表示安装完毕：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/957939485dc76f9e.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>在电脑任意文件夹，右键，能在右键操作列表中看到如下红圈标识的两项操作，表示Git安装成功：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/6e975152b13b049a.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<h1 id="TortoiseGit-安装及配置"><a href="#TortoiseGit-安装及配置" class="headerlink" title="TortoiseGit 安装及配置"></a>TortoiseGit 安装及配置</h1><p>Git自带的操作方式为命令行，命令行的方式对非IT行业的小伙伴来说并不是很友好，为了方便Git的使用，我们还需要安装TortoiseGit。TortoiseGit是一个开放的git版本控制系统的客户端，他将Git原生的命令行操作方式转为界面方式，极大的降低了Git的学习成本。</p>
+<p>双击TortoiseGit-2.4.0.2-64bit.msi，开始安装TortoiseGit：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/da8ddc44ecaf54e7.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/66dfe5b9d56f411e.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/2f4c0cf6cd99198e.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>默认，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/6f56fb85a6fe480d.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击 install，开始安装TortoiseGit：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/13381aa66d476075.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>稍等片刻，弹出如下界面，表示安装完毕：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/615f644a8a4d2e3b.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>在电脑任意文件夹，右键，能在右键操作列表中看到如下红圈标识的三项操作，表示TortoiseGit安装成功：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/ec284f4646af58d9.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>这时候，我们已经把Git的命令行界面简化成了鼠标操作，但是操作按钮全都是英文的，对于英文不是那么好的小伙伴来说，貌似还是不那么友好，接下来我们继续把TortoiseGit的英文界面简化成中文。</p>
+<p>双击 TortoiseGit-LanguagePack-2.4.0.0-64bit-zh_CN.msi，安装中文语言包：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/42334a157c1ede31.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击 下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/497e1ab9fbbcd9d3.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>一眨眼的功夫，就安装完了，点击 完成 退出。在任意文件夹右键，找到 TortoiseGit ——&gt; Settings：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/e499bb67dd277603.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>找到 General ——&gt; Language，将语言改为 【中文】保存：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/54719b4e4978125a.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>这时候TortoiseGit的操作按钮就是中文的了，如下图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/9926fb53ac8a7325.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>至此，我们已经完成了TortoiseGit的安装。</p>
+<h1 id="nodeJS-安装"><a href="#nodeJS-安装" class="headerlink" title="nodeJS 安装"></a>nodeJS 安装</h1><p>Node.js是一个Javascript运行环境(runtime)，就是运行在服务端的 JavaScript。在使用Hexo搭建博客的过程中，NodeJS扮演着十分重要的角色，它提供了Hexo的安装环境。</p>
+<p>NodeJS的安装也很简单，只需下一步下一步即可。<br>双击node-v6.11.0-x64.msi 开始安装：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/774e43a07ce0e22b.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure></p>
+<p>点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/3677007b6cd860d0.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>勾选同意条款，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/62e20a67076d6489.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>选择安装目录，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/6cc6abee30db33cc.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>默认，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/25b21f563d7b6661.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击install，开始安装：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/687b5c60dc359bff.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>稍等片刻，弹出如下界面，表示安装完毕：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/9bc6ee2bcde44862.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击Finish，退出！</p>
+<h1 id="Hexo-安装及配置"><a href="#Hexo-安装及配置" class="headerlink" title="Hexo 安装及配置"></a>Hexo 安装及配置</h1><p>准备好以上两个工具后，就正式迎来了我们今天的主角【Hexo】,Hexo不需要提前准备安装文件，只需要几个简单的命令即可。安装过程和以上两个工具一样，也是非常简单的，OK，走起来。</p>
+<p>在电脑的某个目录下新建一个文件夹，名字随便取，只要不是中文的就好，我这里在E盘下新建文件夹blog。打开刚建好的文件夹，右键选择Git Bash Here，如下图所示：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/49adc90e09817306.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>在弹出的命令窗口中输入：npm install -g hexo ，回车：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /d/blog</div><div class="line">$ npm install -g hexo</div></pre></td></tr></table></figure>
+<p>稍等片刻，控制台输出以下内容表示hexo安装完成：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@^1.0.0 (node_modules\hexo\node_modules\chokidar\node_modules\fsevents):</div><div class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform <span class="keyword">for</span> fsevents@1.1.2: wanted &#123;<span class="string">"os"</span>:<span class="string">"darwin"</span>,<span class="string">"arch"</span>:<span class="string">"any"</span>&#125; (current: &#123;<span class="string">"os"</span>:<span class="string">"win32"</span>,<span class="string">"arch"</span>:<span class="string">"x64"</span>&#125;)</div></pre></td></tr></table></figure>
+<p>在控制台输入hexo -v ，验证hexo是否安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /d/blog</div><div class="line">$ hexo -v</div><div class="line">hexo-cli: 1.0.3</div><div class="line">os: Windows_NT 10.0.10240 win32 x64</div><div class="line">http_parser: 2.7.0</div><div class="line">node: 6.11.0</div><div class="line">v8: 5.1.281.102</div><div class="line">uv: 1.11.0</div><div class="line">zlib: 1.2.11</div><div class="line">ares: 1.10.1-DEV</div><div class="line">icu: 58.2</div><div class="line">modules: 48</div><div class="line">openssl: 1.0.2k</div></pre></td></tr></table></figure>
+<p>控制台输出以上信息，标识hexo安装成功。接着输入hexo init进行初始化操作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /d/blog</div><div class="line">$ hexo init</div></pre></td></tr></table></figure>
+<p>稍等片刻，控制台输出以下信息，标识hexo初始化成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@^1.0.0 (node_modules\chokidar\node_modules\fsevents):</div><div class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform <span class="keyword">for</span> fsevents@1.1.2: wanted &#123;<span class="string">"os"</span>:<span class="string">"darwin"</span>,<span class="string">"arch"</span>:<span class="string">"any"</span>&#125; (current: &#123;<span class="string">"os"</span>:<span class="string">"win32"</span>,<span class="string">"arch"</span>:<span class="string">"x64"</span>&#125;)</div><div class="line">INFO  Start blogging with Hexo!</div></pre></td></tr></table></figure>
+<p>输入npm install，安装hexo依赖包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /d/blog</div><div class="line">$ npm install</div><div class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@^1.0.0 (node_modules\chokidar\node_modules\fsevents):</div><div class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform <span class="keyword">for</span> fsevents@1.1.2: wanted &#123;<span class="string">"os"</span>:<span class="string">"darwin"</span>,<span class="string">"arch"</span>:<span class="string">"any"</span>&#125; (current: &#123;<span class="string">"os"</span>:<span class="string">"win32"</span>,<span class="string">"arch"</span>:<span class="string">"x64"</span>&#125;)</div></pre></td></tr></table></figure>
+<p>到现在hexo就算安装完成了，接下来我们就可以欣赏我们的安装成果了。</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在刚才打开的控制台输入hexo g，生成静态化页面：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /d/blog</div><div class="line">$ hexo g</div></pre></td></tr></table></figure>
+<p>生成完毕后，输入hexo s，启动本地服务器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /d/blog</div><div class="line">$ hexo s</div><div class="line">INFO  Start processing</div><div class="line">INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.</div></pre></td></tr></table></figure>
+<p>然后打开浏览器，访问<a href="http://localhost:4000/，就可以看到我们的博客页面了：" target="_blank" rel="external">http://localhost:4000/，就可以看到我们的博客页面了：</a></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/d8ff3cff8f8e5280.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>现在我们已经在本地搭建好了自己的博客系统，下一节我们介绍如何将本地的博客托管到Github、Coding、码云等代码托管平台上。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-01-04T08:05:11.000Z" itemprop="dateUpdated">2017-01-04 16:05:11</time>
+</span><br>
+
+
+        
+        【转载请注明出处】<a href="/2017/01/04/2017010401/" target="_blank" rel="external">http://www.jkinn.com/2017/01/04/2017010401/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.jkinn.com">
+            <img src="/img/avatar.jpg" alt="田埂↑の夢">
+            田埂↑の夢
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Coding/">Coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/">Github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/码云-oschina/">码云(oschina)</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.jkinn.com/2017/01/04/2017010401/&title=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 基础环境搭建》 — JK客栈&pic=http://www.jkinn.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.jkinn.com/2017/01/04/2017010401/&title=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 基础环境搭建》 — JK客栈&source=前言&nbsp;&nbsp;&nbsp;&nbsp;能用来搭建个人博客的工具很多，本文只对Hexo做介绍。&nbsp;&nbsp;&nbsp;&nbsp;..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.jkinn.com/2017/01/04/2017010401/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 基础环境搭建》 — JK客栈&url=http://www.jkinn.com/2017/01/04/2017010401/&via=http://www.jkinn.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.jkinn.com/2017/01/04/2017010401/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/01/05/2017010501/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 上一篇</div>
+        <h5 class="title">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）</h5>
+      </a>
+    </div>
+  
+
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2137675"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢您的支持
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <!--<p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>-->
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>田埂↑の夢 &copy; 2015 - 2017</span>
+            <span>
+                
+                <!--Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>-->
+				田埂上的梦（王怀亮的博客）
+            </span>
+        </p>
+    </div>
+	
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.jkinn.com/2017/01/04/2017010401/&title=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 基础环境搭建》 — JK客栈&pic=http://www.jkinn.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.jkinn.com/2017/01/04/2017010401/&title=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 基础环境搭建》 — JK客栈&source=前言&nbsp;&nbsp;&nbsp;&nbsp;能用来搭建个人博客的工具很多，本文只对Hexo做介绍。&nbsp;&nbsp;&nbsp;&nbsp;..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.jkinn.com/2017/01/04/2017010401/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 基础环境搭建》 — JK客栈&url=http://www.jkinn.com/2017/01/04/2017010401/&via=http://www.jkinn.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.jkinn.com/2017/01/04/2017010401/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKUlEQVR42u3au5bDMAgFwP3/n842W6SR9yLkwnhU5eRha1wQQPz8xOvztZJPP4v1/enq9eouBxYGBsZjGZ/LlXxn9avrTefg5C4YGBhvYKwiWHL7s2H0+r7L9zEwMDCCbZ0NwRgYGBh9xl6JmzwaDAwMjE4Re42MSs2tgHu4FsfAwHggo1NY3v36lvMNDAyMRzE67f5qc/+O/fxdGQMDYzQjv02HtDe6UR7+wMDAGM2oHkzubXSvubZZsmJgYAxi7FW9/bQvPyKNjlExMDBGM/rBsT9IkQxtlI8wMTAwBjGql0jK13LBWSyDl11DDAyMFzCSkHr9Tuf7eQsvylUxMDCGMqqN+84AWfUh/vMHgIGBMZrRb67laVy16Va9DgYGxlRGZ5Dr1ADZgZIYAwPjBYxq2rc3kJG0+DcHxTAwMEYzqmG3ejrauWZr2AIDA+MFjFMDFnkimLfYNnNVDAyMQYzOdquDX4dnujAwMEYzkvSuc4NOUy9PMTEwMGYzqklhdQjj7qNNDAyMtzHyYjIPvjk+D7jlDBcDA2MEozziEJeyZ9tqy+9jYGAMZXyKq/+rvLgtJIsYGBijGfnKt9vv/HWOHDAwMKYy9sLlfalhHnAxMDDexqj2r6oFbdJ0y0P/Ms/FwMDAKLbMqkcO1ZAdPQkMDIxXMvZq4jzdTHZyIDXEwMB4IGPvMCA/+KyWpuUBDgwMjNGMasirjnPlx5b5GNnmQSYGBsbzGL8E6ImHxPdOogAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1262549369&web_id=1262549369')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

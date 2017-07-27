@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina） | JK客栈 | 王怀亮的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="hexo,Coding,Github,码云(oschina)">
+    <meta name="description" content="本文介绍如何将我们使用 Hexo 搭建的博客部署、托管到 Coding、Github 及 码云（Oschina） 上">
+<meta name="keywords" content="hexo,Coding,Github,码云(oschina)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）">
+<meta property="og:url" content="http://www.jkinn.com/2017/01/05/2017010501/index.html">
+<meta property="og:site_name" content="JK客栈">
+<meta property="og:description" content="本文介绍如何将我们使用 Hexo 搭建的博客部署、托管到 Coding、Github 及 码云（Oschina） 上">
+<meta property="og:image" content="http://i4.piimg.com/1949/f4e73142faca97ca.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/704ba92bf2e294bb.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/cbc0c8dc1fcdfddb.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/db6bdb343e56ef5e.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/49f7e773567280df.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/ceb5286735733444.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/399324b7c16a9ac3.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/fef7849b99a165c9.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/1580382a645d5bb7.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/572ef39c23bf463a.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/ce544cb86940bbdf.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/5ebf1bd498976a7d.jpg">
+<meta property="og:image" content="http://i4.piimg.com/1949/bdcf5073cd8bc4f4.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/a2a17a64c339888c.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/8bcb22b450dfac9e.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/5e5a3f18787fd9d8.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/3acf012b8316c9fc.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/29f9f3f8e7bcbb37.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/b26cc1d3c3afc848.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/472936e229b49618.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/1098a2a405afe97b.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/a3e1522d9bbf8470.jpg">
+<meta property="og:image" content="http://i4.piimg.com/1949/05c51ea83fcd564b.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/a53aa79714a0305d.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/0bfea454f7aec078.png">
+<meta property="og:image" content="http://i4.piimg.com/1949/f312f9a6f5a4553e.png">
+<meta property="og:image" content="http://i2.kiimg.com/1949/14f92a8e56da7a43.png">
+<meta property="og:image" content="http://i2.kiimg.com/1949/298f2d7e391fab4b.png">
+<meta property="og:image" content="http://i2.kiimg.com/1949/3f7bd6d1693feb2d.png">
+<meta property="og:image" content="http://i2.kiimg.com/1949/dbaf86aa240661a0.jpg">
+<meta property="og:updated_time" content="2017-01-05T09:01:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）">
+<meta name="twitter:description" content="本文介绍如何将我们使用 Hexo 搭建的博客部署、托管到 Coding、Github 及 码云（Oschina） 上">
+<meta name="twitter:image" content="http://i4.piimg.com/1949/f4e73142faca97ca.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="JK客栈" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">田埂↑の夢</h5>
+          <a href="mailto:sdwanghuailiang@163.com" title="sdwanghuailiang@163.com" class="mail">sdwanghuailiang@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sdwanghuailiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/sdwanghuailiang" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.dongchunlin.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                小董董
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-01-05T09:01:27.000Z" itemprop="datePublished" class="page-time">
+  2017-01-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/博客搭建/">博客搭建</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#托管至Github"><span class="post-toc-number">2.</span> <span class="post-toc-text">托管至Github</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#托管至Coding"><span class="post-toc-number">3.</span> <span class="post-toc-text">托管至Coding</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#托管至码云"><span class="post-toc-number">4.</span> <span class="post-toc-text">托管至码云</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-2017010501"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-01-05 17:01:27" datetime="2017-01-05T09:01:27.000Z"  itemprop="datePublished">2017-01-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/博客搭建/">博客搭建</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在上一节中，我们在本地用Hexo搭建起了个人博客，并实现了发布及本地访问，本节我们学习将本地搭建好的博客发布到Github、Coding、码云上，实现外网访问。同时发布到多个托管平台一是为了下一节绑定域名时能够做到国内外访问分流，以提高各自的访问速度，二是为了在某一托管平台不能访问时，我们的博客能切换至其他平台继续对外发布。</p>
+<a id="more"></a>
+<p>至于Github、Coding和码云这三大代码托管平台怎么注册我就不说了，以下过程建立在三个代码托管平台均已注册的基础上。</p>
+<h1 id="托管至Github"><a href="#托管至Github" class="headerlink" title="托管至Github"></a>托管至Github</h1><p>首先，我们说一下如何将本地的博客发布到Github上。<br>登录Github后，点击右上角小加号，找到New repository，点击，创建新的资源库：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/f4e73142faca97ca.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p><strong>这里的资源库名字要注意了哈，资源库的名字格式是固定的，格式为：你的Github账户名.github.io，即如果你的Github账户名是zhangsan，则你的资源库名称为：zhangsan.github.io，千万千万不要乱写</strong>，格式不对，等会浏览器是访问不了的，点击Create repository创建资源库：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/704ba92bf2e294bb.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure></p>
+<p>资源库创建后，复制资源库地址，如下图所示：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/cbc0c8dc1fcdfddb.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>打开博客目录（上节我们新建的那个文件夹）下的_config.yml文件，找到deploy节点，将刚才复制的Github资源库地址配置上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: </div><div class="line">    github: git@github.com:你的github帐户名/你的github帐户名.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+<p>接下来我们安装部署插件，右键打开Git Bash，输入 npm install hexo-deployer-git –save 进行安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /d/blog</div><div class="line">$ npm install hexo-deployer-git --save</div><div class="line">hexo-site@0.0.0 D:\blog</div><div class="line">`-- hexo-deployer-git@0.3.0</div><div class="line">  `-- moment@2.18.1</div><div class="line"></div><div class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@^1.0.0 (node_modules\ch                                                                                                                                                                                               okidar\node_modules\fsevents):</div><div class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform <span class="keyword">for</span> fsevents@                                                                                                                                                                                               1.1.2: wanted &#123;<span class="string">"os"</span>:<span class="string">"darwin"</span>,<span class="string">"arch"</span>:<span class="string">"any"</span>&#125; (current: &#123;<span class="string">"os"</span>:<span class="string">"win32"</span>,<span class="string">"arch"</span>:<span class="string">"x64"</span>&#125;)</div></pre></td></tr></table></figure>
+<p>然后依次执行 hexo g、hexo d 进行编译、部署的时候有可能会报下图所示的错误：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/db6bdb343e56ef5e.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>这个错误的意思是没有权限提交，这很正常，因为Github根本不认识我们的电脑，肯定没有权限。在C盘下找到.ssh目录：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/49f7e773567280df.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>如果刚才报错的话，这个目录要么是空的要么只有一个 known_hosts 文件。<br>在刚才的命令窗口执行 ssh-keygen -t rsa -C “注册github时候用的邮箱”（C是大写的）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /d/blog</div><div class="line">$ ssh-keygen -t rsa -C <span class="string">"注册github时候用的邮箱"</span></div></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/ceb5286735733444.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>这时候我们会发现 .ssh 目录下生成了两个文件 id_rsa.pub 和 id_rsa ：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/399324b7c16a9ac3.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>用文本编辑器打开 id_rsa.pub 文件，全选复制里面的内容，找到Github下的个人设置：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/fef7849b99a165c9.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>找到 SSH and GPG keys ，点击右上角的 New SSH key：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/1580382a645d5bb7.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>Title随便起名字，将刚才复制的内容黏贴到 Key 文本域中，点击 Add SSH key 保存。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/572ef39c23bf463a.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>然后在控制台输入 ssh -T git@github.com 测试是否验证通过，控制台输出如下信息表示权限验证通过：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /e/blog</div><div class="line">$ ssh -T git@github.com</div><div class="line">Hi 你的帐户名! You<span class="string">'ve successfully authenticated, but GitHub does not provide shell access.</span></div></pre></td></tr></table></figure>
+<p>然后再次执行 hexo d 提交部署，就可以部署成功了：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/ce544cb86940bbdf.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>在浏览器访问 你的项目名称（即帐户名.github.io），就可以看到我们发布的博客了：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/5ebf1bd498976a7d.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>至此，将本地的Hexo博客发布到Github操作就算完成了，接下来我们再将其发布到Coding。</p>
+<h1 id="托管至Coding"><a href="#托管至Coding" class="headerlink" title="托管至Coding"></a>托管至Coding</h1><p>登录 Coding ，依次找到 账户——&gt;SSH公钥 ，和上边添加Github公钥一样添加我们生成的公钥：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/bdcf5073cd8bc4f4.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>然后点击 添加项目 添加我们要发布博客的项目：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/a2a17a64c339888c.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>项目名和帐户名保持一致，这里就不需要后缀了，直接写帐户名就好，项目类型选为 私有 ，点击 创建项目 进行创建：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/8bcb22b450dfac9e.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>项目创建后，会自动跳转到项目页面，点击 代码 ，找到 SSH 方式访问仓库，然后复制仓库地址：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/5e5a3f18787fd9d8.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>打开博客目录（上节我们新建的那个文件夹）下的_config.yml文件，找到deploy节点，将刚才复制的仓库 SSH 访问地址 配置上，这时候我们的仓库就是两个了，一个是上边配置的Github，一个是Coding：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: </div><div class="line">    github: git@github.com:你的帐户名/你的帐户名.github.io.git</div><div class="line">    coding: git@git.coding.net:你的帐户名/你的帐户名.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+<p>这时，我们再次依次执行 hexo g、hexo d，进行生成、发布，在发布时，会提示如下信息，意思就是是不是要连接到Coding，输入 yes ，点击 OK 继续<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/3acf012b8316c9fc.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure></p>
+<p>这时候控制台会出现两份提交信息，一条是提交到Github，一条是提交到Coding:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/29f9f3f8e7bcbb37.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>进入Coding项目，点击代码，就能看到我们提交上来的文件了，其实这些文件就是博客目录下public子目录中的东西：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/b26cc1d3c3afc848.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>选择 代码——&gt; Pages 服务，部署来源选择 Master分支 ，点击 保存 对项目进行静态发布：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/472936e229b49618.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>出现下边的信息表示项目发布成功，这时候我们可以将 强制 HTTPS 访问 打开，增强博客安全性：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/1098a2a405afe97b.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>最后，在浏览器访问 你的项目名.coding.me，看到我们的博客页面，表示部署成功：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/a3e1522d9bbf8470.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>OK，又搞定一个代码托管平台，继续搞定 码云 ！</p>
+<h1 id="托管至码云"><a href="#托管至码云" class="headerlink" title="托管至码云"></a>托管至码云</h1><p>有了上边两个平台的经验，码云就非常简单了，同样，第一步先授权。登录码云，依次点击 头像——&gt; 个人资料——&gt; SSH 公钥，将我们生成的SSH公钥填进去，确定保存：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/05c51ea83fcd564b.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击 新建项目 创建项目，项目名必须，必须，必须和用户名保持一致，语言类型选择 HTML，点击创建：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/a53aa79714a0305d.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>创建完成后，会跳转至项目页，复制项目 SSH 地址：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/0bfea454f7aec078.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>同样，将项目的 SSH 地址配置在博客的配置文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: </div><div class="line">    github: git@github.com:你的github帐户名/你的项目名.github.io.git</div><div class="line">    coding: git@git.coding.net:你的Coding帐户名/你的项目名.git</div><div class="line">    oschina: git@git.oschina.net:你的码云帐户名/你的项目名.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+<p>然后执行 hexo d 进行发布，这时，也会有提示，和Coding一样，输入 yes 点击 OK：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/f312f9a6f5a4553e.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>刷新码云项目页，就可以看到我们发布的文件了：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/14f92a8e56da7a43.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击项目操作项 服务——&gt; Pages，部署分支选择 Master，点击 启动服务 ，开启Pages 服务：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/298f2d7e391fab4b.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>部署成功后，系统会返回访问地址，其实就是 你的项目名.oschina.io:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/3f7bd6d1693feb2d.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>在浏览器访问部署地址，看到我们的博客主页，表示部署成功：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/dbaf86aa240661a0.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>到现在，三大主流托管平台我们都已经搞定了。其实现在我们已经可以在外网访问我们的博客了，但是访问地址并不是我们自己的域名，看起来有点Low，下一节，我们说一下如何把访问地址改成自己的域名。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-01-05T09:01:31.000Z" itemprop="dateUpdated">2017-01-05 17:01:31</time>
+</span><br>
+
+
+        
+        【转载请注明出处】<a href="/2017/01/05/2017010501/" target="_blank" rel="external">http://www.jkinn.com/2017/01/05/2017010501/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.jkinn.com">
+            <img src="/img/avatar.jpg" alt="田埂↑の夢">
+            田埂↑の夢
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Coding/">Coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/">Github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/码云-oschina/">码云(oschina)</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.jkinn.com/2017/01/05/2017010501/&title=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）》 — JK客栈&pic=http://www.jkinn.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.jkinn.com/2017/01/05/2017010501/&title=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）》 — JK客栈&source=前言在上一节中，我们在本地用Hexo搭建起了个人博客，并实现了发布及本地访问，本节我们学习将本地搭建好的博客发布到Github、Coding、码云上，实现..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.jkinn.com/2017/01/05/2017010501/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）》 — JK客栈&url=http://www.jkinn.com/2017/01/05/2017010501/&via=http://www.jkinn.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.jkinn.com/2017/01/05/2017010501/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/01/06/2017010601/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> 上一篇</div>
+        <h5 class="title">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名</h5>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/01/04/2017010401/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h5 class="title">零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 基础环境搭建</h5>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2137675"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢您的支持
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <!--<p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>-->
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>田埂↑の夢 &copy; 2015 - 2017</span>
+            <span>
+                
+                <!--Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>-->
+				田埂上的梦（王怀亮的博客）
+            </span>
+        </p>
+    </div>
+	
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.jkinn.com/2017/01/05/2017010501/&title=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）》 — JK客栈&pic=http://www.jkinn.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.jkinn.com/2017/01/05/2017010501/&title=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）》 — JK客栈&source=前言在上一节中，我们在本地用Hexo搭建起了个人博客，并实现了发布及本地访问，本节我们学习将本地搭建好的博客发布到Github、Coding、码云上，实现..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.jkinn.com/2017/01/05/2017010501/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）》 — JK客栈&url=http://www.jkinn.com/2017/01/05/2017010501/&via=http://www.jkinn.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.jkinn.com/2017/01/05/2017010501/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACOElEQVR42u3ay4oDMQxE0f7/n+6BWQUyMbek9IDl61UgL59eFLak68Lr/l3rd18/c39Y77/26VvXE0uGDBnbMu7lIoz15vi/rGHrb8mQIeMEBtnWenM8iElM873JkCFDxjpASSyS7/J3ZciQISMN3PXhj0Rw+vhkyJBxMoNcYvuHORLEj9/FZciQsSEjbQz85+sH+xsyZMjYhHGHixT9+YMgZTi0KxkyZIxmkIIXj11+fX2iVSBDhoypDH6NTAtwaaR2olyGDBknMHgZq9ZC6ODRZ2TIkHEAIz269QcsvlXUkyFDxjmM9DqaBmXn19aHxT+qhjJkyBjHIH/GYzQtnNVKeHH4ypAhYwTjW0MP6WGxBkYtTBkyZIxj1NqZnTZD+uA4VYYMGVMZacmsX5jjF92gwSBDhoyhjHS7tTZnLV6D8QsZMmQcwygOOjQGL/ijDAJXhgwZ4xjp1ZGU7DsltrRRKkOGjBMYtQNfeqSrjY6RmGbzFzJkyNibwYvvZCu1gK6NncmQIeMcBgm+dMAijenaAEfcVZAhQ8bmjFohrDNswducqBUqQ4aM0Yz+MEQtXtOGBNqJDBkyhjLucKVBXDsypqNpMmTImM1IL5M8gvnfpO2B1sVYhgwZ2zJ4yKaBWDsa8kaCDBkyTmOQS2laUEsbCWk0o7dlyJBxGIMf1zonUx79MmTIkEEYtbGJ2khH0I+VIUPGUEbaDOhccdMBi2InVoYMGYMYtchLw7Q2ENYp6smQIWME4wc6emqY8APOuAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1262549369&web_id=1262549369')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

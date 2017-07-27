@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>JK客栈</title>
-  <subtitle>再不折腾就老了</subtitle>
+  <subtitle>王怀亮的博客</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.jkinn.com/"/>
-  <updated>2017-07-05T09:22:29.000Z</updated>
+  <updated>2017-04-10T07:48:21.000Z</updated>
   <id>http://www.jkinn.com/</id>
   
   <author>
@@ -16,13 +16,71 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hexo + Coding、Github、码云(oschina)搭建个人博客（五） —— Markdown常用语法及工具</title>
-    <link href="http://www.jkinn.com/2017/07/05/hexo5/"/>
-    <id>http://www.jkinn.com/2017/07/05/hexo5/</id>
-    <published>2017-07-05T09:22:32.000Z</published>
-    <updated>2017-07-05T09:22:29.000Z</updated>
+    <title>阿里云 Linux CentOS 7.3 安装配置 JDK-1.8、MySQL-5.7、Redis-3.2.9、Zookeeper-3.4.9</title>
+    <link href="http://www.jkinn.com/2017/04/10/2017041001/"/>
+    <id>http://www.jkinn.com/2017/04/10/2017041001/</id>
+    <published>2017-04-10T07:48:14.000Z</published>
+    <updated>2017-04-10T07:48:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最初公司购买的阿里云服务器是Linux CentOS 6.8版本的，在安装MySQL 5.7的过程中遇到了一些问题，系统总是提示各种依赖包不存在。折腾了一天，打败了好多小怪兽后最后总算安装好了，遗憾的是，当时的安装过程没有做记录。这几天公司又采购了一台阿里云，还是由我来搭建生产环境，为了以后公司有新的服务器加入时，弟兄们能无脑搭建环境，这次的安装过程我做了详细记录，其他的服务器版本不敢说，阿里云 CentOS 7.3 的服务器按照这个过程基本不会出现什么问题。</p>
+<h1 id="已安装版本查看及卸载"><a href="#已安装版本查看及卸载" class="headerlink" title="已安装版本查看及卸载"></a>已安装版本查看及卸载</h1><p>因为我们的服务器是新采购的，上面什么东西都没有安装，甚至连JDK也没有，所以安装前我不需要检查软件是否安装，如果阁下的服务器是正在使用的，建议先检查某个软件是否已经安装，如果已经安装，需要咨询下领导是否要重新安装或者是否可移除。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-- 检查软件是否已经安装，以MySQL为例</div><div class="line">[root@服务器主机名 opt]<span class="comment"># rpm -qa | grep -i mysql</span></div><div class="line">mysql-community-release-el7-5.noarch</div><div class="line">-- 如果有安装组件，则需要一个个的卸载掉</div><div class="line">[root@服务器主机名 opt]<span class="comment"># yum -y remove mysql-community-release-el7-5</span></div></pre></td></tr></table></figure>
+<h1 id="系统版本查看"><a href="#系统版本查看" class="headerlink" title="系统版本查看"></a>系统版本查看</h1><p>我们才接收到公司采购的服务器时，基本都知道自己的服务器版本信息，当然有些情况我们是不知道服务器版本信息的，在这里我们先查询一下服务器信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">-- 查看系统内核版本</div><div class="line">[root@服务器主机名 ~]<span class="comment"># uname -a</span></div><div class="line">Linux 服务器主机名 3.10.0-514.21.1.el7.x86_64 <span class="comment">#1 SMP Thu May 25 17:04:51 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux</span></div><div class="line">[root@服务器主机名 ~]<span class="comment"># cat /proc/version</span></div><div class="line">Linux version 3.10.0-514.21.1.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-11) (GCC) ) <span class="comment">#1 SMP Thu May 25 17:04:51 UTC 2017</span></div><div class="line">-- 查看系统发行版本</div><div class="line">[root@服务器主机名 ~]<span class="comment"># lsb_release -a</span></div><div class="line">LSB Version:	:core-4.1-amd64:core-4.1-noarch</div><div class="line">Distributor ID:	CentOS</div><div class="line">Description:	CentOS Linux release 7.3.1611 (Core) </div><div class="line">Release:	7.3.1611</div><div class="line">Codename:	Core</div><div class="line">[root@服务器主机名 ~]<span class="comment"># cat /etc/os-release</span></div><div class="line">NAME=<span class="string">"CentOS Linux"</span></div><div class="line">VERSION=<span class="string">"7 (Core)"</span></div><div class="line">ID=<span class="string">"centos"</span></div><div class="line">ID_LIKE=<span class="string">"rhel fedora"</span></div><div class="line">VERSION_ID=<span class="string">"7"</span></div><div class="line">PRETTY_NAME=<span class="string">"CentOS Linux 7 (Core)"</span></div><div class="line">ANSI_COLOR=<span class="string">"0;31"</span></div><div class="line">CPE_NAME=<span class="string">"cpe:/o:centos:centos:7"</span></div><div class="line">HOME_URL=<span class="string">"https://www.centos.org/"</span></div><div class="line">BUG_REPORT_URL=<span class="string">"https://bugs.centos.org/"</span></div><div class="line"></div><div class="line">CENTOS_MANTISBT_PROJECT=<span class="string">"CentOS-7"</span></div><div class="line">CENTOS_MANTISBT_PROJECT_VERSION=<span class="string">"7"</span></div><div class="line">REDHAT_SUPPORT_PRODUCT=<span class="string">"centos"</span></div><div class="line">REDHAT_SUPPORT_PRODUCT_VERSION=<span class="string">"7"</span></div><div class="line"></div><div class="line">[root@服务器主机名 ~]<span class="comment"># cat /etc/redhat-release</span></div><div class="line">CentOS Linux release 7.3.1611 (Core) </div><div class="line">[root@服务器主机名 ~]<span class="comment"># rpm -q centos-release</span></div><div class="line">centos-release-7-3.1611.el7.centos.x86_64</div><div class="line">......</div></pre></td></tr></table></figure>
+<h1 id="安装-JDK-1-8"><a href="#安装-JDK-1-8" class="headerlink" title="安装 JDK 1.8"></a>安装 JDK 1.8</h1><p>我安装的时候JDK的最高版本是jdk-8u131，所以此处就以jdk-8u131为例进行安装，其他版本也一样：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">-- 安装JDK</div><div class="line">[root@服务器主机名 opt]<span class="comment"># rpm -ivh jdk-8u131-linux-x64.rpm </span></div><div class="line">Preparing...                          <span class="comment">################################# [100%]</span></div><div class="line">Updating / installing...</div><div class="line">   1:jdk1.8.0_131-2000:1.8.0_131-fcs  <span class="comment">################################# [100%]</span></div><div class="line">Unpacking JAR files...</div><div class="line">	tools.jar...</div><div class="line">	plugin.jar...</div><div class="line">	javaws.jar...</div><div class="line">	deploy.jar...</div><div class="line">	rt.jar...</div><div class="line">	jsse.jar...</div><div class="line">	charsets.jar...</div><div class="line">	localedata.jar...</div><div class="line">......</div></pre></td></tr></table></figure></p>
+<p>安装完成后，查看JDK版本信息以判断是否安装成功：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-- 查看JDK版本信息</div><div class="line">[root@服务器主机名 opt]<span class="comment"># java -version</span></div><div class="line">java version <span class="string">"1.8.0_131"</span></div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_131-b11)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.131-b11, mixed mode)</div></pre></td></tr></table></figure></p>
+<h1 id="安装-MySQL-5-7"><a href="#安装-MySQL-5-7" class="headerlink" title="安装 MySQL 5.7"></a>安装 MySQL 5.7</h1><p>原则上在安装前，我们需要检查一下MySQL是否已经安装，因为我的服务器是全新的，不需要检查，此处我直接安装，如果阁下的服务器已经安装了软件，则回到本文前言处查看如何检查是否已安装MySQL。<br>此处我选择了rpm包安装的方式，这种方式比较快速，而且安装过程简单，为了方便兄弟们判断自己的安装过程是否正确，我把安装过程的大部分日志贴出来了供各位对比：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div></pre></td><td class="code"><pre><div class="line">-- 下载MySQL 5.7 rpm 安装包</div><div class="line">[root@服务器主机名 opt]<span class="comment"># wget http://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm</span></div><div class="line">--2017-06-20 10:45:38--  http://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm</div><div class="line">Resolving dev.mysql.com (dev.mysql.com)... 137.254.60.11</div><div class="line">Connecting to dev.mysql.com (dev.mysql.com)|137.254.60.11|:80... connected.</div><div class="line">HTTP request sent, awaiting response... 301 Moved Permanently</div><div class="line">Location: https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm [following]</div><div class="line">--2017-06-20 10:45:38--  https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm</div><div class="line">Connecting to dev.mysql.com (dev.mysql.com)|137.254.60.11|:443... connected.</div><div class="line">HTTP request sent, awaiting response... 302 Found</div><div class="line">Location: https://repo.mysql.com//mysql57-community-release-el7-11.noarch.rpm [following]</div><div class="line">--2017-06-20 10:45:40--  https://repo.mysql.com//mysql57-community-release-el7-11.noarch.rpm</div><div class="line">Resolving repo.mysql.com (repo.mysql.com)... 23.10.6.195</div><div class="line">Connecting to repo.mysql.com (repo.mysql.com)|23.10.6.195|:443... connected.</div><div class="line">HTTP request sent, awaiting response... 200 OK</div><div class="line">Length: 25680 (25K) [application/x-redhat-package-manager]</div><div class="line">Saving to: ‘mysql57-community-release-el7-11.noarch.rpm’</div><div class="line"></div><div class="line">100%[==================================================================================================================================&gt;] 25,680      --.-K/s   <span class="keyword">in</span> 0.06s   </div><div class="line"></div><div class="line">2017-06-20 10:45:40 (421 KB/s) - ‘mysql57-community-release-el7-11.noarch.rpm’ saved [25680/25680]</div><div class="line"></div><div class="line">-- 安装MySQL rpm 安装包，一路除了输入[y]就是回车</div><div class="line">[root@服务器主机名 opt]<span class="comment"># yum localinstall mysql57-community-release-el7-11.noarch.rpm</span></div><div class="line">Loaded plugins: fastestmirror</div><div class="line">Examining mysql57-community-release-el7-11.noarch.rpm: mysql57-community-release-el7-11.noarch</div><div class="line">Marking mysql57-community-release-el7-11.noarch.rpm to be installed</div><div class="line">Resolving Dependencies</div><div class="line">--&gt; Running transaction check</div><div class="line">---&gt; Package mysql57-community-release.noarch 0:el7-11 will be installed</div><div class="line">--&gt; Finished Dependency Resolution</div><div class="line"></div><div class="line">Dependencies Resolved</div><div class="line"></div><div class="line">============================================================================================================================================================================</div><div class="line"> Package                                        Arch                        Version                     Repository                                                     Size</div><div class="line">============================================================================================================================================================================</div><div class="line">Installing:</div><div class="line"> mysql57-community-release                      noarch                      el7-11                      /mysql57-community-release-el7-11.noarch                       31 k</div><div class="line"></div><div class="line">Transaction Summary</div><div class="line">============================================================================================================================================================================</div><div class="line">Install  1 Package</div><div class="line"></div><div class="line">Total size: 31 k</div><div class="line">Installed size: 31 k</div><div class="line">-- 输入 y</div><div class="line">Is this ok [y/d/N]: y</div><div class="line">Downloading packages:</div><div class="line">Running transaction check</div><div class="line">Running transaction <span class="built_in">test</span></div><div class="line">Transaction <span class="built_in">test</span> succeeded</div><div class="line">Running transaction</div><div class="line">Warning: RPMDB altered outside of yum.</div><div class="line">  Installing : mysql57-community-release-el7-11.noarch                                                                                                                  1/1 </div><div class="line">  Verifying  : mysql57-community-release-el7-11.noarch                                                                                                                  1/1 </div><div class="line"></div><div class="line">Installed:</div><div class="line">  mysql57-community-release.noarch 0:el7-11                                                                                                                                 </div><div class="line"></div><div class="line">Complete!</div><div class="line"></div><div class="line">-- 查看刚才的安装过程是否成功（看看安装了哪些MySQL组件即可）</div><div class="line">[root@服务器主机名 opt]<span class="comment"># yum repolist enabled | grep "mysql.*-community.*"</span></div><div class="line">mysql-connectors-community/x86_64 MySQL Connectors Community                  36</div><div class="line">mysql-tools-community/x86_64      MySQL Tools Community                       47</div><div class="line">mysql57-community/x86_64          MySQL 5.7 Community Server                 187</div><div class="line"></div><div class="line">-- 安装MySQL服务器，同样一路除了输入[y]就是回车</div><div class="line">[root@服务器主机名 opt]<span class="comment"># yum install mysql-community-server</span></div><div class="line">Loaded plugins: fastestmirror</div><div class="line">Loading mirror speeds from cached hostfile</div><div class="line"> * base: mirrors.aliyun.com</div><div class="line"> * epel: mirrors.aliyun.com</div><div class="line"> * extras: mirrors.aliyun.com</div><div class="line"> * updates: mirrors.aliyun.com</div><div class="line">Resolving Dependencies</div><div class="line">--&gt; Running transaction check</div><div class="line">---&gt; Package mysql-community-server.x86_64 0:5.7.18-1.el7 will be installed</div><div class="line">--&gt; Processing Dependency: mysql-community-common(x86-64) = 5.7.18-1.el7 <span class="keyword">for</span> package: mysql-community-server-5.7.18-1.el7.x86_64</div><div class="line">--&gt; Processing Dependency: mysql-community-client(x86-64) &gt;= 5.7.9 <span class="keyword">for</span> package: mysql-community-server-5.7.18-1.el7.x86_64</div><div class="line">--&gt; Processing Dependency: libaio.so.1(LIBAIO_0.4)(64bit) <span class="keyword">for</span> package: mysql-community-server-5.7.18-1.el7.x86_64</div><div class="line">--&gt; Processing Dependency: libaio.so.1(LIBAIO_0.1)(64bit) <span class="keyword">for</span> package: mysql-community-server-5.7.18-1.el7.x86_64</div><div class="line">--&gt; Processing Dependency: libaio.so.1()(64bit) <span class="keyword">for</span> package: mysql-community-server-5.7.18-1.el7.x86_64</div><div class="line">--&gt; Running transaction check</div><div class="line">---&gt; Package libaio.x86_64 0:0.3.109-13.el7 will be installed</div><div class="line">---&gt; Package mysql-community-client.x86_64 0:5.7.18-1.el7 will be installed</div><div class="line">--&gt; Processing Dependency: mysql-community-libs(x86-64) &gt;= 5.7.9 <span class="keyword">for</span> package: mysql-community-client-5.7.18-1.el7.x86_64</div><div class="line">---&gt; Package mysql-community-common.x86_64 0:5.7.18-1.el7 will be installed</div><div class="line">--&gt; Running transaction check</div><div class="line">---&gt; Package mariadb-libs.x86_64 1:5.5.52-1.el7 will be obsoleted</div><div class="line">--&gt; Processing Dependency: libmysqlclient.so.18()(64bit) <span class="keyword">for</span> package: 2:postfix-2.10.1-6.el7.x86_64</div><div class="line">--&gt; Processing Dependency: libmysqlclient.so.18(libmysqlclient_18)(64bit) <span class="keyword">for</span> package: 2:postfix-2.10.1-6.el7.x86_64</div><div class="line">---&gt; Package mysql-community-libs.x86_64 0:5.7.18-1.el7 will be obsoleting</div><div class="line">--&gt; Running transaction check</div><div class="line">---&gt; Package mysql-community-libs-compat.x86_64 0:5.7.18-1.el7 will be obsoleting</div><div class="line">--&gt; Finished Dependency Resolution</div><div class="line"></div><div class="line">Dependencies Resolved</div><div class="line"></div><div class="line">============================================================================================================================================================================</div><div class="line"> Package                                             Arch                           Version                                 Repository                                 Size</div><div class="line">============================================================================================================================================================================</div><div class="line">Installing:</div><div class="line"> mysql-community-libs                                x86_64                         5.7.18-1.el7                            mysql57-community                         2.1 M</div><div class="line">     replacing  mariadb-libs.x86_64 1:5.5.52-1.el7</div><div class="line"> mysql-community-libs-compat                         x86_64                         5.7.18-1.el7                            mysql57-community                         2.0 M</div><div class="line">     replacing  mariadb-libs.x86_64 1:5.5.52-1.el7</div><div class="line"> mysql-community-server                              x86_64                         5.7.18-1.el7                            mysql57-community                         162 M</div><div class="line">Installing <span class="keyword">for</span> dependencies:</div><div class="line"> libaio                                              x86_64                         0.3.109-13.el7                          base                                       24 k</div><div class="line"> mysql-community-client                              x86_64                         5.7.18-1.el7                            mysql57-community                          24 M</div><div class="line"> mysql-community-common                              x86_64                         5.7.18-1.el7                            mysql57-community                         271 k</div><div class="line"></div><div class="line">Transaction Summary</div><div class="line">============================================================================================================================================================================</div><div class="line">Install  3 Packages (+3 Dependent packages)</div><div class="line"></div><div class="line">Total download size: 190 M</div><div class="line">-- 输入 y</div><div class="line">Is this ok [y/d/N]: y</div><div class="line">Downloading packages:</div><div class="line">(1/6): libaio-0.3.109-13.el7.x86_64.rpm                                                                                                              |  24 kB  00:00:00     </div><div class="line">warning: /var/cache/yum/x86_64/7/mysql57-community/packages/mysql-community-common-5.7.18-1.el7.x86_64.rpm: Header V3 DSA/SHA1 Signature, key ID 5072e1f5: NOKEY</div><div class="line">Public key <span class="keyword">for</span> mysql-community-common-5.7.18-1.el7.x86_64.rpm is not installed</div><div class="line">(2/6): mysql-community-common-5.7.18-1.el7.x86_64.rpm                                                                                                | 271 kB  00:00:00     </div><div class="line">(3/6): mysql-community-libs-5.7.18-1.el7.x86_64.rpm                                                                                                  | 2.1 MB  00:00:00     </div><div class="line">(4/6): mysql-community-libs-compat-5.7.18-1.el7.x86_64.rpm                                                                                           | 2.0 MB  00:00:00     </div><div class="line">(5/6): mysql-community-client-5.7.18-1.el7.x86_64.rpm                                                                                                |  24 MB  00:00:02     </div><div class="line">(6/6): mysql-community-server-5.7.18-1.el7.x86_64.rpm                                                                                                | 162 MB  00:00:15     </div><div class="line">----------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div><div class="line">Total                                                                                                                                        12 MB/s | 190 MB  00:00:16     </div><div class="line">Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql</div><div class="line">Importing GPG key 0x5072E1F5:</div><div class="line"> Userid     : <span class="string">"MySQL Release Engineering &lt;mysql-build@oss.oracle.com&gt;"</span></div><div class="line"> Fingerprint: a4a9 4068 76fc bd3c 4567 70c8 8c71 8d3b 5072 e1f5</div><div class="line"> Package    : mysql57-community-release-el7-11.noarch (installed)</div><div class="line"> From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-mysql</div><div class="line">-- 输入 y</div><div class="line">Is this ok [y/N]: y</div><div class="line">Running transaction check</div><div class="line">Running transaction <span class="built_in">test</span></div><div class="line">Transaction <span class="built_in">test</span> succeeded</div><div class="line">Running transaction</div><div class="line">  Installing : mysql-community-common-5.7.18-1.el7.x86_64                                                                                                               1/7 </div><div class="line">  Installing : mysql-community-libs-5.7.18-1.el7.x86_64                                                                                                                 2/7 </div><div class="line">  Installing : mysql-community-client-5.7.18-1.el7.x86_64                                                                                                               3/7 </div><div class="line">  Installing : libaio-0.3.109-13.el7.x86_64                                                                                                                             4/7 </div><div class="line">  Installing : mysql-community-server-5.7.18-1.el7.x86_64                                                                                                               5/7 </div><div class="line">  Installing : mysql-community-libs-compat-5.7.18-1.el7.x86_64                                                                                                          6/7 </div><div class="line">  Erasing    : 1:mariadb-libs-5.5.52-1.el7.x86_64                                                                                                                       7/7 </div><div class="line">  Verifying  : mysql-community-server-5.7.18-1.el7.x86_64                                                                                                               1/7 </div><div class="line">  Verifying  : mysql-community-common-5.7.18-1.el7.x86_64                                                                                                               2/7 </div><div class="line">  Verifying  : mysql-community-client-5.7.18-1.el7.x86_64                                                                                                               3/7 </div><div class="line">  Verifying  : mysql-community-libs-compat-5.7.18-1.el7.x86_64                                                                                                          4/7 </div><div class="line">  Verifying  : libaio-0.3.109-13.el7.x86_64                                                                                                                             5/7 </div><div class="line">  Verifying  : mysql-community-libs-5.7.18-1.el7.x86_64                                                                                                                 6/7 </div><div class="line">  Verifying  : 1:mariadb-libs-5.5.52-1.el7.x86_64                                                                                                                       7/7 </div><div class="line"></div><div class="line">Installed:</div><div class="line">  mysql-community-libs.x86_64 0:5.7.18-1.el7            mysql-community-libs-compat.x86_64 0:5.7.18-1.el7            mysql-community-server.x86_64 0:5.7.18-1.el7           </div><div class="line"></div><div class="line">Dependency Installed:</div><div class="line">  libaio.x86_64 0:0.3.109-13.el7                 mysql-community-client.x86_64 0:5.7.18-1.el7                 mysql-community-common.x86_64 0:5.7.18-1.el7                </div><div class="line"></div><div class="line">Replaced:</div><div class="line">  mariadb-libs.x86_64 1:5.5.52-1.el7                                                                                                                                        </div><div class="line"></div><div class="line">Complete!</div></pre></td></tr></table></figure></p>
+<p>这样 MySQL 就安装完成了，简单吧，其实只要系统没有缺少依赖包，安装MySQL就不会出现什么问题。<br>好了，接下来我们启动MySQL服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">-- 安装完毕，启动MySQL服务 </div><div class="line">[root@服务器主机名 opt]<span class="comment"># systemctl start mysqld</span></div><div class="line"></div><div class="line">-- 查看MySQL状态</div><div class="line">[root@服务器主机名 opt]<span class="comment"># systemctl status mysqld</span></div><div class="line">● mysqld.service - MySQL Server</div><div class="line">   Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)</div><div class="line">   Active: active (running) since Tue 2017-06-20 10:50:44 CST; 12s ago</div><div class="line">     Docs: man:mysqld(8)</div><div class="line">           http://dev.mysql.com/doc/refman/en/using-systemd.html</div><div class="line">  Process: 20502 ExecStart=/usr/sbin/mysqld --daemonize --pid-file=/var/run/mysqld/mysqld.pid <span class="variable">$MYSQLD_OPTS</span> (code=exited, status=0/SUCCESS)</div><div class="line">  Process: 20426 ExecStartPre=/usr/bin/mysqld_pre_systemd (code=exited, status=0/SUCCESS)</div><div class="line"> Main PID: 20504 (mysqld)</div><div class="line">   CGroup: /system.slice/mysqld.service</div><div class="line">           └─20504 /usr/sbin/mysqld --daemonize --pid-file=/var/run/mysqld/mysqld.pid</div><div class="line"></div><div class="line">Jun 20 10:50:39 服务器主机名 systemd[1]: Starting MySQL Server...</div><div class="line">Jun 20 10:50:44 服务器主机名 systemd[1]: Started MySQL Server.</div><div class="line"></div><div class="line">-- 当然你也可以这样启动MySQL服务</div><div class="line">[root@服务器主机名 opt]<span class="comment"># systemctl enable mysqld</span></div><div class="line">-- 重新加载配置文件</div><div class="line">[root@服务器主机名 opt]<span class="comment"># systemctl daemon-reload</span></div></pre></td></tr></table></figure>
+<p>现在小伙伴们应该有个疑问，安装过程中没有配置访问密码，那我们的数据库密码是多少呢？甭担心，安装过程中 MySQL 生成了首次访问的默认密码，通过以下命令我们就可以查找到 MySQL 的访问密码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-- 查询 MySQL 默认密码</div><div class="line">[root@服务器主机名 opt]<span class="comment"># grep 'temporary password' /var/log/mysqld.log</span></div><div class="line">2017-06-20T02:50:40.691736Z 1 [Note] A temporary password is generated <span class="keyword">for</span> root@localhost: Oot)8y;ih&gt;<span class="comment">#K</span></div></pre></td></tr></table></figure>
+<p>看见了没，root@localhost:后边的 Oot)8y;ih&gt;#K 就是我们的 MySQL 密码。</p>
+<p>现在我们就可以进入我们的MySQL玩耍了,首先我们要做的就是修改 root 账户的密码，毕竟默认密码太不安全了（<strong>这里需要注意的是，MySQL 5.7的密码安全性验证很强，需要同时包含有大写字母、小写字母、特殊符号、数字，并且长度不能少于8位</strong>）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">-- 登录MySQL</div><div class="line">[root@服务器主机名 opt]<span class="comment"># mysql -uroot -p</span></div><div class="line">Enter password: </div><div class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</div><div class="line">Your MySQL connection id is 3</div><div class="line">Server version: 5.7.18</div><div class="line"></div><div class="line">Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.</div><div class="line"></div><div class="line">Oracle is a registered trademark of Oracle Corporation and/or its</div><div class="line">affiliates. Other names may be trademarks of their respective</div><div class="line">owners.</div><div class="line"></div><div class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">'\c'</span> to clear the current input statement.</div><div class="line"></div><div class="line">mysql&gt; ALTER USER <span class="string">'root'</span>@<span class="string">'localhost'</span> IDENTIFIED BY <span class="string">'你的密码'</span>;</div><div class="line">Query OK, 0 rows affected (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; quit</div><div class="line">Bye</div></pre></td></tr></table></figure>
+<p>在正式使用 MySQL 时，我们肯定不能使用root用户操作数据库，因为root用户的权限太大，稍不留神，手一抖数据库就废了，所以下一步我们需要创建一个普通用户：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">-- 登录MySQL</div><div class="line">[root@服务器主机名 opt]<span class="comment"># mysql -uroot -p</span></div><div class="line">Enter password: </div><div class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</div><div class="line">Your MySQL connection id is 4</div><div class="line">Server version: 5.7.18 MySQL Community Server (GPL)</div><div class="line"></div><div class="line">Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.</div><div class="line"></div><div class="line">Oracle is a registered trademark of Oracle Corporation and/or its</div><div class="line">affiliates. Other names may be trademarks of their respective</div><div class="line">owners.</div><div class="line"></div><div class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">'\c'</span> to clear the current input statement.</div><div class="line"></div><div class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">'用户名'</span>@<span class="string">'%'</span> IDENTIFIED BY <span class="string">'用户密码'</span> WITH GRANT OPTION;</div><div class="line">Query OK, 0 rows affected, 1 warning (0.00 sec)</div><div class="line"></div><div class="line">mysql&gt; quit</div><div class="line">Bye</div></pre></td></tr></table></figure>
+<p>测试我们新建的用户是否能登录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">[root@服务器主机名 opt]<span class="comment"># mysql -uzxjy -p</span></div><div class="line">Enter password: </div><div class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</div><div class="line">Your MySQL connection id is 5</div><div class="line">Server version: 5.7.18 MySQL Community Server (GPL)</div><div class="line"></div><div class="line">Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.</div><div class="line"></div><div class="line">Oracle is a registered trademark of Oracle Corporation and/or its</div><div class="line">affiliates. Other names may be trademarks of their respective</div><div class="line">owners.</div><div class="line"></div><div class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">'\c'</span> to clear the current input statement.</div><div class="line"></div><div class="line">mysql&gt;</div><div class="line"></div><div class="line">......</div></pre></td></tr></table></figure>
+<p>由于公司规定数据库的编码都必须是utf-8，所以接下来我们需要把 MySQL 的数据库编码改为 utf-8。编辑 MySQL 的配置文件，在其中添加character_set_server=utf8、init_connect=’SET NAMES utf8’两句，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">[root@服务器主机名 opt]<span class="comment"># cat /etc/my.cnf</span></div><div class="line"><span class="comment"># For advice on how to change settings please see</span></div><div class="line"><span class="comment"># http://dev.mysql.com/doc/refman/5.7/en/server-configuration-defaults.html</span></div><div class="line"></div><div class="line">[mysqld]</div><div class="line"></div><div class="line"><span class="comment">#添加下边这两句</span></div><div class="line">character_set_server=utf8</div><div class="line">init_connect=<span class="string">'SET NAMES utf8'</span></div><div class="line"></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># Remove leading # and set to the amount of RAM for the most important data</span></div><div class="line"><span class="comment"># cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.</span></div><div class="line"><span class="comment"># innodb_buffer_pool_size = 128M</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># Remove leading # to turn on a very important data integrity option: logging</span></div><div class="line"><span class="comment"># changes to the binary log between backups.</span></div><div class="line"><span class="comment"># log_bin</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># Remove leading # to set options mainly useful for reporting servers.</span></div><div class="line"><span class="comment"># The server defaults are faster for transactions and fast SELECTs.</span></div><div class="line"><span class="comment"># Adjust sizes as needed, experiment to find the optimal values.</span></div><div class="line"><span class="comment"># join_buffer_size = 128M</span></div><div class="line"><span class="comment"># sort_buffer_size = 2M</span></div><div class="line"><span class="comment"># read_rnd_buffer_size = 2M</span></div><div class="line">datadir=/var/lib/mysql</div><div class="line">socket=/var/lib/mysql/mysql.sock</div><div class="line"></div><div class="line"><span class="comment"># Disabling symbolic-links is recommended to prevent assorted security risks</span></div><div class="line">symbolic-links=0</div><div class="line"></div><div class="line"><span class="built_in">log</span>-error=/var/<span class="built_in">log</span>/mysqld.log</div><div class="line">pid-file=/var/run/mysqld/mysqld.pid</div></pre></td></tr></table></figure>
+<p>查看编码是否修改：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">-- 重启MySQL</div><div class="line">[root@服务器主机名 opt]<span class="comment"># systemctl restart mysqld</span></div><div class="line">[root@服务器主机名 opt]<span class="comment"># mysql -uroot -p</span></div><div class="line">Enter password: </div><div class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</div><div class="line">Your MySQL connection id is 3</div><div class="line">Server version: 5.7.18 MySQL Community Server (GPL)</div><div class="line"></div><div class="line">Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.</div><div class="line"></div><div class="line">Oracle is a registered trademark of Oracle Corporation and/or its</div><div class="line">affiliates. Other names may be trademarks of their respective</div><div class="line">owners.</div><div class="line"></div><div class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">'\c'</span> to clear the current input statement.</div><div class="line"></div><div class="line">mysql&gt; show variables like <span class="string">'%character%'</span>;</div><div class="line">+--------------------------+----------------------------+</div><div class="line">| Variable_name            | Value                      |</div><div class="line">+--------------------------+----------------------------+</div><div class="line">| character_set_client     | utf8                       |</div><div class="line">| character_set_connection | utf8                       |</div><div class="line">| character_set_database   | utf8                       |</div><div class="line">| character_set_filesystem | binary                     |</div><div class="line">| character_set_results    | utf8                       |</div><div class="line">| character_set_server     | utf8                       |</div><div class="line">| character_set_system     | utf8                       |</div><div class="line">| character_sets_dir       | /usr/share/mysql/charsets/ |</div><div class="line">+--------------------------+----------------------------+</div><div class="line">8 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.01 sec)</div></pre></td></tr></table></figure>
+<p>好了，到现在，我们的MySQL就安装完成了，具体的配置就看阁下公司内部的具体规定了。</p>
+<h1 id="安装-Redis-3-2-9"><a href="#安装-Redis-3-2-9" class="headerlink" title="安装 Redis 3.2.9"></a>安装 Redis 3.2.9</h1><h1 id="安装-Zookeeper-3-4-9"><a href="#安装-Zookeeper-3-4-9" class="headerlink" title="安装 Zookeeper 3.4.9"></a>安装 Zookeeper 3.4.9</h1>]]></content>
     
     <summary type="html">
+    
+      本文介绍如何在 Linux CentOS 7.3 版本的阿里云上安装 JDK 1.8、MySQL 5.7、Redis 3.2.9、Zookeeper 3.4.9
+    
+    </summary>
+    
+      <category term="阿里云" scheme="http://www.jkinn.com/categories/%E9%98%BF%E9%87%8C%E4%BA%91/"/>
+    
+    
+      <category term="阿里云" scheme="http://www.jkinn.com/tags/%E9%98%BF%E9%87%8C%E4%BA%91/"/>
+    
+      <category term="Linux" scheme="http://www.jkinn.com/tags/Linux/"/>
+    
+      <category term="CentOS" scheme="http://www.jkinn.com/tags/CentOS/"/>
+    
+      <category term="MySQL" scheme="http://www.jkinn.com/tags/MySQL/"/>
+    
+      <category term="Redis" scheme="http://www.jkinn.com/tags/Redis/"/>
+    
+      <category term="Zookeeper" scheme="http://www.jkinn.com/tags/Zookeeper/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（六） —— Markdown常用语法及工具</title>
+    <link href="http://www.jkinn.com/2017/01/09/2017010901/"/>
+    <id>http://www.jkinn.com/2017/01/09/2017010901/</id>
+    <published>2017-01-09T02:39:52.000Z</published>
+    <updated>2017-01-09T02:39:56.000Z</updated>
+    
+    <summary type="html">
+    
+      本文介绍如何编写我们使用 Hexo + Coding、Github、码云(oschina) 搭建的博客，MarkDown常用语法 及 工具
     
     </summary>
     
@@ -31,16 +89,20 @@
     
       <category term="hexo" scheme="http://www.jkinn.com/tags/hexo/"/>
     
+      <category term="Markdown" scheme="http://www.jkinn.com/tags/Markdown/"/>
+    
   </entry>
   
   <entry>
-    <title>Hexo + Coding、Github、码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床</title>
-    <link href="http://www.jkinn.com/2017/07/05/hexo4/"/>
-    <id>http://www.jkinn.com/2017/07/05/hexo4/</id>
-    <published>2017-07-05T09:21:08.000Z</published>
-    <updated>2017-07-05T09:21:04.000Z</updated>
+    <title>零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（五） —— 博客链接提交百度、谷歌等搜索引擎收录</title>
+    <link href="http://www.jkinn.com/2017/01/08/2017010801/"/>
+    <id>http://www.jkinn.com/2017/01/08/2017010801/</id>
+    <published>2017-01-08T09:22:32.000Z</published>
+    <updated>2017-01-08T09:22:29.000Z</updated>
     
     <summary type="html">
+    
+      本文介绍如何将我们使用 Hexo + Coding、Github、码云(oschina) 搭建的博客 收录 在百度、谷歌 等搜索引擎上
     
     </summary>
     
@@ -49,16 +111,77 @@
     
       <category term="hexo" scheme="http://www.jkinn.com/tags/hexo/"/>
     
+      <category term="百度" scheme="http://www.jkinn.com/tags/%E7%99%BE%E5%BA%A6/"/>
+    
+      <category term="谷歌" scheme="http://www.jkinn.com/tags/%E8%B0%B7%E6%AD%8C/"/>
+    
   </entry>
   
   <entry>
-    <title>Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名</title>
-    <link href="http://www.jkinn.com/2017/07/05/hexo3/"/>
-    <id>http://www.jkinn.com/2017/07/05/hexo3/</id>
-    <published>2017-07-05T09:18:41.000Z</published>
-    <updated>2017-07-05T09:18:44.000Z</updated>
+    <title>零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（四） —— 使用七牛云作为博客图床</title>
+    <link href="http://www.jkinn.com/2017/01/07/2017010701/"/>
+    <id>http://www.jkinn.com/2017/01/07/2017010701/</id>
+    <published>2017-01-07T09:21:08.000Z</published>
+    <updated>2017-01-07T06:51:05.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>前面三个小节，我们实现了博客搭建及绑定个人域名，到目前我们的博客其实已经搭建完成了，本节属于博客优化。<br>我们之前把博客部署在了Github、Coding、码云上，Giehub和码云好说，空间比较大，但是Coding给我们的存储空间只有256M，试想如果我们博客中的图片很多，一篇博客有那么十来张图片，那么一篇博客的大小最低也得超出1M甚至几兆了，而博客的文字只占很小的一部分空间，大部分空间都让图片占去了。既然这样，我们能不能把图片和文字分开，图片存储在专门的图床上，我们只调取链接呢，这样不就极大的减少了博客占据的空间了吗。</p>
+<p>下面我们就说一下如何将图片存储在图床上。</p>
+<p>现在国内免费的图床有很多，比如：贴图库<a href="http://www.tietuku.com/" title="贴图库" target="_blank" rel="external">http://www.tietuku.com/</a>、图床<a href="http://tuchuang.org/" title="图床" target="_blank" rel="external">http://tuchuang.org/</a>、极简图床<a href="http://jiantuku.com/#/" title="极简图床" target="_blank" rel="external">http://jiantuku.com/#/</a>等等。当然腾讯云、阿里云、七牛云这些收费的云平台也可以作为图床使用。免费的我们就不说了，很简单，本节我们只说一下七牛云。七牛云也提供了免费的空间，当然不是全免费，在一定存储范围内免费，而且每月有10G的免费访问流量，其实一般来说，只要正常访问也够用了。</p>
+<p>首先登录七牛云，找到 对象存储——&gt; 立即添加：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/e1fbdfcd51fbaacf.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>新建存储空间，如下图所示，这里的空间一定要选公开空间：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/5e4d118488ee342d.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>空间创建后，进入 内容管理：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/b4d04722d67f64ec.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击 上传文件：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/ccd39e1712ab076c.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>上传我们的图片就可以了，上传后点击 关闭 按钮回到文件列表：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/0e5f652709ef55b2.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>在文件列表的操作项上点击 复制外链 ，就可以拿到我们的图片外网访问地址了：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/e52e379ec9a4e523.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>然后我们把地址插进 Markdown 的编辑器就可以了。</p>
+<p><strong>注意：七牛云每月提供的10G流量在正常情况下可以满足，但是如果有小伙伴拿到你的图片地址，随便写个网络请求的小程序，外加个死循环，呵呵，那这10G的流量分分钟就给你玩没了，超出的流量可就是收费的了。这个问题目前来说无解，谁让咱们用的人家免费的呢。</strong></p>
+]]></content>
     
     <summary type="html">
+    
+      本文介绍如何将我们使用 Hexo + Coding、Github、码云(oschina) 搭建的博客中的图片放到 七牛云 等图床上
     
     </summary>
     
@@ -67,16 +190,90 @@
     
       <category term="hexo" scheme="http://www.jkinn.com/tags/hexo/"/>
     
+      <category term="七牛云" scheme="http://www.jkinn.com/tags/%E4%B8%83%E7%89%9B%E4%BA%91/"/>
+    
+      <category term="图床" scheme="http://www.jkinn.com/tags/%E5%9B%BE%E5%BA%8A/"/>
+    
   </entry>
   
   <entry>
-    <title>Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）</title>
-    <link href="http://www.jkinn.com/2017/07/05/hexo2/"/>
-    <id>http://www.jkinn.com/2017/07/05/hexo2/</id>
-    <published>2017-07-05T09:17:27.000Z</published>
-    <updated>2017-07-05T09:17:31.000Z</updated>
+    <title>零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（三） —— 绑定个人域名</title>
+    <link href="http://www.jkinn.com/2017/01/06/2017010601/"/>
+    <id>http://www.jkinn.com/2017/01/06/2017010601/</id>
+    <published>2017-01-06T09:18:41.000Z</published>
+    <updated>2017-01-06T09:18:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>经过前面两个小节的搭建，我们的博客已经实现了外网访问，其实只要不介意地址，博客就可以用了。今天我们来说一下如何使用自己申请的域名访问博客，当然，前提是你已经购买了域名。<br>在第二小节中，我们把博客发布在了Github、Coding、码云这三个平台上，在绑定域名时，可以选择其中一个平台进行绑定，也可以一个域名根据线路不同绑定多个平台，比如海外用户访问Github，国内用户访问Coding或者码云。</p>
+<p>首先，我们登录Coding，依次选择 代码——&gt; Pages服务，在 自定义域名处填写自己的域名，这里可以写多个：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/9b37a6f30b5703f8.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>然后登录我们的域名系统，这里我是购买的万网的域名，找到域名解析——&gt;立即设置：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/f05f35709ddb77ec.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>然后选择 进入高级设置：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/8990aab1a0edc77a.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>这里先科普一下，什么是记录类型和主机记录，常用的记录类型是 CNAME记录和A记录，简单说就是CNAME记录是绑定域名，A记录是绑定IP地址：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/5a34c87afeaa1e94.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>主机记录就是你的域名在浏览器地址栏怎么写，www就是域名带www，@就是域名不带www:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/78d2aaeee1b1cfec.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>添加解析记录就很简单了，这里你可以用之前我们访问的地址（xxxx.github.io、xxx.coding.me、xxxx.oschina.io），也可以用IP地址，可以找一个平台绑定，也可以根据解析线路不同绑定多个平台，具体解析如下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/0daa464b42eca4ac.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>有的兄弟可能会问，我哪知道他的IP多少，ping命令会吧，ping一下地址不就出来了：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/f1c52943504aec43.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>到这里还没完呢，这时候我们可以通过域名访问，但是访问会提示403,这时候需要在博客根目录的source子目录下建一个名为【CNAME】的文本文件，然后把文件的后缀名干掉，这个文件里写什么呢，就是你的域名，如下图所示：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/d55dc9ac84996028.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>最后依次执行 hexo g、hexo d 待执行完毕，我们就可以用自己的域名访问博客了。</p>
+]]></content>
     
     <summary type="html">
+    
+      本文介绍如何将我们使用 Hexo + Coding、Github、码云(oschina) 搭建的博客绑定到我们自己的域名上
     
     </summary>
     
@@ -85,23 +282,314 @@
     
       <category term="hexo" scheme="http://www.jkinn.com/tags/hexo/"/>
     
+      <category term="Coding" scheme="http://www.jkinn.com/tags/Coding/"/>
+    
+      <category term="Github" scheme="http://www.jkinn.com/tags/Github/"/>
+    
+      <category term="码云(oschina)" scheme="http://www.jkinn.com/tags/%E7%A0%81%E4%BA%91-oschina/"/>
+    
+      <category term="域名绑定" scheme="http://www.jkinn.com/tags/%E5%9F%9F%E5%90%8D%E7%BB%91%E5%AE%9A/"/>
+    
   </entry>
   
   <entry>
-    <title>Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 环境搭建</title>
-    <link href="http://www.jkinn.com/2017/07/05/hexo1/"/>
-    <id>http://www.jkinn.com/2017/07/05/hexo1/</id>
-    <published>2017-07-05T08:05:05.000Z</published>
-    <updated>2017-07-05T08:05:11.000Z</updated>
+    <title>零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（二） —— 托管至Coding、Github、码云（oschina）</title>
+    <link href="http://www.jkinn.com/2017/01/05/2017010501/"/>
+    <id>http://www.jkinn.com/2017/01/05/2017010501/</id>
+    <published>2017-01-05T09:01:27.000Z</published>
+    <updated>2017-01-05T09:01:31.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>能用来搭建个人博客的工具很多，本文只对Hexo做介绍。<br>Hexo可用来搭建个人博客，并可依据国内外网络环境同时部署在Github和Coding(码云)上，国外用户访问Github，国内用户访问Coding，即加快国内访问速度，又可实现博客访问分流。用Hexo搭建个人博客，不仅所需的所有软件及部署平台均免费，而且搭建过程也是非常简单的，您只需要按照小编给您写好的步骤不停的下一步即可。</p>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在上一节中，我们在本地用Hexo搭建起了个人博客，并实现了发布及本地访问，本节我们学习将本地搭建好的博客发布到Github、Coding、码云上，实现外网访问。同时发布到多个托管平台一是为了下一节绑定域名时能够做到国内外访问分流，以提高各自的访问速度，二是为了在某一托管平台不能访问时，我们的博客能切换至其他平台继续对外发布。</p>
+<a id="more"></a>
+<p>至于Github、Coding和码云这三大代码托管平台怎么注册我就不说了，以下过程建立在三个代码托管平台均已注册的基础上。</p>
+<h1 id="托管至Github"><a href="#托管至Github" class="headerlink" title="托管至Github"></a>托管至Github</h1><p>首先，我们说一下如何将本地的博客发布到Github上。<br>登录Github后，点击右上角小加号，找到New repository，点击，创建新的资源库：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/f4e73142faca97ca.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p><strong>这里的资源库名字要注意了哈，资源库的名字格式是固定的，格式为：你的Github账户名.github.io，即如果你的Github账户名是zhangsan，则你的资源库名称为：zhangsan.github.io，千万千万不要乱写</strong>，格式不对，等会浏览器是访问不了的，点击Create repository创建资源库：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/704ba92bf2e294bb.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure></p>
+<p>资源库创建后，复制资源库地址，如下图所示：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/cbc0c8dc1fcdfddb.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>打开博客目录（上节我们新建的那个文件夹）下的_config.yml文件，找到deploy节点，将刚才复制的Github资源库地址配置上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: </div><div class="line">    github: git@github.com:你的github帐户名/你的github帐户名.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+<p>接下来我们安装部署插件，右键打开Git Bash，输入 npm install hexo-deployer-git –save 进行安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /d/blog</div><div class="line">$ npm install hexo-deployer-git --save</div><div class="line">hexo-site@0.0.0 D:\blog</div><div class="line">`-- hexo-deployer-git@0.3.0</div><div class="line">  `-- moment@2.18.1</div><div class="line"></div><div class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@^1.0.0 (node_modules\ch                                                                                                                                                                                               okidar\node_modules\fsevents):</div><div class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform <span class="keyword">for</span> fsevents@                                                                                                                                                                                               1.1.2: wanted &#123;<span class="string">"os"</span>:<span class="string">"darwin"</span>,<span class="string">"arch"</span>:<span class="string">"any"</span>&#125; (current: &#123;<span class="string">"os"</span>:<span class="string">"win32"</span>,<span class="string">"arch"</span>:<span class="string">"x64"</span>&#125;)</div></pre></td></tr></table></figure>
+<p>然后依次执行 hexo g、hexo d 进行编译、部署的时候有可能会报下图所示的错误：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/db6bdb343e56ef5e.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>这个错误的意思是没有权限提交，这很正常，因为Github根本不认识我们的电脑，肯定没有权限。在C盘下找到.ssh目录：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/49f7e773567280df.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>如果刚才报错的话，这个目录要么是空的要么只有一个 known_hosts 文件。<br>在刚才的命令窗口执行 ssh-keygen -t rsa -C “注册github时候用的邮箱”（C是大写的）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /d/blog</div><div class="line">$ ssh-keygen -t rsa -C <span class="string">"注册github时候用的邮箱"</span></div></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/ceb5286735733444.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>这时候我们会发现 .ssh 目录下生成了两个文件 id_rsa.pub 和 id_rsa ：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/399324b7c16a9ac3.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>用文本编辑器打开 id_rsa.pub 文件，全选复制里面的内容，找到Github下的个人设置：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/fef7849b99a165c9.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>找到 SSH and GPG keys ，点击右上角的 New SSH key：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/1580382a645d5bb7.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>Title随便起名字，将刚才复制的内容黏贴到 Key 文本域中，点击 Add SSH key 保存。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/572ef39c23bf463a.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>然后在控制台输入 ssh -T git@github.com 测试是否验证通过，控制台输出如下信息表示权限验证通过：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /e/blog</div><div class="line">$ ssh -T git@github.com</div><div class="line">Hi 你的帐户名! You<span class="string">'ve successfully authenticated, but GitHub does not provide shell access.</span></div></pre></td></tr></table></figure>
+<p>然后再次执行 hexo d 提交部署，就可以部署成功了：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/ce544cb86940bbdf.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>在浏览器访问 你的项目名称（即帐户名.github.io），就可以看到我们发布的博客了：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/5ebf1bd498976a7d.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>至此，将本地的Hexo博客发布到Github操作就算完成了，接下来我们再将其发布到Coding。</p>
+<h1 id="托管至Coding"><a href="#托管至Coding" class="headerlink" title="托管至Coding"></a>托管至Coding</h1><p>登录 Coding ，依次找到 账户——&gt;SSH公钥 ，和上边添加Github公钥一样添加我们生成的公钥：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/bdcf5073cd8bc4f4.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>然后点击 添加项目 添加我们要发布博客的项目：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/a2a17a64c339888c.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>项目名和帐户名保持一致，这里就不需要后缀了，直接写帐户名就好，项目类型选为 私有 ，点击 创建项目 进行创建：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/8bcb22b450dfac9e.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>项目创建后，会自动跳转到项目页面，点击 代码 ，找到 SSH 方式访问仓库，然后复制仓库地址：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/5e5a3f18787fd9d8.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>打开博客目录（上节我们新建的那个文件夹）下的_config.yml文件，找到deploy节点，将刚才复制的仓库 SSH 访问地址 配置上，这时候我们的仓库就是两个了，一个是上边配置的Github，一个是Coding：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: </div><div class="line">    github: git@github.com:你的帐户名/你的帐户名.github.io.git</div><div class="line">    coding: git@git.coding.net:你的帐户名/你的帐户名.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+<p>这时，我们再次依次执行 hexo g、hexo d，进行生成、发布，在发布时，会提示如下信息，意思就是是不是要连接到Coding，输入 yes ，点击 OK 继续<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/3acf012b8316c9fc.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure></p>
+<p>这时候控制台会出现两份提交信息，一条是提交到Github，一条是提交到Coding:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/29f9f3f8e7bcbb37.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>进入Coding项目，点击代码，就能看到我们提交上来的文件了，其实这些文件就是博客目录下public子目录中的东西：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/b26cc1d3c3afc848.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>选择 代码——&gt; Pages 服务，部署来源选择 Master分支 ，点击 保存 对项目进行静态发布：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/472936e229b49618.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>出现下边的信息表示项目发布成功，这时候我们可以将 强制 HTTPS 访问 打开，增强博客安全性：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/1098a2a405afe97b.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>最后，在浏览器访问 你的项目名.coding.me，看到我们的博客页面，表示部署成功：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/a3e1522d9bbf8470.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>OK，又搞定一个代码托管平台，继续搞定 码云 ！</p>
+<h1 id="托管至码云"><a href="#托管至码云" class="headerlink" title="托管至码云"></a>托管至码云</h1><p>有了上边两个平台的经验，码云就非常简单了，同样，第一步先授权。登录码云，依次点击 头像——&gt; 个人资料——&gt; SSH 公钥，将我们生成的SSH公钥填进去，确定保存：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/05c51ea83fcd564b.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击 新建项目 创建项目，项目名必须，必须，必须和用户名保持一致，语言类型选择 HTML，点击创建：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/a53aa79714a0305d.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>创建完成后，会跳转至项目页，复制项目 SSH 地址：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/0bfea454f7aec078.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>同样，将项目的 SSH 地址配置在博客的配置文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: </div><div class="line">    github: git@github.com:你的github帐户名/你的项目名.github.io.git</div><div class="line">    coding: git@git.coding.net:你的Coding帐户名/你的项目名.git</div><div class="line">    oschina: git@git.oschina.net:你的码云帐户名/你的项目名.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+<p>然后执行 hexo d 进行发布，这时，也会有提示，和Coding一样，输入 yes 点击 OK：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i4.piimg.com/1949/f312f9a6f5a4553e.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>刷新码云项目页，就可以看到我们发布的文件了：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/14f92a8e56da7a43.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击项目操作项 服务——&gt; Pages，部署分支选择 Master，点击 启动服务 ，开启Pages 服务：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/298f2d7e391fab4b.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>部署成功后，系统会返回访问地址，其实就是 你的项目名.oschina.io:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/3f7bd6d1693feb2d.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>在浏览器访问部署地址，看到我们的博客主页，表示部署成功：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/dbaf86aa240661a0.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>到现在，三大主流托管平台我们都已经搞定了。其实现在我们已经可以在外网访问我们的博客了，但是访问地址并不是我们自己的域名，看起来有点Low，下一节，我们说一下如何把访问地址改成自己的域名。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      本文介绍如何将我们使用 Hexo 搭建的博客部署、托管到 Coding、Github 及 码云（Oschina） 上
+    
+    </summary>
+    
+      <category term="博客搭建" scheme="http://www.jkinn.com/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    
+    
+      <category term="hexo" scheme="http://www.jkinn.com/tags/hexo/"/>
+    
+      <category term="Coding" scheme="http://www.jkinn.com/tags/Coding/"/>
+    
+      <category term="Github" scheme="http://www.jkinn.com/tags/Github/"/>
+    
+      <category term="码云(oschina)" scheme="http://www.jkinn.com/tags/%E7%A0%81%E4%BA%91-oschina/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>零基础 Hexo + Coding、Github、码云(oschina)搭建个人博客（一） —— 基础环境搭建</title>
+    <link href="http://www.jkinn.com/2017/01/04/2017010401/"/>
+    <id>http://www.jkinn.com/2017/01/04/2017010401/</id>
+    <published>2017-01-04T08:05:05.000Z</published>
+    <updated>2017-01-04T08:05:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;能用来搭建个人博客的工具很多，本文只对Hexo做介绍。<br>&nbsp;&nbsp;&nbsp;&nbsp;Hexo可用来搭建个人博客，并可依据国内外网络环境同时部署在Github和Coding(码云)上，国外用户访问Github，国内用户访问Coding，即加快国内访问速度，又可实现博客访问分流。用Hexo搭建个人博客，不仅所需的所有软件及部署平台均免费，而且搭建过程也是非常简单的，您只需要按照小编给您写好的步骤不停的下一步即可。</p>
 <a id="more"></a>
 <h1 id="软件列表"><a href="#软件列表" class="headerlink" title="软件列表"></a>软件列表</h1><p>整个搭建过程需要安装的软件并不多，全部所需软件如下（版本无所谓）：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://oslz3deon.bkt.clouddn.com/image/myblog/jpg/0.%E8%BD%AF%E4%BB%B6%E5%88%97%E8%A1%A8.png" alt="软件列表" title="">
+                    <img src="http://i1.buimg.com/1949/945c19924044317ds.png" alt="Markdown" title="">
                 </div>
-                <div class="image-caption">软件列表</div>
+                <div class="image-caption">Markdown</div>
             </figure><br>各软件下载地址如下：</p>
 <table>
 <thead>
@@ -135,103 +623,294 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://i1.buimg.com/599721/2b6e2efb0217383e.png" alt="git安装 图1" title="">
+                    <img src="http://i1.buimg.com/1949/83be676010557ac0.png" alt="Markdown" title="">
                 </div>
-                <div class="image-caption">git安装 图1</div>
+                <div class="image-caption">Markdown</div>
             </figure>
 <p>点击Next,进入下一步：</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://i1.buimg.com/599721/827aee525a73d1ca.png" alt="git安装 图2" title="">
+                    <img src="http://i1.buimg.com/1949/9229aba951974761.png" alt="Markdown" title="">
                 </div>
-                <div class="image-caption">git安装 图2</div>
+                <div class="image-caption">Markdown</div>
             </figure>
 <p>选择安装目录，点击Next，进入下一步：</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://i1.buimg.com/599721/aad05f2d2eff9f2e.png" alt="git安装 图3" title="">
+                    <img src="http://i1.buimg.com/1949/d05508802aa1c71e.png" alt="Markdown" title="">
                 </div>
-                <div class="image-caption">git安装 图3</div>
+                <div class="image-caption">Markdown</div>
             </figure>
 <p>全部勾选，特别是需要勾选Git Bash Here和Git GUI Here这两个选项，点击Next，进入下一步：</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://i1.buimg.com/599721/dabca812c5ff6e05.png" alt="git安装 图4" title="">
+                    <img src="http://i1.buimg.com/1949/3bf094fc2db92e1e.png" alt="Markdown" title="">
                 </div>
-                <div class="image-caption">git安装 图4</div>
+                <div class="image-caption">Markdown</div>
             </figure>
 <p>默认，点击Next，进入下一步：</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://i1.buimg.com/599721/2481e06f1eb8768e.png" alt="git安装 图5" title="">
+                    <img src="http://i1.buimg.com/1949/6c88e19b8d8374b6.png" alt="Markdown" title="">
                 </div>
-                <div class="image-caption">git安装 图5</div>
+                <div class="image-caption">Markdown</div>
             </figure>
 <p>选择第二项 Use Git from the Windows Command Prompt ,点击Next，进入下一步：</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://i1.buimg.com/599721/b0f83af6283df166.png" alt="git安装 图6" title="">
+                    <img src="http://i1.buimg.com/1949/5127bbfd570d8631.png" alt="Markdown" title="">
                 </div>
-                <div class="image-caption">git安装 图6</div>
+                <div class="image-caption">Markdown</div>
             </figure>
 <p>默认，点击Next，进入下一步：</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://i1.buimg.com/599721/b86cc7a5e305cc55.png" alt="git安装 图7" title="">
+                    <img src="http://i1.buimg.com/1949/bf68af24f1374e2e.png" alt="Markdown" title="">
                 </div>
-                <div class="image-caption">git安装 图7</div>
+                <div class="image-caption">Markdown</div>
             </figure>
 <p>选择第一项Checkout Windows-style,comment Unix-style line endings，点击Next，进入下一步：</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://i1.buimg.com/599721/0abf31f23def5b05.png" alt="git安装 图8" title="">
+                    <img src="http://i1.buimg.com/1949/c5d6463d7e13e436.png" alt="Markdown" title="">
                 </div>
-                <div class="image-caption">git安装 图8</div>
+                <div class="image-caption">Markdown</div>
             </figure>
 <p>选择第一项Use MinTTY， 点击Next，进入下一步：</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://i1.buimg.com/599721/90e5e2f8553a46a8.png" alt="git安装 图9" title="">
+                    <img src="http://i1.buimg.com/1949/14d4287f07ed9ece.png" alt="Markdown" title="">
                 </div>
-                <div class="image-caption">git安装 图9</div>
+                <div class="image-caption">Markdown</div>
             </figure>
 <p>默认，点击Next，开始安装：</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://i1.buimg.com/599721/3ac8bbdac8800677.png" alt="git安装 图10" title="">
+                    <img src="http://i1.buimg.com/1949/70494ff6340c4e38.png" alt="Markdown" title="">
                 </div>
-                <div class="image-caption">git安装 图10</div>
+                <div class="image-caption">Markdown</div>
             </figure>
 <p>稍等片刻，弹出如下界面，表示安装完毕：</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://i1.buimg.com/599721/8a19de991997f588.png" alt="git安装 图11" title="">
+                    <img src="http://i1.buimg.com/1949/957939485dc76f9e.png" alt="Markdown" title="">
                 </div>
-                <div class="image-caption">git安装 图11</div>
+                <div class="image-caption">Markdown</div>
             </figure>
-<p>在电脑任意文件夹，右键，能在右键操作列表中看到如下红圈标识两项操作，标识Git安装成功：</p>
+<p>在电脑任意文件夹，右键，能在右键操作列表中看到如下红圈标识的两项操作，表示Git安装成功：</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://i1.buimg.com/599721/6efd480c83ca0149.jpg" alt="git安装 图12" title="">
+                    <img src="http://i1.buimg.com/1949/6e975152b13b049a.jpg" alt="Markdown" title="">
                 </div>
-                <div class="image-caption">git安装 图12</div>
+                <div class="image-caption">Markdown</div>
             </figure>
-<h1 id="TortoiseGit-安装及配置"><a href="#TortoiseGit-安装及配置" class="headerlink" title="TortoiseGit 安装及配置"></a>TortoiseGit 安装及配置</h1><h1 id="nodeJS-安装"><a href="#nodeJS-安装" class="headerlink" title="nodeJS 安装"></a>nodeJS 安装</h1><h1 id="Hexo-安装及配置"><a href="#Hexo-安装及配置" class="headerlink" title="Hexo 安装及配置"></a>Hexo 安装及配置</h1><h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1>]]></content>
+<h1 id="TortoiseGit-安装及配置"><a href="#TortoiseGit-安装及配置" class="headerlink" title="TortoiseGit 安装及配置"></a>TortoiseGit 安装及配置</h1><p>Git自带的操作方式为命令行，命令行的方式对非IT行业的小伙伴来说并不是很友好，为了方便Git的使用，我们还需要安装TortoiseGit。TortoiseGit是一个开放的git版本控制系统的客户端，他将Git原生的命令行操作方式转为界面方式，极大的降低了Git的学习成本。</p>
+<p>双击TortoiseGit-2.4.0.2-64bit.msi，开始安装TortoiseGit：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/da8ddc44ecaf54e7.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/66dfe5b9d56f411e.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/2f4c0cf6cd99198e.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>默认，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/6f56fb85a6fe480d.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击 install，开始安装TortoiseGit：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/13381aa66d476075.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>稍等片刻，弹出如下界面，表示安装完毕：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/615f644a8a4d2e3b.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>在电脑任意文件夹，右键，能在右键操作列表中看到如下红圈标识的三项操作，表示TortoiseGit安装成功：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/ec284f4646af58d9.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>这时候，我们已经把Git的命令行界面简化成了鼠标操作，但是操作按钮全都是英文的，对于英文不是那么好的小伙伴来说，貌似还是不那么友好，接下来我们继续把TortoiseGit的英文界面简化成中文。</p>
+<p>双击 TortoiseGit-LanguagePack-2.4.0.0-64bit-zh_CN.msi，安装中文语言包：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/42334a157c1ede31.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击 下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/497e1ab9fbbcd9d3.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>一眨眼的功夫，就安装完了，点击 完成 退出。在任意文件夹右键，找到 TortoiseGit ——&gt; Settings：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/e499bb67dd277603.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>找到 General ——&gt; Language，将语言改为 【中文】保存：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/54719b4e4978125a.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>这时候TortoiseGit的操作按钮就是中文的了，如下图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/9926fb53ac8a7325.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>至此，我们已经完成了TortoiseGit的安装。</p>
+<h1 id="nodeJS-安装"><a href="#nodeJS-安装" class="headerlink" title="nodeJS 安装"></a>nodeJS 安装</h1><p>Node.js是一个Javascript运行环境(runtime)，就是运行在服务端的 JavaScript。在使用Hexo搭建博客的过程中，NodeJS扮演着十分重要的角色，它提供了Hexo的安装环境。</p>
+<p>NodeJS的安装也很简单，只需下一步下一步即可。<br>双击node-v6.11.0-x64.msi 开始安装：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/774e43a07ce0e22b.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure></p>
+<p>点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/3677007b6cd860d0.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>勾选同意条款，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/62e20a67076d6489.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>选择安装目录，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/6cc6abee30db33cc.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>默认，点击Next，进入下一步：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/25b21f563d7b6661.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击install，开始安装：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/687b5c60dc359bff.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>稍等片刻，弹出如下界面，表示安装完毕：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i2.kiimg.com/1949/9bc6ee2bcde44862.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>点击Finish，退出！</p>
+<h1 id="Hexo-安装及配置"><a href="#Hexo-安装及配置" class="headerlink" title="Hexo 安装及配置"></a>Hexo 安装及配置</h1><p>准备好以上两个工具后，就正式迎来了我们今天的主角【Hexo】,Hexo不需要提前准备安装文件，只需要几个简单的命令即可。安装过程和以上两个工具一样，也是非常简单的，OK，走起来。</p>
+<p>在电脑的某个目录下新建一个文件夹，名字随便取，只要不是中文的就好，我这里在E盘下新建文件夹blog。打开刚建好的文件夹，右键选择Git Bash Here，如下图所示：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/49adc90e09817306.png" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>在弹出的命令窗口中输入：npm install -g hexo ，回车：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /d/blog</div><div class="line">$ npm install -g hexo</div></pre></td></tr></table></figure>
+<p>稍等片刻，控制台输出以下内容表示hexo安装完成：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@^1.0.0 (node_modules\hexo\node_modules\chokidar\node_modules\fsevents):</div><div class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform <span class="keyword">for</span> fsevents@1.1.2: wanted &#123;<span class="string">"os"</span>:<span class="string">"darwin"</span>,<span class="string">"arch"</span>:<span class="string">"any"</span>&#125; (current: &#123;<span class="string">"os"</span>:<span class="string">"win32"</span>,<span class="string">"arch"</span>:<span class="string">"x64"</span>&#125;)</div></pre></td></tr></table></figure>
+<p>在控制台输入hexo -v ，验证hexo是否安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /d/blog</div><div class="line">$ hexo -v</div><div class="line">hexo-cli: 1.0.3</div><div class="line">os: Windows_NT 10.0.10240 win32 x64</div><div class="line">http_parser: 2.7.0</div><div class="line">node: 6.11.0</div><div class="line">v8: 5.1.281.102</div><div class="line">uv: 1.11.0</div><div class="line">zlib: 1.2.11</div><div class="line">ares: 1.10.1-DEV</div><div class="line">icu: 58.2</div><div class="line">modules: 48</div><div class="line">openssl: 1.0.2k</div></pre></td></tr></table></figure>
+<p>控制台输出以上信息，标识hexo安装成功。接着输入hexo init进行初始化操作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /d/blog</div><div class="line">$ hexo init</div></pre></td></tr></table></figure>
+<p>稍等片刻，控制台输出以下信息，标识hexo初始化成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@^1.0.0 (node_modules\chokidar\node_modules\fsevents):</div><div class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform <span class="keyword">for</span> fsevents@1.1.2: wanted &#123;<span class="string">"os"</span>:<span class="string">"darwin"</span>,<span class="string">"arch"</span>:<span class="string">"any"</span>&#125; (current: &#123;<span class="string">"os"</span>:<span class="string">"win32"</span>,<span class="string">"arch"</span>:<span class="string">"x64"</span>&#125;)</div><div class="line">INFO  Start blogging with Hexo!</div></pre></td></tr></table></figure>
+<p>输入npm install，安装hexo依赖包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /d/blog</div><div class="line">$ npm install</div><div class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@^1.0.0 (node_modules\chokidar\node_modules\fsevents):</div><div class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform <span class="keyword">for</span> fsevents@1.1.2: wanted &#123;<span class="string">"os"</span>:<span class="string">"darwin"</span>,<span class="string">"arch"</span>:<span class="string">"any"</span>&#125; (current: &#123;<span class="string">"os"</span>:<span class="string">"win32"</span>,<span class="string">"arch"</span>:<span class="string">"x64"</span>&#125;)</div></pre></td></tr></table></figure>
+<p>到现在hexo就算安装完成了，接下来我们就可以欣赏我们的安装成果了。</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在刚才打开的控制台输入hexo g，生成静态化页面：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /d/blog</div><div class="line">$ hexo g</div></pre></td></tr></table></figure>
+<p>生成完毕后，输入hexo s，启动本地服务器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dell@wanghl MINGW64 /d/blog</div><div class="line">$ hexo s</div><div class="line">INFO  Start processing</div><div class="line">INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.</div></pre></td></tr></table></figure>
+<p>然后打开浏览器，访问<a href="http://localhost:4000/，就可以看到我们的博客页面了：" target="_blank" rel="external">http://localhost:4000/，就可以看到我们的博客页面了：</a></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i1.buimg.com/1949/d8ff3cff8f8e5280.jpg" alt="Markdown" title="">
+                </div>
+                <div class="image-caption">Markdown</div>
+            </figure>
+<p>现在我们已经在本地搭建好了自己的博客系统，下一节我们介绍如何将本地的博客托管到Github、Coding、码云等代码托管平台上。</p>
+]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;能用来搭建个人博客的工具很多，本文只对Hexo做介绍。&lt;br&gt;Hexo可用来搭建个人博客，并可依据国内外网络环境同时部署在Github和Coding(码云)上，国外用户访问Github，国内用户访问Coding，即加快国内访问速度，又可实现博客访问分流。用Hexo搭建个人博客，不仅所需的所有软件及部署平台均免费，而且搭建过程也是非常简单的，您只需要按照小编给您写好的步骤不停的下一步即可。&lt;/p&gt;
+      本文介绍如何如何安装 Git、 nodeJS、TortoiseGit、Hexo，并使用 Hexo 搭建个人博客
     
     </summary>
     
@@ -239,6 +918,14 @@
     
     
       <category term="hexo" scheme="http://www.jkinn.com/tags/hexo/"/>
+    
+      <category term="Git" scheme="http://www.jkinn.com/tags/Git/"/>
+    
+      <category term="Coding" scheme="http://www.jkinn.com/tags/Coding/"/>
+    
+      <category term="Github" scheme="http://www.jkinn.com/tags/Github/"/>
+    
+      <category term="码云(oschina)" scheme="http://www.jkinn.com/tags/%E7%A0%81%E4%BA%91-oschina/"/>
     
   </entry>
   
