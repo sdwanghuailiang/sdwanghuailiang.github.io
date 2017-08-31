@@ -222,8 +222,16 @@
 <li>1g =&gt; 1000000000 bytes</li>
 <li>1gb =&gt; 1024<em>1024</em>1024 bytes<br>另外，Redis的配置大小写是不敏感的，所以1GB 1Gb 1gB表达的意思是一样的。</li>
 </ul>
-<p>&lt;!– 这里需要一点 CSS 知识，选择器的问题，首先 &lt;th&gt; 存在于 &lt;table&gt; 中；其次 th:first-of-type 的意思是每个 &lt;th&gt; 为其父级的第一个元素，这里指的就是围绕着【名称】的 &lt;th&gt;。同理第二、三个使用 th:nth-of-type(2)、th:nth-of-type(3) 就可以了，以此类推。上述的 th:first-of-type 等于 th:nth-of-type(1) –&gt;</p>
-<p>&lt;style&gt;<br>table th:first-of-type(1) {<br>    width: 30%;<br>}<br>table th:nth-of-type(2) {<br>    width: 70%;<br>}<br>&lt;/style&gt;</p>
+<!-- 这里需要一点 CSS 知识，选择器的问题，首先 <th> 存在于 <table> 中；其次 th:first-of-type 的意思是每个 <th> 为其父级的第一个元素，这里指的就是围绕着【名称】的 <th>。同理第二、三个使用 th:nth-of-type(2)、th:nth-of-type(3) 就可以了，以此类推。上述的 th:first-of-type 等于 th:nth-of-type(1) -->
+<style>
+table th:first-of-type(1) {
+    width: 30%;
+}
+table th:nth-of-type(2) {
+    width: 70%;
+}
+</style>
+
 <table>
 <thead>
 <tr>
