@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Redis 探讨（二）： Redis 4.0.1 配置文件详解 | JK客栈 | 王怀亮的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="配置,详解,redis.conf,sentinel,conf,Redis,4.0.1">
+    <meta name="description" content="本文介绍如何在 Linux CentOS 7.3 上安装 Redis 4.0.1，及安装过程中常见问题的解决">
+<meta name="keywords" content="Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 探讨（二）： Redis 4.0.1 配置文件详解">
+<meta property="og:url" content="http://www.jkinn.com/2017/08/27/20170827001/index.html">
+<meta property="og:site_name" content="JK客栈">
+<meta property="og:description" content="本文介绍如何在 Linux CentOS 7.3 上安装 Redis 4.0.1，及安装过程中常见问题的解决">
+<meta property="og:image" content="http://oslz3deon.bkt.clouddn.com/LFU%E7%AE%97%E6%B3%95%E6%B7%98%E6%B1%B0%E8%BF%87%E7%A8%8B.png">
+<meta property="og:updated_time" content="2017-08-27T03:55:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis 探讨（二）： Redis 4.0.1 配置文件详解">
+<meta name="twitter:description" content="本文介绍如何在 Linux CentOS 7.3 上安装 Redis 4.0.1，及安装过程中常见问题的解决">
+<meta name="twitter:image" content="http://oslz3deon.bkt.clouddn.com/LFU%E7%AE%97%E6%B3%95%E6%B7%98%E6%B1%B0%E8%BF%87%E7%A8%8B.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="JK客栈" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">田埂↑の夢</h5>
+          <a href="mailto:sdwanghuailiang@163.com" title="sdwanghuailiang@163.com" class="mail">sdwanghuailiang@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sdwanghuailiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/sdwanghuailiang" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.dongchunlin.com"  >
+                <i class="icon icon-lg icon-link"></i>
+                小董董
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Redis 探讨（二）： Redis 4.0.1 配置文件详解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Redis 探讨（二）： Redis 4.0.1 配置文件详解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-08-27T03:55:42.000Z" itemprop="datePublished" class="page-time">
+  2017-08-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Redis/">Redis</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#redis-conf-详解"><span class="post-toc-number">1.</span> <span class="post-toc-text">redis.conf 详解</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#sentinel-conf-详解"><span class="post-toc-number">2.</span> <span class="post-toc-text">sentinel.conf 详解</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-20170827001"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Redis 探讨（二）： Redis 4.0.1 配置文件详解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-08-27 11:55:42" datetime="2017-08-27T03:55:42.000Z"  itemprop="datePublished">2017-08-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Redis/">Redis</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Redis 4.0.1 常用的配置文件是 redis.conf 和 sentinel.conf 这俩配置文件都在 redis 的根目录下，下面我们就简单说明一下这两个配置文件中的各个配置项。<br>其实Redis配置文件中的描述已经很详细了，本文完全是为了自己更好的熟悉Redis的各个配置。</p>
+<h1 id="redis-conf-详解"><a href="#redis-conf-详解" class="headerlink" title="redis.conf 详解"></a>redis.conf 详解</h1><p>首先，启动Redis时，需要指定配置文件路径，例如：./redis-server /path/to/redis.conf，否则，Redis将以默认配置文件启动。<br>在该配置文件中配置内存大小或者空间大小时，可以用1k 5GB 4M等形式来指定：</p>
+<ul>
+<li>1k =&gt; 1000 bytes</li>
+<li>1kb =&gt; 1024 bytes</li>
+<li>1m =&gt; 1000000 bytes</li>
+<li>1mb =&gt; 1024*1024 bytes</li>
+<li>1g =&gt; 1000000000 bytes</li>
+<li>1gb =&gt; 1024<em>1024</em>1024 bytes<br>另外，Redis的配置大小写是不敏感的，所以1GB 1Gb 1gB表达的意思是一样的。</li>
+</ul>
+<p>&lt;!– 这里需要一点 CSS 知识，选择器的问题，首先 &lt;th&gt; 存在于 &lt;table&gt; 中；其次 th:first-of-type 的意思是每个 &lt;th&gt; 为其父级的第一个元素，这里指的就是围绕着【名称】的 &lt;th&gt;。同理第二、三个使用 th:nth-of-type(2)、th:nth-of-type(3) 就可以了，以此类推。上述的 th:first-of-type 等于 th:nth-of-type(1) –&gt;</p>
+<p>&lt;style&gt;<br>table th:first-of-type(1) {<br>    width: 30%;<br>}<br>table th:nth-of-type(2) {<br>    width: 70%;<br>}<br>&lt;/style&gt;</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>导入外部配置文件</strong></td>
+<td>这个在引用通用的配置模板时很有用</td>
+</tr>
+<tr>
+<td> include xx.conf</td>
+<td>用于包含一个或多个配置文件，特别是引用通用的配置时，为了避免该配置文件中的配置被重写，最好把include写在最后一行，因为Redis总是采用最后一个配置作为配置指令的值。</td>
+</tr>
+<tr>
+<td><strong>启动时加载的模块</strong></td>
+<td>模块系统时Redis 4.0加入的 这个系统可以让用户通过自己编写的代码来扩展和实现 Redis 本身并不具备的功能</td>
+</tr>
+<tr>
+<td> loadmodule xx.so</td>
+<td>加载模块，该模块会在Redis启动时加载，如果服务器不能记载模块，则终止加载，可以使用多个loadmodule命令加载多个模块。</td>
+</tr>
+<tr>
+<td><strong>网络配置</strong></td>
+<td></td>
+</tr>
+<tr>
+<td> bind 127.0.0.1</td>
+<td>绑定的主机地址，默认是127.0.0.1，如果不设置，会处理所有的网络接口请求，一台服务器可以有多个网络接口（也就是网卡），每个网络接口都有自己的IP地址，如果不绑定，则这些网络接口都接受请求，如果设置，则只接受制定的网络地址请求，多个IP地址用空格隔开。  </td>
+</tr>
+<tr>
+<td> protected-mode yes</td>
+<td>3.2加入的参数，是否开启保护模式，默认开启。要是配置里没有指定bind和密码，开启该参数后，redis只会本地进行访问，拒绝外部访问。要是开启了密码和bind，可以开启。否则最好关闭，设置为no </td>
+</tr>
+<tr>
+<td> port 6379</td>
+<td>redis监听的端口号，默认为6379，如果设为0，redis将不在socket 上监听任何客户端连接  </td>
+</tr>
+<tr>
+<td> tcp-backlog 511</td>
+<td>此参数确定了TCP连接中已完成队列(完成三次握手之后)的长度， 当然此值必须不大于Linux系统定义的/proc/sys/net/core/somaxconn值，默认是511，而Linux的默认参数值是128。当系统并发量大并且客户端速度缓慢的时候，可以将这二个参数一起参考设定。该内核参数默认值一般是128，对于负载很大的服务程序来说大大的不够。一般会将它修改为2048或者更大。在/etc/sysctl.conf中添加:net.core.somaxconn = 2048，然后在终端中执行sysctl -p  </td>
+</tr>
+<tr>
+<td> unixsocket /tmp/redis.sock</td>
+<td>指定redis监听的unix socket路径，默认不启用  </td>
+</tr>
+<tr>
+<td> unixsocketperm 700</td>
+<td>配置unix socket使用文件的权限  </td>
+</tr>
+<tr>
+<td> timeout 0</td>
+<td>此参数为设置客户端空闲超过timeout，服务端会断开连接，为0则服务端不会主动断开连接，不能小于0（也就是一个 client 空闲多少秒之后关闭连接（0表示永不关闭）） 。 </td>
+</tr>
+<tr>
+<td> tcp-keepalive 300</td>
+<td>单位是秒，表示将周期性的使用SO_KEEPALIVE检测客户端是否还处于健康状态，避免服务器一直阻塞，官方给出的建议值是300s，如果设置为0，则不会周期性的检测  </td>
+</tr>
+<tr>
+<td><strong>一般配置</strong></td>
+<td></td>
+</tr>
+<tr>
+<td> daemonize no</td>
+<td>默认情况下 redis 不是作为守护进程运行的，如果你想让它在后台运行，你就把它改成 yes。当redis作为守护进程运行的时候，它会写一个 pid 到pidfile配置的文件里面。</td>
+</tr>
+<tr>
+<td> supervised no</td>
+<td>可以通过upstart和systemd管理Redis守护进程。<br>选项：<br>supervised no - 没有监督互动 <br>supervised upstart - 通过将Redis置于SIGSTOP模式来启动信号 <br>supervised systemd - signal systemd将READY = 1写入$ NOTIFY_SOCKET <br>supervised auto - 检测upstart或systemd方法基于 UPSTART_JOB或NOTIFY_SOCKET环境变量  </td>
+</tr>
+<tr>
+<td> pidfile /var/run/redis_6379.pid</td>
+<td>配置PID文件（redis进程文件）路径，当redis作为守护进程运行的时候，它会把 pid 默认写到该文件里面。</td>
+</tr>
+<tr>
+<td> loglevel notice</td>
+<td>定义日志级别。<br>可以是下面的这些值：<br>debug（记录大量日志信息，适用于开发、测试阶段）<br>verbose（较多日志信息，但是没有debug级别信息多）<br>notice（适量日志信息，使用于生产环境）<br>warning（仅有部分重要、关键信息才会被记录）  </td>
+</tr>
+<tr>
+<td> logfile “”</td>
+<td>日志文件的位置，当指定为空字符串时，为标准输出，如果redis已守护进程模式运行，那么日志将会输出到/dev/null。  </td>
+</tr>
+<tr>
+<td> syslog-enabled no</td>
+<td>要想把日志记录到系统日志，就把它改成 yes，也可以可选择性的更新其他的syslog 参数以达到你的要求。  </td>
+</tr>
+<tr>
+<td> syslog-ident redis</td>
+<td>设置系统日志的标识符  </td>
+</tr>
+<tr>
+<td> syslog-facility local0</td>
+<td>指定系统日志设置，必须是 USER 或者是 LOCAL0-LOCAL7 之间的值  </td>
+</tr>
+<tr>
+<td> databases 16</td>
+<td>设置数据库的数目。默认的数据库是DB 0 ，可以在每个连接上使用select  &lt;dbid&gt; 命令选择一个不同的数据库，dbid是一个介于0到databases - 1 之间的数值。  </td>
+</tr>
+<tr>
+<td> always-show-logo yes</td>
+<td>Redis 4.0加入的配置，是否一直显示图标。  </td>
+</tr>
+<tr>
+<td><strong>快照配置</strong></td>
+<td></td>
+</tr>
+<tr>
+<td> save &lt;seconds&gt; &lt;changes&gt;</td>
+<td>存 DB 到磁盘，可以配置多个：<br>格式：save &lt;间隔时间（秒）&gt; &lt;写入次数&gt;<br>根据给定的时间间隔和写入次数将数据保存到磁盘.<br>下面的例子的意思是：<br>save 900 1<br>save 300 10<br>save 60 10000<br>900 秒内如果至少有 1 个 key 的值变化，则保存。<br>300 秒内如果至少有 10 个 key 的值变化，则保存。<br>60 秒内如果至少有 10000 个 key 的值变化，则保存。<br><strong>注意</strong>：你可以注释掉所有的 save 行来停用保存功能。<br>也可以直接一个空字符串来实现停用：save “”。  </td>
+</tr>
+<tr>
+<td> stop-writes-on-bgsave-error yes</td>
+<td>当RDB持久化出现错误后，是否依然进行继续进行工作，yes：不能进行工作，no：可以继续进行工作，可以通过info中的rdb_last_bgsave_status了解RDB持久化是否有错误。如果用户开启了RDB快照功能，那么在redis持久化数据到磁盘时如果出现失败，默认情况下，redis会停止接受所有的写请求。<br>这样做的好处在于可以让用户很明确的知道内存中的数据和磁盘上的数据已经存在不一致了。<br>如果redis不顾这种不一致，一意孤行的继续接收写请求，就可能会引起一些灾难性的后果。<br>如果下一次RDB持久化成功，redis会自动恢复接受写请求。<br>如果不在乎这种数据不一致或者有其他的手段发现和控制这种不一致的话，可以关闭这个功能，<br>以便在快照写入失败时，也能确保redis继续接受新的写请求。  </td>
+</tr>
+<tr>
+<td> rdbcompression yes</td>
+<td>对于存储到磁盘中的快照，可以设置是否进行压缩存储。<br>如果是的话，redis会采用LZF算法进行压缩。如果你不想消耗CPU来进行压缩的话，可以设置为关闭此功能，但是存储在磁盘上的快照会比较大。  </td>
+</tr>
+<tr>
+<td> rdbchecksum yes</td>
+<td>是否校验rdb文件。从rdb格式的第五个版本开始，在rdb文件的末尾会带上CRC64的校验值。这跟有利于文件的容错性，但是在保存rdb文件的时候，会有大概10%的性能损耗，所以如果你追求高性能，可以关闭该配置。  </td>
+</tr>
+<tr>
+<td> dbfilename dump.rdb</td>
+<td>设置快照的文件名  </td>
+</tr>
+<tr>
+<td> dir ./</td>
+<td>设置快照文件的存放路径，这个配置项一定是个目录，而不能是文件名，数据库的写入会在这个目录，rdb、aof文件也会写在这个目录。   </td>
+</tr>
+<tr>
+<td><strong>主从配置</strong></td>
+<td></td>
+</tr>
+<tr>
+<td> slaveof &lt;masterip&gt; &lt;masterport&gt;</td>
+<td>主从复制，使用 slaveof 来让一个 redis 实例成为另一个reids 实例的副本，默认关闭。<strong>注意这个只需要在 slave 上配置</strong>  </td>
+</tr>
+<tr>
+<td> masterauth &lt;master-password&gt;</td>
+<td>如果master设置了requirepass，需要密码认证，那么slave要连上master，需要有master的密码才行，masterauth就是用来配置master的密码，这样可以在连上master后进行认证，默认不设置。  </td>
+</tr>
+<tr>
+<td> slave-serve-stale-data yes</td>
+<td>当一个 slave 与 master 失去联系，或者复制正在进行的时候，slave 可能会有两种表现：<br>如果为 yes ，slave 仍然会应答客户端请求，但返回的数据可能是过时，或者数据可能是空的在第一次同步的时候。<br>如果为 no ，在你执行除了 info 和 salveof 之外的其他命令时，slave 都将返回一个 “SYNC with master in progress” 的错误。  </td>
+</tr>
+<tr>
+<td> slave-read-only yes</td>
+<td>你可以配置一个 slave 实体是否接受写入操作。通过写入操作来存储一些短暂的数据对于一个 slave 实例来说可能是有用的，因为相对从 master 重新同步数而言，据数据写入到 slave 会更容易被删除。但是如果客户端因为一个错误的配置写入，也可能会导致一些问题。从 redis 2.6 版起，默认 slaves 都是只读的。  </td>
+</tr>
+<tr>
+<td> repl-diskless-sync no</td>
+<td>是否使用socket方式复制数据。目前redis复制提供两种方式，disk（硬盘备份）和socket（无硬盘备份）。如果新的slave连上来或者重连的slave无法部分同步，就会执行全量同步，master会生成rdb文件。有2种方式：disk方式是master创建一个新的进程把rdb文件保存到磁盘，再把磁盘上的rdb文件传递给slave。socket是master创建一个新的进程，直接把rdb文件以socket的方式发给slave。disk方式的时候，当一个rdb保存的过程中，多个slave都能共享这个rdb文件。socket的方式就的一个个slave顺序复制。在磁盘速度缓慢，网速快也就是硬盘低速而网络高速（高带宽）的情况下推荐用socket（无硬盘备份）方式。  </td>
+</tr>
+<tr>
+<td> repl-diskless-sync-delay 5</td>
+<td>当启用无硬盘备份，服务器等待一段时间后才会通过套接字向从站（slave）传送RDB文件，这个等待时间是可配置的。这一点很重要，因为一旦传送开始，就不可能再为一个新到达的从站（slave）服务。从站（slave）则要排队等待下一次RDB传送。因此服务器等待一段时间以期更多的从站（slave）到达。延迟时间以秒为单位，默认为5秒。要关掉这一功能，只需将它设置为0秒，传送会立即启动。  </td>
+</tr>
+<tr>
+<td> repl-ping-slave-period 10</td>
+<td>slave根据指定的时间间隔向服务器发送ping请求。时间间隔可以通过repl_ping_slave_period 来设置，默认10秒。  </td>
+</tr>
+<tr>
+<td> repl-timeout 60</td>
+<td>主从复制连接超时时间。master和slave都有超时时间的设置。master检测到slave上次发送的时间超过repl-timeout，即认为slave离线，清除该slave信息。slave检测到上次和master交互的时间超过repl-timeout，则认为master离线。需要<strong>注意</strong>的是repl-timeout需要设置一个比repl-ping-slave-period更大的值，否则每次主站和从站之间通信低速时都会被检测为超时。  </td>
+</tr>
+<tr>
+<td> repl-disable-tcp-nodelay no</td>
+<td>同步之后是否禁用从站（slave）上的TCP_NODELAY，可设置yes或者no。默认是no，即使用tcp nodelay。如果master设置了yes来禁止tcp nodelay设置，在把数据复制给slave的时候，会减少包的数量和更小的网络带宽。但是这也可能带来数据的延迟。默认我们推荐更小的延迟，但是在数据量传输很大的场景下，即在高负载情况下或者在主从都掉线的情况下建议选择yes。  </td>
+</tr>
+<tr>
+<td> repl-backlog-size 1mb</td>
+<td>复制缓冲区大小，这是一个累加的缓冲区，用来保存最新复制的命令，当从站断开一段时间的情况时，它替从站接收存储数据。这样在slave离线的时候，不需要完全复制master的数据，如果可以执行部分同步，只需要把缓冲区的部分数据复制给slave，就能恢复正常复制状态。缓冲区的大小越大，slave离线的时间可以更长，复制缓冲区只有在有slave连接的时候才分配内存。没有slave的一段时间，内存会被释放出来，默认1m。  </td>
+</tr>
+<tr>
+<td> repl-backlog-ttl 3600</td>
+<td>master没有slave连接时，一段时间会释放复制缓冲区的内存，repl-backlog-ttl用来设置该时间长度。单位为秒，秒数从最后一个从服务器断开的时间开始计算，值为0表示不释放。需要<strong>注意</strong>的是，从服务器没有该超时时间，因为他们可能会被提升为主服务器，并且能够与其下的从服务器重新同步，所以从服务器的缓冲区应该总是能够积累缓存。  </td>
+</tr>
+<tr>
+<td> slave-priority 100</td>
+<td>当master不可用，Redis Sentinel（哨兵）会根据slave的优先级选举一个提升为master。最低的优先级的slave，当选master。而配置成0，永远不会被选举。默认优先级是100。  </td>
+</tr>
+<tr>
+<td> min-slaves-to-write 3</td>
+<td>redis提供了可以让master停止写入的方式，如果配置了min-slaves-to-write N，健康的slave（在线的从服务器）的个数小于N，mater就禁止写入。master最少得有N个健康的slave存活才能执行写命令。这个配置虽然不能保证N个slave都一定能接收到master的写操作，但是能避免没有足够健康的slave（在线的从服务器）的时候，master不能写入来避免数据丢失。设置为0是关闭该功能，默认是0。  </td>
+</tr>
+<tr>
+<td> min-slaves-max-lag 10</td>
+<td>配合min-slaves-to-write使用，设置延时多少秒的slave才被认为是健康的slave, 默认是10秒，延迟的秒数必须&lt;=所定义的值，延迟秒数是从最后一次收到的来自从站的ping开始计算。ping通常是每秒一次。  </td>
+</tr>
+<tr>
+<td> slave-announce-ip 5.5.5.5</td>
+<td>slave-announce-ip和slave-announce-port配置是Redis 3.2.2加上的。在端口转发或地址转换（NAT）网络环境中，如果Redis和Sentinel做了端口映射，例如在Docker默认网络模式下，使用-p参数做端口映射，就需要配置一下从服务器（slave）redis.conf中的slave-announce-ip 和 slave-announce-port，对应外网的IP和外网端口。Sentinel的配置文件sentinel.conf 也需要配置sentinel announce-ip 和 sentinel announce-port ，对应外网的IP和外网端口。当然，如果Docker配置成host网络模式，就不需要配置了。  </td>
+</tr>
+<tr>
+<td> slave-announce-port 1234</td>
+<td>配合slave-announce-ip使用。  </td>
+</tr>
+<tr>
+<td><strong>安全配置</strong></td>
+<td></td>
+</tr>
+<tr>
+<td> requirepass foobared</td>
+<td>requirepass配置可以让用户使用AUTH命令来认证连接密码，才能使用其他命令。这让redis可以使用在不受信任的网络中。为了保持向后的兼容性，可以注释该命令，因为大部分用户的redis都是跑在内网的服务器，也不需要认证。使用requirepass的时候需要注意，因为redis太快了，每秒可以认证15w次密码，简单的密码很容易被攻破，所以最好使用一个更复杂的密码。  </td>
+</tr>
+<tr>
+<td> rename-command CONFIG “”</td>
+<td>将命令重命名，为了安全考虑，可以将某些重要的、危险的命令重命名，比如 CONFIG 命令，这样用户不能使用，而内部工具还能接着使用。当你把某个命令重命名成空字符串的时候就等于取消了这个命令。 需要<strong>注意</strong>的是，登陆或者和从服务器之间进行传输连接传输的命令不要重命名，不然会出现问题。 </td>
+</tr>
+<tr>
+<td><strong>客户端配置</strong></td>
+<td></td>
+</tr>
+<tr>
+<td> maxclients 10000</td>
+<td>设置能连上redis的最大客户端连接数量，默认是10000个客户端连接，如果设置 maxclients为0，表示不作限制。由于redis不区分连接是客户端连接还是内部打开文件或者和slave连接等，所以maxclients最小建议设置到32。如果超过了maxclients，redis会给新的连接发送’max number of clients reached’，并关闭连接。  </td>
+</tr>
+<tr>
+<td><strong>内存管理配置</strong></td>
+<td></td>
+</tr>
+<tr>
+<td> maxmemory &lt;bytes&gt;</td>
+<td>redis配置的最大内存限制，Redis在启动时会把数据加载到内存中，达到最大内存后，Redis会先配合maxmemory-policy策略进行处理，即清除已到期或即将到期的Key，当此方法处理后，仍然到达最大内存设置，将无法再进行写入操作，但仍然可以进行读取操作。Redis新的vm机制，会把Key存放内存，Value会存放在swap区。<strong>注意</strong>slave的输出缓冲区是不计算在maxmemory内的。所以为了防止主机内存使用完，建议设置的maxmemory需要更小一些。  </td>
+</tr>
+<tr>
+<td> maxmemory-policy noeviction</td>
+<td>当内存使用达到最大值时，redis使用的删除策略。<br>有以下几种策略可以选择，默认是noeviction（LRU是最近才使用的，LFU是最不常用的。LRU，LFU和volatile-ttl都是用近似的方法实现的）：<br>volatile-lru -&gt; 利用LRU算法移除设置过过期时间的key。<br>allkeys-lru -&gt; 利用LRU算法移除任何key。<br>volatile-lfu -&gt; 从设置过过期时间的key集合中移除最不常用的key。<br>allkeys-lfu -&gt; 从最不常用的key中移除任何的key。<br>volatile-random -&gt; 随机移除设置过过期时间的key。<br>allkeys-random -&gt; 随机移除任何key。<br>volatile-ttl -&gt; 移除即将过期的key，根据最近过期时间来删除（较小的TTL值）。<br>noeviction -&gt; 不移除任何key，只是返回一个写错误 ，默认选项。<br><strong>注意</strong>：<br>上面的这些移除策略，如果redis没有合适的key移除，对于写命令，还是会返回错误。redis将不再接收写请求，只接收get请求。写命令包括：set setnx setex append incr decr rpush lpush rpushx lpushx linsert lset rpoplpush sadd sinter sinterstore sunion sunionstore sdiff sdiffstore zadd zincrby zunionstore zinterstore hset hsetnx hmset hincrby incrby decrby getset mset msetnx exec sort。</td>
+</tr>
+<tr>
+<td> maxmemory-samples 5</td>
+<td>LRU，LFU和minimal TTL算法不是精确的算法，而是近似的算法(为了节省内存)，所以你可以改变样本大小对它进行调优以达到更快的速度或更精确的精度。默认情况下，Redis会选择5个样本进行检测，检查5个key并选择最近使用过的一个key，因为5个key已经可以产生足够精确的结果，10个key会非常接近于真实的LRU，但是需要消耗更多的CPU，3个key速度会很快，但是结果不准确。 </td>
+</tr>
+<tr>
+<td><strong>惰性删除（非阻塞删除）配置</strong></td>
+<td>默认情况下是以阻塞的方式删除对象，和DEL命令一样，阻塞删除时，服务器会停止处理新的命令，以便回收对象所占的内存。如果删除的key关联的是一个小对象，则删除的时间会非常短，但是，如果这个键与包含数百万个元素的聚合值相关联，那么服务器可以阻塞很长时间来完成操作。这种情况下，可以将对象删除策略配置为非阻塞删除，和UNLINK、FLUSHDB和FLUSHDB命令的异步选项一样，以在后台回收内存。</td>
+</tr>
+<tr>
+<td> lazyfree-lazy-eviction no</td>
+<td>达到最大内存后，移除对象时的删除策略。  </td>
+</tr>
+<tr>
+<td> lazyfree-lazy-expire no</td>
+<td>对象达到过期时间时的删除策略  </td>
+</tr>
+<tr>
+<td> lazyfree-lazy-server-del no</td>
+<td>Redis服务器删除key或者刷新数据库时的删除策略  </td>
+</tr>
+<tr>
+<td> slave-lazy-flush no</td>
+<td>从服务器执行重新同步操作或者删除整个数据库以便加载RDB文件时的删除策略。</td>
+</tr>
+<tr>
+<td><strong>仅追加模式配置</strong></td>
+<td>默认redis使用的是rdb方式持久化，这种方式在许多应用中已经足够用了。但是redis如果中途宕机，会导致可能有几分钟的数据丢失（取决于配置的保存点），Append Only File是另一种持久化方式，可以提供更好的持久化特性。Redis会把每次写入的数据在接收后都写入 appendonly.aof 文件，redis宕机或服务器断电时只丢失一秒的数据。如果在启动时启用了AOF，启动时Redis都会先把这个AOF文件的数据读入内存里，先忽略RDB文件。可以同时启用AOF和RDB两种持久化方式。</td>
+</tr>
+<tr>
+<td> appendonly no</td>
+<td>是否启用AOF持久化，默认不开启  </td>
+</tr>
+<tr>
+<td> appendfilename “appendonly.aof”</td>
+<td>AOF持久化文件名，默认时appendonly.aof  </td>
+</tr>
+<tr>
+<td> appendfsync everysec</td>
+<td>aof持久化策略的配置，调用fsync()告诉操作系统在磁盘上写入数据：<br>no表示不执行fsync，由操作系统保证数据同步到磁盘，速度最快。<br>always表示每次写入都执行fsync，以保证数据同步到磁盘。<br>everysec表示每秒执行一次fsync，可能会导致丢失这1s数据  </td>
+</tr>
+<tr>
+<td> no-appendfsync-on-rewrite no</td>
+<td>在aof重写或者写入rdb文件的时候，会执行大量IO，此时对于everysec和always的aof模式来说，执行fsync会造成阻塞过长时间，no-appendfsync-on-rewrite字段设置为默认设置为no。如果对延迟要求很高的应用，这个字段可以设置为yes，否则还是设置为no，这样对持久化特性来说这是更安全的选择。设置为yes表示rewrite期间对新写操作不fsync,暂时存在内存中,等rewrite完成后再写入，默认为no，建议yes。Linux的默认fsync策略是30秒。可能丢失30秒数据。  </td>
+</tr>
+<tr>
+<td> auto-aof-rewrite-percentage 100</td>
+<td>aof自动重写配置。当目前aof文件大小超过上一次重写的aof文件大小的百分之多少进行重写，即当aof文件增长到一定大小的时候Redis能够调用 BGREWRITEAOF 对日志文件进行重写。当前AOF文件大小是上次日志重写得到AOF文件大小的二倍（设置为100）时，自动启动新的日志重写过程。  </td>
+</tr>
+<tr>
+<td> auto-aof-rewrite-min-size 64mb</td>
+<td>设置允许重写的最小aof文件大小，避免了达到约定百分比但尺寸仍然很小的情况还要重写。  </td>
+</tr>
+<tr>
+<td> aof-load-truncated yes</td>
+<td>Redis所在得服务器崩溃宕机得时候，aof文件可能在尾部是不完整的，当redis启动的时候，aof文件的数据被载入内存，这时就可能发现AOF文件是不完整得。尤其在ext4文件系统没有加上data=ordered选项（redis自己宕机或者异常终止不会造成尾部不完整现象）时出现这种现象，可以选择让redis在系统错误时退出，或者导入尽可能多的数据（默认）。如果选择的是yes，当截断的aof文件被导入的时候，会自动发布一个日志通知给客户端，然后加载一个截短得文件。如果是no，服务器就会出现错误并拒绝启动，用户必须手动redis-check-aof修复AOF文件才可以重新启动。  </td>
+</tr>
+<tr>
+<td> aof-use-rdb-preamble no</td>
+<td>Redis 4.0 新增了 RDB-AOF 混合持久化格式，这是一个可选的功能，在开启了这个功能之后，AOF 重写产生的文件将同时包含 RDB 格式的内容和 AOF 格式的内容，其中 RDB 格式的内容用于记录已有的数据，而 AOF 格式的内存则用于记录最近发生了变化的数据，这样 Redis 就可以同时兼有 RDB 持久化和 AOF 持久化的优点——既能够快速地生成重写文件，也能够在出现问题时，快速地载入数据。这个功能可以通过 aof-use-rdb-preamble 选项进行开启，默认不开启，这是为了避免格式更改出现意外，新部署得就无所谓了。  </td>
+</tr>
+<tr>
+<td><strong>Lua脚本配置</strong></td>
+<td></td>
+</tr>
+<tr>
+<td> lua-time-limit 5000</td>
+<td>以毫秒为单位执行Lua脚本的最大执行时间。如果达到最大时间限制（毫秒），redis会记个log，然后返回错误的查询。当一个脚本超过了最大时限。只有SCRIPT KILL和SHUTDOWN NOSAVE可以用。第一个可以杀没有调write写命令的脚本。如果已经调用了write写命令，SHUTDOWN NOSAVE将是关闭服务器的唯一方法。将其设置为0或负值，无限执行，无需警告。  </td>
+</tr>
+<tr>
+<td><strong>redis集群配置</strong></td>
+<td></td>
+</tr>
+<tr>
+<td> cluster-enabled yes</td>
+<td>是否开启集群模式，默认不开启。  </td>
+</tr>
+<tr>
+<td> cluster-config-file nodes-6379.conf</td>
+<td>集群配置文件的名称，每个节点都有一个集群相关的配置文件，持久化保存集群的信息。这个文件并不需要手动配置，这个配置文件有Redis集群节点生成并更新，每个Redis集群节点需要一个单独的配置文件，请确保与实例运行的系统中配置文件名称不冲突。  </td>
+</tr>
+<tr>
+<td> cluster-node-timeout 15000</td>
+<td>集群节点连接超时毫秒数  </td>
+</tr>
+<tr>
+<td> cluster-slave-validity-factor 10</td>
+<td>在进行故障转移的时候，全部slave都会请求申请为master，但是有些slave可能与master断开连接一段时间了，导致数据过于陈旧，这样的slave不应该被提升为master。对于一个slave，没有什么简单的方法可以精确的测量它的数据年龄，因此需要进行以下两项检查：<br>1.如果多个slave服务器都能够进行故障转移，他们就会交换消息，以试图以最佳的复制偏移量(来自于master的更多数据)给slave提供转移优势。<br>2.每一个slave都计算最后一次与master互动的时间，这个时间可能是最后一次ping操作，或者接收命令，或者与master断开的时间。如果最后一次交互时间过去太久，则该slave压根不会进行故障转移。<br>该参数就是用来判断slave节点与master断线的时间是否过长。判断方法是：<br>比较slave断开连接的时间和(node-timeout * slave-validity-factor) + repl-ping-slave-period。<br>如果node-timeout为三十秒, 并且slave-validity-factor为10,假设默认的repl-ping-slave-period是10秒，即如果超过310秒slave将不会尝试进行故障转移。  </td>
+</tr>
+<tr>
+<td> cluster-migration-barrier 1</td>
+<td>迁移壁垒：Redis集群中的slave节点可以迁移到没有slave节点或者slave节点全部停止工作的master节点（孤儿节点）下，这种机制提高了Redis集群抵御故障的能力，不然的话，如果master节点下没有正在工作的slave节点，这台master节点就会成为孤儿节点。只有master的slave数量大于该值，其下的slave节点才能迁移到其他孤儿master节点上，他反映了集群中每一个master节点下拥有的slave节点的数量。如这个参数若被设为2，那么只有当一个主节点拥有2个可工作的从节点时，它的其中一个从节点会尝试迁移。默认值是1，即当master节点下至少有一个slave节点和他保持在一起时，其下其他的slave节点才能进行迁移。 要禁用slave节点迁移，只需要将改值设置为一个非常大的值就好。值可以设置为0，但这种配置会有危险，可以在开发调试时使用。 </td>
+</tr>
+<tr>
+<td> cluster-require-full-coverage yes</td>
+<td>默认情况下，Redis集群中，如果有一个哈希槽没有可用的节点为他提供服务（也就是这个哈希槽不属于任何节点），redis集群就停止接受查询，也就是必须保证所有的哈希槽都正常，Redis集群才能提供服务。 当这个哈希槽有节点收回时，集群会自动开始提供服务。但是，有时候现在工作的是Redis集群的子集，仍然希望能提供服务这时就应该把该项设置为no。不建议开启该配置，这样集群分区的时候，小分区的master一直在接受写请求，但又无法查询，而造成很长时间数据不一致。</td>
+</tr>
+<tr>
+<td><strong>NAT 和 Docker配置</strong></td>
+<td>Redis 4.0 将兼容 NAT 和 Docker。在某些部署环境下，比如采用Docker或其他容器部署，这时的IP地址是处理过的，或者端口是转发后的，这种环境下，Redis集群节点地址发现就会失败。为了使Redis集群能在这种复杂环境下工作，需要将地址信息配置为静态的，即每个节点都配置为他的公共地址（包括IP地址，端口号、集群消息总线端口）。节点的公共信息在消息总线的数据包中能够找到，以便其他节点能够正确映射节点的地址。如果此处不配置，则将使用正常的Redis集群进行自动检测。<br><strong>注意</strong>：<br>当重新映射的时候，总线端口可能不位于 端口号 + 10000的固定偏移量上，因此可以指定任何的端口和总线端口，如果不设置总线端口，通常使用10000的固定偏移量</td>
+</tr>
+<tr>
+<td> cluster-announce-ip 10.1.1.5</td>
+<td>节点的公网IP地址  </td>
+</tr>
+<tr>
+<td> cluster-announce-port 6379</td>
+<td>节点的端口号  </td>
+</tr>
+<tr>
+<td> cluster-announce-bus-port 6380</td>
+<td>总线端口号  </td>
+</tr>
+<tr>
+<td><strong>慢请求日志配置</strong></td>
+<td>慢日志是用来记录redis运行中执行比较慢的命令耗时。当命令的执行超过了指定时间，就记录在慢日志中，慢日志保存在内存中，所以没有IO操作。</td>
+</tr>
+<tr>
+<td> slowlog-log-slower-than 10000</td>
+<td>执行时间比slowlog-log-slower-than大的请求记录到慢日志里面，单位是微秒，1000000就是1秒。<strong>注意</strong>，负数时间会禁用慢查询日志，而0则会强制记录所有命令。  </td>
+</tr>
+<tr>
+<td> slowlog-max-len 128</td>
+<td>慢查询日志所占的内存长度。当一个新的命令被写进日志的时候，最老的那个记录会被删掉。这个长度没有限制。只要有足够的内存就行。你可以通过 SLOWLOG RESET 来释放内存。  </td>
+</tr>
+<tr>
+<td><strong>延迟监控配置</strong></td>
+<td>延迟监控功能是用来监控redis中执行比较缓慢的一些操作，用LATENCY打印redis实例在跑命令时的耗时图表。只记录大于等于下边设置的值的操作。</td>
+</tr>
+<tr>
+<td> latency-monitor-threshold 0</td>
+<td>延迟监控阈值（毫秒数），0的话，就是关闭监视。默认延迟监控功能是关闭的，因为如果您没有延迟问题，这个配置就不需要，并且它搜集数据对性能有影响，虽然影响非常小，但是负载大的话，效果就明显了。如果你需要打开，也可以通过CONFIG SET latency-monitor-threshold &lt;milliseconds&gt;命令动态设置。  </td>
+</tr>
+<tr>
+<td><strong>事件通知配置</strong></td>
+<td>键空间通知使得客户端可以通过订阅频道或模式，来接收那些以某种方式改动了 Redis 数据集的事件。因为开启键空间通知功能需要消耗一些 CPU ，所以在默认配置下，该功能处于关闭状态</td>
+</tr>
+<tr>
+<td> notify-keyspace-events “”</td>
+<td>参数可以是以下字符的任意组合，它指定了服务器该发送哪些类型的通知：<br>#K 键空间通知，所有通知以 <strong>keyspace@</strong> 为前缀<br>#E 键事件通知，所有通知以 <strong>keyevent@</strong> 为前缀<br>#g DEL 、 EXPIRE 、 RENAME 等类型无关的通用命令的通知<br>#$ 字符串命令的通知<br>#l 列表命令的通知<br>#s 集合命令的通知<br>#h 哈希命令的通知<br>#z 有序集合命令的通知<br>#x 过期事件：每当有过期键被删除时发送<br>#e 驱逐(evict)事件：每当有键因为 maxmemory 政策而被删除时发送<br>#A 参数 g$lshzxe 的别名<br>输入的参数中至少要有一个 K 或者 E，否则的话，不管其余的参数是什么，都不会有任何 通知被分发。详细使用可以参考<a href="http://redis.io/topics/notifications" target="_blank">Redis Keyspace Notifications</a>。  </td>
+</tr>
+<tr>
+<td><strong>高级配置</strong></td>
+<td>该设置是Redis的内存优化策略，将一个对象存储在hash类型中会占用更少的内存，并且可以更方便的存取整个对象。省内存的原因是新建一个hash对象时开始是用zipmap来存储的。这个zipmap其实并不是hash table，但是zipmap相比正常的hash实现可以节省不少hash本身需要的一些元数据存储开销。尽管zipmap的添加，删除，查找都是O(n)，但是由于一般对象的field数量都不太多。所以使用zipmap也是很快的,也就是说添加删除平均还是O(1)。如果field或者value的大小超出一定限制后，Redis会在内部自动将zipmap替换成正常的hash实现。<br>以下是几篇Redis再内存优化方面的文章，感觉分析的不错，分享给各位：<br><a href="http://www.cnblogs.com/Jason-Xiang/p/5369069.html" target="_blank">Redis短结构与分片</a><br><a href="http://blog.csdn.net/freebird_lb/article/details/7733994" target="_blank">Redis数据存储优化机制</a><br><a href="http://mp.weixin.qq.com/s?__biz=MzAwMDU1MTE1OQ==&mid=2653547263&idx=1&sn=fe484b24660b7e1dc4beabca71fe1cb1" target="_blank">用最少的机器支撑万亿级访问，微博6年Redis优化历程</a><br><a href="http://www.infoq.com/cn/articles/tq-redis-memory-usage-optimization-storage#anch104989" target="_blank">Redis内存使用优化与存储</a><br><a href="http://carlosfu.iteye.com/blog/2254154" target="_blank">美团在Redis上踩过的一些坑</a><br><a href="http://www.redis.cn/topics/memory-optimization.html" target="_blank">小的聚合类型数据的特殊编码处理</a><br><a href="http://www.cnblogs.com/trigged/p/3240774.html" target="_blank">30G 的redis 如何优化</a><br><a href="http://blog.csdn.net/session_time/article/details/52792190" target="_blank">Redis常用内存优化手段与参数</a><br><a href="http://www.jb51.net/article/109462.htm" target="_blank">Redis优化经验总结(必看篇)</a></td>
+</tr>
+<tr>
+<td> hash-max-ziplist-entries 512</td>
+<td>hash类型的数据结构在编码上可以使用ziplist和hashtable。<br>ziplist的特点就是文件存储(以及内存存储)所需的空间较小,在内容较小时,性能和hashtable几乎一样。<br>因此redis对hash类型默认采取ziplist。如果hash中条目的条目个数或者value长度达到阀值,将会被重构为hashtable。<br>这个参数指的是ziplist中允许存储的最大条目个数，默认为512，建议为128。  </td>
+</tr>
+<tr>
+<td> hash-max-ziplist-value 64</td>
+<td>ziplist中允许条目value值最大字节数，超过该值，采用hash，默认为64，建议为1024  </td>
+</tr>
+<tr>
+<td> list-max-ziplist-size -2</td>
+<td>list也以一种特殊的方式进行编码，以节省大量空间。<br>当取正值的时候，表示按照数据项个数来限定每个quicklist节点上的ziplist长度。比如，当这个参数配置成5的时候，表示每个quicklist节点的ziplist最多包含5个数据项。<br>当取负值的时候，表示按照占用字节数来限定每个quicklist节点上的ziplist长度。这时，它只能取-1到-5这五个值，每个值含义如下：<br>-5: 每个quicklist节点上的ziplist大小不能超过64 Kb。（注：1kb =&gt; 1024 bytes）<br>-4: 每个quicklist节点上的ziplist大小不能超过32 Kb。<br>-3: 每个quicklist节点上的ziplist大小不能超过16 Kb。<br>-2: 每个quicklist节点上的ziplist大小不能超过8 Kb。（-2是Redis给出的默认值，性能最高的选项通常是-2(8 Kb大小)或-1(4 Kb大小)）<br>-1: 每个quicklist节点上的ziplist大小不能超过4 Kb。  </td>
+</tr>
+<tr>
+<td> list-compress-depth 0</td>
+<td>列表也可以被压缩，这个参数表示一个quicklist两端不被压缩的节点个数。<br>注：这里的节点个数是指quicklist双向链表的节点个数，而不是指ziplist里面的数据项个数。<br>实际上，一个quicklist节点上的ziplist，如果被压缩，就是整体被压缩的。<br>参数list-compress-depth的取值含义如下：<br>0: 是个特殊值，表示都不压缩。这是Redis的默认值。<br>1: 表示quicklist两端各有1个节点不压缩，中间的节点压缩。<br>2: 表示quicklist两端各有2个节点不压缩，中间的节点压缩。<br>3: 表示quicklist两端各有3个节点不压缩，中间的节点压缩。<br>依此类推…<br>由于0是个特殊值，很容易看出quicklist的头节点和尾节点总是不被压缩的，以便于在表的两端进行快速存取。  </td>
+</tr>
+<tr>
+<td> set-max-intset-entries 512</td>
+<td>当set集合中的元素为整数且元素个数小于配置set-max-intset-entries值时，使用intset数据结构存储，否则转化为Dict结构，Dict实际是Hash Table的一种实现，key为元素值，value为NULL，这样即可在O(1)时间内判断集合中是否包含某个元素。intset中有三种类型数组：int16_t类型、int32_t 类型、 int64_t 类型。至于怎么选择是那种类型的数组，是根据其保存的值的取值范围来决定的，初始化时是 int16_t，根据 set 中的最大值在[INT16_MIN, INT16_MAX] , [INT32_MIN, INT32_MAX], [INT64_MIN, INT64_MAX]的那个取值范围来动态确定整个数组的类型。例如set一开始是 int16_t 类型，当一个取值范围在 [INT32_MIN, INT32_MAX]的值加入到 set 时，则将保存 set 的数组升级成 int32_t 的数组。  </td>
+</tr>
+<tr>
+<td> zset-max-ziplist-entries 128</td>
+<td>根hash和list一样sorted set也有节约内存的方式，当sorted set的元素个数及元素大小小于一定限制时，它是用ziplist来存储。  </td>
+</tr>
+<tr>
+<td> zset-max-ziplist-value 64</td>
+<td>配置value最大为64字节。</td>
+</tr>
+<tr>
+<td> hll-sparse-max-bytes 3000</td>
+<td>value大小小于等于hll-sparse-max-bytes使用稀疏数据结构（sparse）。大于hll-sparse-max-bytes使用稠密的数据结构（dense），一个比16000大的value是几乎没用的，建议的value大概为3000。如果对CPU要求不高，对空间要求较高的，建议设置到10000左右。  </td>
+</tr>
+<tr>
+<td> activerehashing yes</td>
+<td>Redis将在每100毫秒时使用1毫秒的CPU时间来对redis的hash表进行重新hash，可以降低内存的使用。当你的使用场景中，有非常严格的实时性需要，不能够接受Redis时不时的对请求有2毫秒的延迟的话，把这项配置为no。如果没有这么严格的实时性要求，可以设置为yes，以便能够尽可能快的释放内存。  </td>
+</tr>
+<tr>
+<td> client-output-buffer-limit &lt;class&gt; &lt;hard limit&gt; &lt;soft limit&gt; &lt;soft seconds&gt;</td>
+<td>对客户端输出缓冲进行限制可以强迫那些不从服务器读取数据的客户端断开连接，用来强制关闭传输缓慢的客户端。<br>class：客户端类型，取值normal（普通的客户端）、slave（从库的复制客户端）、pubsub（发布与订阅的客户端）。<br>hard limit：缓冲区大小的硬性限制，即buffer最大值,一旦达到阀值将立即关闭连接。<br>soft limit：缓冲去大小的软性限制，它和seconds配合,如果buffer值超过soft且持续时间达到了seconds,也将立即关闭连接,如果超过了soft但是在seconds之后，buffer数据小于了soft,连接将会被保留。<br>soft seconds：缓冲区大小达到了（超过）soft limit值的持续时间，单位是秒。<br>其中hard和soft都设置为0,则表示禁用buffer控制.通常hard值大于soft。</td>
+</tr>
+<tr>
+<td> client-output-buffer-limit normal 0 0 0</td>
+<td>对于normal client（正常客户端，包括监控客户端），第一个0表示取消hard limit，第二个0和第三个0表示取消soft limit，normal client默认取消限制，因为如果没有寻问，他们是不会接收数据的。</td>
+</tr>
+<tr>
+<td> client-output-buffer-limit slave 256mb 64mb 60</td>
+<td>对于slave client和MONITER client，如果client-output-buffer一旦超过256mb，又或者超过64mb持续60秒，那么服务器就会立即断开客户端连接。</td>
+</tr>
+<tr>
+<td> client-output-buffer-limit pubsub 32mb 8mb 60</td>
+<td>对于pubsub client，如果client-output-buffer一旦超过32mb，又或者超过8mb持续60秒，那么服务器就会立即断开客户端连接。  </td>
+</tr>
+<tr>
+<td> hz 10</td>
+<td>Redis 调用内部函数来执行许多后台任务，如关闭客户端超时的连接，清除过期的Key等等。不是所有的任务都以相同的频率执行，但 Redis 依照指定的“Hz”值来执行检查任务。默认情况下，“Hz”的被设定为 10 。提高该值将在 Redis 空闲时使用更多的 CPU 时，但同时当有多个 key 同时到期会使 Redis 的反应更灵敏，以及超时可以更精确地处理。范围是 1 到 500 之间，但是最好不要超过100。大多数用户应该使用 10 这个默认值，只有在非常低的延迟的情况下有必要提高最大到 100 。  </td>
+</tr>
+<tr>
+<td> aof-rewrite-incremental-fsync yes</td>
+<td>在aof重写的时候，如果打开了aof-rewrite-incremental-fsync开关，系统会每32MB执行一次fsync进行同步。这对于把文件写入磁盘是有帮助的，可以避免过大的延迟峰值。  </td>
+</tr>
+<tr>
+<td><strong>LFU驱逐策略</strong></td>
+<td>从Redis4.0开始，一个新的LFU（Least Frequently Used）驱逐策略被引入，和绝大多数新加入的配置一样，该配置默认也是关闭的。<br>在说明该驱逐策略之前，我们先简单说下LFU算法的基本原理：<br>LFU（Least Frequently Used）最近最少使用算法，看名字就知道是个基于访问频次的一种算法。它是基于“如果一个数据在最近一段时间内使用次数很少，那么在将来一段时间内被使用的可能性也很小”的思路。<br><strong>注意</strong>LFU和LRU算法的不同之处，LRU的淘汰规则是基于访问时间（会将时间上最不常访问的数据给淘汰），而LFU是基于访问次数的。举个简单的例子：<br>假设缓存大小为3，数据访问序列为set(2,2),set(1,1),get(2),get(1),get(2),set(3,3),set(4,4)，则在set(4,4)时对于LFU算法应该淘汰(3,3)，而LRU应该淘汰(1,1)。<br>那么LFU Cache应该支持的操作为：<br>get(key)：如果Cache中存在该key，则返回对应的value值，否则，返回-1；<br>set(key,value)：如果Cache中存在该key，则重置value值；如果不存在该key，则将该key插入到到Cache中，若Cache已满，则淘汰最少访问的数据。<br>为了能够淘汰最少使用的数据，因此LFU算法最简单的一种设计思路就是 利用一个数组存储 数据项，用hashmap存储每个数据项在数组中对应的位置，然后为每个数据项设计一个访问频次，当数据项被命中时，访问频次自增，在淘汰的时候淘汰访问频次最少的数据。这样一来的话，在插入数据和访问数据的时候都能达到O(1)的时间复杂度，在淘汰数据的时候，通过选择算法得到应该淘汰的数据项在数组中的索引，并将该索引位置的内容替换为新来的数据内容即可，这样的话，淘汰数据的操作时间复杂度为O(n)。<br>另外还有一种实现思路就是利用 小顶堆+hashmap，小顶堆插入、删除操作都能达到O(logn)时间复杂度，因此效率相比第一种实现方法更加高效。综上，LFU更加偏向于随机性比较大的场景。<br>说了一堆，是不是蒙圈了，下边咱们拿个网上的图来说一下：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://oslz3deon.bkt.clouddn.com/LFU%E7%AE%97%E6%B3%95%E6%B7%98%E6%B1%B0%E8%BF%87%E7%A8%8B.png" alt="LFU淘汰过程" title="">
+                </div>
+                <div class="image-caption">LFU淘汰过程</div>
+            </figure><br>下面简单讲解一下:<br>1. 假设我们的lfu最大的存储空间控制为5个，此时访问D,D现在的访问频率计数是26;<br>2. 访问D后,D的频率+1,也就是27了。 此时需要调整缓存池数据需要重新排序,D和C交换;<br>3. 访问B,B的频率+1,由于A的频率仍然比B大,所以不需要调整;<br>4. 当新数据F插入缓存池之前,由于已经空间满了，需要干掉一个！ 因为E的频率最低,故淘汰E,将F插入缓存池,缓存池重新排序,F放到队尾。<br>上面简单介绍了LFU算法，下边我们再说一下Redis 4.x中的LFU驱逐策略：<br>Redis LFU实现中有两个可调参数：计数器对数因子和计数器衰减时间。<br>LFU计数器每个键只有8位，最大值为255，所以Redis使用具有对数行为的概率增量。给定旧计数器的值，当访问一个密钥时，计数器以这种方式递增：<br>1. 提取0和1之间的随机数R。<br>2. 概率P被计算为1 /（old_value 乘以 lfu_log_factor + 1）。<br> 3. 只有当”R&lt;P”时才会递增计数器。<br>默认lfu-log-factor为10.这是一个表格，说明频率计数器如何随着不同对数因子的不同访问次数而变化：<br> <strong>注意</strong>：<br>上表是通过运行以下命令获得的：<br>＃redis-benchmark -n 1000000 incr foo<br>＃redis-cli object freq foo<br>＃注2：计数器初始值为5，以使新对象有机会累积命中。<br>＃计数器衰减时间是为了使key计数器除以2，必须经过的时间（以分钟为单位）（如果key值小于&lt;= 10，则递减）。</td>
+</tr>
+<tr>
+<td> lfu-log-factor 10</td>
+<td>计数器对数因子，默认是10。</td>
+</tr>
+<tr>
+<td> lfu-decay-time 1</td>
+<td>计数器衰减时间，以分钟为单位，默认值为1，如果设置为0，意味着每次发生扫描时都会使计数器衰减。</td>
+</tr>
+<tr>
+<td><strong>碎片整理配置</strong></td>
+<td>Redis 4.0开始，添加了灵活的碎片处理机制。该特性需要Redis使用Jemalloc做内存管理，目前这个特性还处于实验阶段，但是已经通过了一段时间的测试。<br>首先，我们先说说什么是灵活的碎片处理机制：<br>碎片处理就是Redis服务器压缩在内存中分配给数据的空间，这样可以回收内存空间，一般情况下，碎片处理需要重启服务器，或者刷新所有的数据并重新创建，但是，从Redis 4.0开始，<br>Redis处理碎片时，不需要重启服务器，碎片处理过程可以在运行状态下进行，类似于程序的热部署。<br>基本上，当碎片超过一定级别（参见下边的配置选项）时，Redis会利用某些特定的<strong>Jemalloc</strong>特性来创建连续内存区域中的值的新副本（这是为了将其分配到更好的位置），同时释放数据的旧副本，并对所有的key重复此过程，以使内存碎片返回到正常值。<br><strong>注意</strong>：<br>1. 默认情况下，该功能是禁用的。<br>2. 如果没有碎片问题，不需要开启该功能。<br>3. 一旦遇到碎片问题，您可以在需要时，使用”CONFIG SET activedefrag yes”命令启用此功能。<br>4. 配置参数能够对内存碎片起到微调的作用，如果您不确定自己需要什么样的配置，请保持默认值不变。</td>
+</tr>
+<tr>
+<td> activedefrag yes</td>
+<td>启用活动碎片整理  </td>
+</tr>
+<tr>
+<td> active-defrag-ignore-bytes 100mb</td>
+<td>开始进行活动碎片整理的最小碎片资源  </td>
+</tr>
+<tr>
+<td> active-defrag-threshold-lower 10</td>
+<td>开始进行活动碎片整理的最小碎片百分比  </td>
+</tr>
+<tr>
+<td> active-defrag-threshold-upper 100</td>
+<td>Redis尽力整理碎片后，最大碎片百分比  </td>
+</tr>
+<tr>
+<td> active-defrag-cycle-min 25</td>
+<td>在CPU百分比最小为多少时，开始进行碎片处理  </td>
+</tr>
+<tr>
+<td> active-defrag-cycle-max 75</td>
+<td>Redis尽力整理碎片后，最大的CPU百分比  </td>
+</tr>
+</tbody>
+</table>
+<h1 id="sentinel-conf-详解"><a href="#sentinel-conf-详解" class="headerlink" title="sentinel.conf 详解"></a>sentinel.conf 详解</h1><p>Redis-Sentinel（一般成称为哨兵）是Redis官方推荐的高可用性(HA)解决方案，当用Redis做Master-slave的高可用方案时，假如master宕机了，Redis本身(包括它的很多客户端)都没有实现自动进行主备切换，而Redis-sentinel本身也是一个独立运行的进程，它能监控多个master-slave集群，发现master宕机后能进行自动切换。<br>它的主要功能有以下几点：</p>
+<ol>
+<li>不时地监控redis是否按照预期良好地运行;</li>
+<li>如果发现某个redis节点运行出现状况，能够通知另外一个进程(例如它的客户端);</li>
+<li>能够进行自动切换。当一个master节点不可用时，能够选举出master的多个slave(如果有超过一个slave的话)中的一个来作为新的master,其它的slave节点会将它所追随的master的地址改为被提升为master的slave的新地址。</li>
+<li>需要注意的是，配置文件在sentinel运行期间是会被动态修改的，当slave升级为master时，配置文件被重写。例如当发生主备切换时候，master配置文件会被修改为另外一个slave的配置文件。这样，之后sentinel如果重启时，就可以根据这个配置来恢复其之前所监控的redis集群的状态。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>网络配置</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>bind 127.0.0.1</td>
+<td>绑定的主机地址，默认是127.0.0.1，多个地址用空格隔开。   </td>
+</tr>
+<tr>
+<td>protected-mode no</td>
+<td>是否开启保护模式，默认关闭。 </td>
+</tr>
+<tr>
+<td>port &lt;sentinel-port&gt;</td>
+<td>哨兵实例运行的端口号，默认是26379。</td>
+</tr>
+<tr>
+<td>sentinel announce-ip &lt;ip&gt;</td>
+<td>在端口转发或地址转换（NAT）网络环境中，哨兵可以通过非本地地址从外部访问。</td>
+</tr>
+<tr>
+<td>sentinel announce-port &lt;port&gt;</td>
+<td>＃同样，当提供announce-port并且有效且非零时，哨兵会通知指定的TCP端口。</td>
+</tr>
+<tr>
+<td>dir &lt;working-directory&gt;</td>
+<td>哨兵工作时使用的临时文件夹。</td>
+</tr>
+<tr>
+<td><strong>故障转移配置</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>sentinel monitor &lt;master-name&gt; &lt;ip&gt; &lt;redis-port&gt; &lt;quorum&gt;</td>
+<td>哨兵去监视一个名为<strong>master-name</strong>（master-name只能包含英文字母，数字，和“.-_”这三个字符，不能包含特殊字符和空格）的主redis实例，这个主实例的IP地址为本机地址<strong>ip</strong>（master-ip 要写真实的ip地址而不要用回环地址127.0.0.1），端口号为<strong>redis-port</strong>，而将这个主实例判断为失效至少需要<strong>quorum</strong>个哨兵进程的同意，只要同意哨兵的数量不达标，自动failover就不会执行。</td>
+</tr>
+<tr>
+<td>sentinel auth-pass &lt;master-name&gt; &lt;password&gt;</td>
+<td>设置连接master和slave时的密码，注意的是sentinel不能分别为master和slave设置不同的密码，因此master和slave的密码应该设置相同，而且如果集群中有Redis设置了密码，则其主从实例都应该设置密码。</td>
+</tr>
+<tr>
+<td>sentinel down-after-milliseconds &lt;master-name&gt; &lt;milliseconds&gt;</td>
+<td>指定了Sentinel认为Redis实例已经失效所需的毫秒数。当实例超过该时间没有返回心跳PING结果，或者直接返回错误，那么Sentinel将这个实例标记为主观下线（单方面地认为这个master已经不可用了(subjectively down, 也简称为SDOWN)）。只有一个 Sentinel进程将实例标记为主观下线并不一定会引起实例的自动故障迁移：只有在足够数量的Sentinel都将一个实例标记为主观下线之后，实例才会被标记为客观下线（objectively down， 简称 ODOWN ），这时自动故障迁移才会执行。单位是毫秒，默认是30秒。</td>
+</tr>
+<tr>
+<td>sentinel parallel-syncs &lt;master-name&gt; &lt;numslaves&gt;</td>
+<td>默认是1。选项指定了在执行故障转移时，最多可以有多少个从服务器同时对新的主服务器进行同步，这个数字越小，完成故障转移所需的时间就越长。<br>如果从服务器被设置为允许使用过期数据集（参见对 redis.conf 文件中对 slave-serve-stale-data 选项的说明），那么你可能不希望所有从服务器都在同一时间向新的主服务器发送同步请求，因为尽管复制过程的绝大部分步骤都不会阻塞从服务器，但从服务器在载入主服务器发来的 RDB 文件时，仍然会造成从服务器在一段时间内不能处理命令请求：如果全部从服务器一起对新的主服务器进行同步， 那么就可能会造成所有从服务器在短时间内全部不可用的情况出现。<br>你可以通过将这个值设为 1 来保证每次只有一个从服务器处于不能处理命令请求的状态。如果您使用从服务器提供查询，为了避免主备切换主从数据同步的过程中从服务器无法访问，请使用较低的数字。</td>
+</tr>
+<tr>
+<td>sentinel failover-timeout &lt;master-name&gt; &lt;milliseconds&gt;</td>
+<td>故障转移超时时间，单位是毫秒，默认是3分钟。<br>它可以用在如下几个方面：<br>1. 同一个sentinel对同一个master两次failover之间的间隔时间。<br>2. 当一个slave从一个错误的master那里同步数据开始计算时间。直到slave被纠正为向正确的master那里同步数据时。<br>3. 取消已经进行但未生成任何配置更改的failover所需的时间（SLAVEOF NO ONE尚未被提升的从站确认）。<br>4. 当进行failover时，配置所有slaves指向新的master所需的最大时间。不过，即使过了这个超时，slaves依然会被正确配置为指向master，但是就不按parallel-syncs所配置的规则来了。</td>
+</tr>
+<tr>
+<td><strong>脚本配置</strong></td>
+<td>notification-script 和 reconfig-script是用来配置当某一事件发生时所需要执行的脚本，可以通过脚本来通知管理员，例如当系统运行不正常时发邮件通知相关人员。<br>对于脚本的运行结果有以下规则：<br>若脚本执行后返回1，那么该脚本稍后将会被再次执行，重复次数目前默认为10<br>若脚本执行后返回2，或者比2更高的一个返回值，脚本将不会重复执行。<br>如果脚本在执行过程中由于收到系统中断信号被终止了，则同返回值为1时的行为相同。<br>一个脚本的最大执行时间为60s，如果超过这个时间，脚本将会被一个SIGKILL信号终止，之后重新执行。</td>
+</tr>
+<tr>
+<td>sentinel notification-script &lt;master-name&gt; &lt;script-path&gt;</td>
+<td>通知型脚本，当sentinel有任何警告级别的事件发生时（比如说redis实例的主观失效和客观失效等等），将会去调用这个脚本，这时这个脚本应该通过邮件，SMS等方式去通知系统管理员关于系统不正常运行的信息。调用该脚本时，将传给脚本两个参数，一个是事件的类型，一个是事件的描述。如果sentinel.conf配置文件中配置了这个脚本路径，那么必须保证这个脚本存在于这个路径，并且是可执行的，否则sentinel无法正常启动成功。</td>
+</tr>
+<tr>
+<td>sentinel client-reconfig-script &lt;master-name&gt; &lt;script-path&gt;</td>
+<td>当一个master由于failover而发生改变时，这个脚本将会被调用，通知相关的客户端关于master地址已经发生改变的信息。<br>以下参数将会在调用脚本时传给脚本:<br>“&lt;master-name&gt; &lt;role&gt; &lt;state&gt; &lt;from-ip&gt; &lt;from-port&gt; &lt;to-ip&gt; &lt;to-port&gt;”<br>目前”&lt;state&gt;”总是“failover”, “&lt;role&gt;”是“leader”或者“observer”中的一个。<br>参数 from-ip, from-port, to-ip, to-port是旧的master和新的master(即旧的slave)用来通信的。<br>这个脚本应该是通用的，能被多次调用，不是针对性的。</td>
+</tr>
+</tbody>
+</table>
+<p>好了，Redis配置文件介绍完了，下一讲，我们再说一下Redis的数据类型。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-08-27T03:55:47.000Z" itemprop="dateUpdated">2017-08-27 11:55:47</time>
+</span><br>
+
+
+        
+        【转载请注明出处】<a href="/2017/08/27/20170827001/" target="_blank" rel="external">http://www.jkinn.com/2017/08/27/20170827001/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.jkinn.com">
+            <img src="/img/avatar.jpg" alt="田埂↑の夢">
+            田埂↑の夢
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.jkinn.com/2017/08/27/20170827001/&title=《Redis 探讨（二）： Redis 4.0.1 配置文件详解》 — JK客栈&pic=http://www.jkinn.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.jkinn.com/2017/08/27/20170827001/&title=《Redis 探讨（二）： Redis 4.0.1 配置文件详解》 — JK客栈&source=本站是 JK客栈 田埂上的梦（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.jkinn.com/2017/08/27/20170827001/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Redis 探讨（二）： Redis 4.0.1 配置文件详解》 — JK客栈&url=http://www.jkinn.com/2017/08/27/20170827001/&via=http://www.jkinn.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.jkinn.com/2017/08/27/20170827001/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/08/16/20170816001/" id="post-next" class="post-nav-link">
+        <div class="tips">下一篇 <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h5 class="title">Redis 深入探讨（一）：Linux CentOS 7.3 安装 Redis 4.0.1</h5>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+<section class="comments" id="comments">
+    <!-- UY BEGIN -->
+    <div id="uyan_frame"></div>
+    <script src="http://v2.uyan.cc/code/uyan.js?uid=2137675"></script>
+    <!-- UY END -->
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢您的支持
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <!--<p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>-->
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>田埂↑の夢 &copy; 2015 - 2017</span>
+            <span>
+                
+                <!--Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>-->
+				田埂上的梦（王怀亮的博客）
+            </span>
+        </p>
+    </div>
+	
+
+
+<!-- Baidu Push -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- End Baidu Push -->
+
+
+
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.jkinn.com/2017/08/27/20170827001/&title=《Redis 探讨（二）： Redis 4.0.1 配置文件详解》 — JK客栈&pic=http://www.jkinn.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.jkinn.com/2017/08/27/20170827001/&title=《Redis 探讨（二）： Redis 4.0.1 配置文件详解》 — JK客栈&source=本站是 JK客栈 田埂上的梦（田埂↑の夢 王怀亮）的技术分享博客。内容涵盖Java后端技术、微服务架构、分布式架构、网络安全、运维开发等相关的研究与知识分享。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.jkinn.com/2017/08/27/20170827001/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Redis 探讨（二）： Redis 4.0.1 配置文件详解》 — JK客栈&url=http://www.jkinn.com/2017/08/27/20170827001/&via=http://www.jkinn.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.jkinn.com/2017/08/27/20170827001/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3aQY7EIAxE0b7/peltpIikqkwWmM8qGjFJPxaWjf37yWtc1vUv92d9/2zP/W3LFgwYMLZljMel/KxVB/H83dkeGDBgnMOYfVh5zoLmbKdyWDBgwICRvU6nKjwYMGDAWBVw3aJUT0NhwIABIytiKyFSP4LPa3EYMGBsyKika18/f9LfgAEDxlaMYS79Ddll3IgWDBgwejP0AOfC3HJXKapfmgowYMBoyqgMVWTFZ+Uiz57jgAEDRgtGpU6sNAb0o1zVFoUBA8a+DDdoum3F7ELf/hYMGDAOYOipmBt2n3dmhe701hAGDBhNGc+v1hM+t9x1W5VGPgsDBox2jMrQlRJGlaCplLsvBwcDBozWjKwQVcKluzMrbmHAgHECIwu4eqHrtk7dRLOUGsKAAWNbhlvQVoY2Ki0Hu0qGAQPGtgy9+NQHufSctIKchl0YMGC0Y+gAt22Zla/GhVoWamHAgLEhI0vUjNGH6EJNH9SAAQPGmQz3it/NQyvtUumIYcCA0ZShF6vuoJj7frcJ+lKLw4ABox1DL1OzdmZ2BHrjAQYMGOcw9ECZtRuz8Q7p/TBgwGjKGObK0kf3Ms79LgwYMHozKp1B93/1JqV7ZDBgwDiBkQXZVQNh7tiH3f+EAQNGI0Z2oa+0NvWmZil8w4ABA4bbUJRJbttSGraAAQMGDHk4bFUlrSSOMGDAOIHhjkRkRWn4E9det8GAAWNDRjbisGpcrM6GAQNGa8YfWjZLqQ/IF8AAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1262549369&web_id=1262549369')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
